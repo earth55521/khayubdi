@@ -25,7 +25,7 @@ const APP_BUILD = "53";
 const APP_ENVIRONMENT = "Closed Beta";
 const APP_RELEASE_CHANNEL = "Release Candidate";
 const APP_DEVELOPER = "Khayubdi";
-const APP_CACHE_VERSION = "khayubdi-exercise-v54";
+const APP_CACHE_VERSION = "khayubdi-exercise-v55";
 const BETA_WELCOME_KEY = "khayubdi_beta_welcome_dismissed";
 const USE_BACKEND = location.protocol === "http:" || location.protocol === "https:";
 const LOCAL_TRACKING_ONLY = true;
@@ -7973,4 +7973,3 @@ function downloadJson(data, filename) {
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[char]);
 }
-

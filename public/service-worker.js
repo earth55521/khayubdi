@@ -1,12 +1,12 @@
-const CACHE_NAME = "khayubdi-exercise-v54";
+const CACHE_NAME = "khayubdi-exercise-v55";
 const ASSETS = [
   "/",
   "/index.html",
   "/exercise.html",
   "/privacy.html",
   "/terms.html",
-  "/exercise.css?v=54",
-  "/exercise.js?v=54",
+  "/exercise.css?v=55",
+  "/exercise.js?v=55",
   "/manifest.webmanifest",
   "/icon.svg",
   "/icon-192.png",

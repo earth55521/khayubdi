@@ -3058,7 +3058,7 @@ input[inputmode="decimal"] {
   padding:
     calc(18px + env(safe-area-inset-top))
     max(14px, env(safe-area-inset-right))
-    calc(124px + env(safe-area-inset-bottom))
+    calc(172px + env(safe-area-inset-bottom))
     max(14px, env(safe-area-inset-left));
 }
 
@@ -3086,7 +3086,7 @@ input[inputmode="decimal"] {
 }
 
 .bottom-nav {
-  bottom: max(10px, env(safe-area-inset-bottom));
+  bottom: max(14px, env(safe-area-inset-bottom));
   width: min(520px, calc(100% - max(24px, env(safe-area-inset-left) + env(safe-area-inset-right) + 16px)));
   padding-bottom: max(10px, env(safe-area-inset-bottom));
   min-height: calc(78px + env(safe-area-inset-bottom));
@@ -3102,6 +3102,7 @@ input[inputmode="decimal"] {
 .bottom-nav .tab:nth-of-type(5) {
   width: 74px;
   height: 74px;
+  top: -18px;
 }
 
 .screen,
@@ -3296,7 +3297,7 @@ input[inputmode="decimal"] {
 
 @media (min-width: 760px) {
   .app {
-    padding-bottom: calc(124px + env(safe-area-inset-bottom));
+    padding-bottom: calc(176px + env(safe-area-inset-bottom));
   }
   .session-card {
     top: calc(78px + env(safe-area-inset-top));
