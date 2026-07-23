@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Khayubdi OS - LINE OA</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Khayubdi OS</p>
+          <h1>LINE OA Connector</h1>
+          <p class="lead">
+            รับข้อความจาก LINE Official Account แล้วตอบกลับผู้ใช้ด้วยผู้ช่วยสุขภาพของ Khayubdi OS
+          </p>
+        </div>
+        <div class="status-panel">
+          <span class="status-dot" id="statusDot"></span>
+          <div>
+            <strong id="statusTitle">กำลังตรวจสอบ</strong>
+            <p id="statusText">กำลังอ่านการตั้งค่าจากเซิร์ฟเวอร์</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <h2>Webhook URL</h2>
+          <p>นำ URL นี้ไปใส่ใน LINE Developers ตรง Messaging API webhook settings</p>
+          <div class="copy-row">
+            <code id="webhookUrl">/webhook/line</code>
+            <button id="copyWebhook" type="button">คัดลอก</button>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>ทดสอบข้อความตอบกลับ</h2>
+          <form id="testForm">
+            <label for="message">ข้อความตัวอย่าง</label>
+            <textarea id="message" rows="4" placeholder="เช่น วันนี้กินข้าวมันไก่"></textarea>
+            <button type="submit">ทดสอบ</button>
+          </form>
+          <div class="reply-box" id="replyBox">ผลลัพธ์จะแสดงตรงนี้</div>
+        </article>
+
+        <article class="panel steps">
+          <h2>ขั้นตอนเชื่อม LINE OA</h2>
+          <ol>
+            <li>สร้าง Messaging API channel ใน LINE Developers</li>
+            <li>คัดลอก Channel secret และ Channel access token มาใส่ในไฟล์ .env</li>
+            <li>เปิด webhook และใส่ URL ของเซิร์ฟเวอร์นี้</li>
+            <li>กด Verify ใน LINE Developers แล้วลองส่งข้อความหา OA</li>
+          </ol>
+        </article>
+
+        <article class="panel">
+          <h2>ฟีเจอร์ที่พร้อมต่อยอด</h2>
+          <div class="feature-list">
+            <span>Food Log</span>
+            <span>Workout Plan</span>
+            <span>Weight Check-in</span>
+            <span>Water Tracking</span>
+            <span>Weekly AI Review</span>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

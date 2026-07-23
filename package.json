@@ -1,0 +1,14 @@
+{
+  "name": "khayubdi-exercise-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Khayubdi exercise tracking app with LINE OA backend connector",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "node --check server.js && node --check public/exercise.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

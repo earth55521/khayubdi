@@ -1,0 +1,31 @@
+{
+  "name": "Khayubdi AI Fitness",
+  "short_name": "Khayubdi",
+  "description": "A mobile-first AI fitness coach for workouts, recovery, nutrition, habits, progress, and smart recommendations.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "orientation": "portrait",
+  "categories": ["health", "fitness", "lifestyle", "productivity"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "Khayubdi mobile fitness dashboard"
+    }
+  ],
+  "prefer_related_applications": false
+}

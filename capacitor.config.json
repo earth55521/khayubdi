@@ -1,0 +1,8 @@
+{
+  "appId": "com.khayubdi.tracker",
+  "appName": "ขยับดิ",
+  "webDir": "public",
+  "server": {
+    "androidScheme": "https"
+  }
+}

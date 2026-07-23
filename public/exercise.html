@@ -1,0 +1,1722 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Khayubdi" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Khayubdi" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>ขยับดิ - Exercise Tracker</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+  <link rel="stylesheet" href="/exercise.css?v=53" />
+  </head>
+  <body>
+    <section class="splash-shell" id="splashShell">
+      <div class="splash-card">
+        <p class="eyebrow">Khayubdi</p>
+        <h1>??????</h1>
+        <p>Premium health and exercise tracker for your daily foundation.</p>
+        <div class="landing-actions">
+          <button id="landingRegisterButton" type="button">Create account</button>
+          <button class="secondary" id="landingLoginButton" type="button">Log in</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-shell hidden" id="authShell">
+      <div class="auth-card">
+        <p class="eyebrow">Khayubdi</p>
+        <h1 id="authTitle">Log in</h1>
+        <p class="auth-copy" id="authCopy">Use your username or email to open your profile on this device.</p>
+        <form id="authForm">
+          <label class="register-only hidden">Username<input id="registerUsername" autocomplete="username" /></label>
+          <label class="register-only hidden">Email<input id="registerEmail" type="email" autocomplete="email" /></label>
+          <label id="loginIdLabel">Username or email<input id="authId" autocomplete="username" required /></label>
+          <label class="register-only hidden">Display name<input id="registerDisplayName" autocomplete="name" /></label>
+          <div class="form-grid register-only hidden">
+            <label>Gender
+              <select id="registerGender">
+                <option value="">Prefer not to say</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="non_binary">Non-binary</option>
+                <option value="self_describe">Self describe</option>
+              </select>
+            </label>
+            <label>Age<input id="registerAge" type="number" min="13" max="120" step="1" /></label>
+            <label>Height cm<input id="registerHeight" type="number" min="80" max="250" step="1" /></label>
+            <label>Current weight kg<input id="registerCurrentWeight" type="number" min="20" max="350" step="0.5" /></label>
+            <label>Target weight kg<input id="registerTargetWeight" type="number" min="20" max="350" step="0.5" /></label>
+            <label>Goal
+              <select id="registerGoal">
+                <option value="health">General health</option>
+                <option value="fat_loss">Fat loss</option>
+                <option value="muscle_gain">Muscle gain</option>
+                <option value="endurance">Endurance</option>
+              </select>
+            </label>
+          </div>
+          <label class="register-only hidden">Activity level
+            <select id="registerActivityLevel">
+              <option value="sedentary">Sedentary</option>
+              <option value="light">Light</option>
+              <option value="moderate">Moderate</option>
+              <option value="active">Active</option>
+              <option value="athlete">Athlete</option>
+            </select>
+          </label>
+          <label>Password<input id="authPassword" type="password" autocomplete="current-password" required /></label>
+          <label class="register-only hidden">Confirm Password<input id="authConfirmPassword" type="password" autocomplete="new-password" /></label>
+          <label class="check-row login-only"><input id="rememberMe" type="checkbox" checked /> Remember me</label>
+          <button type="submit" id="authSubmit">Log in</button>
+        </form>
+        <button class="link-button auth-toggle login-only" id="forgotPassword" type="button">Forgot password?</button>
+        <div class="oauth-divider"><span>or continue with</span></div>
+        <div class="oauth-grid">
+          <button class="oauth-button" data-provider="google" type="button">Google</button>
+          <button class="oauth-button" data-provider="apple" type="button">Apple ID</button>
+          <button class="oauth-button" data-provider="facebook" type="button">Facebook</button>
+        </div>
+        <button class="link-button auth-toggle" id="authModeToggle" type="button">Create account</button>
+        <p class="auth-note" id="authMessage"></p>
+        <p class="legal-links"><a href="/privacy" target="_blank">Privacy Policy</a> · <a href="/terms" target="_blank">Terms</a></p>
+      </div>
+    </section>
+
+    <section class="auth-shell hidden" id="onboardingShell">
+      <div class="auth-card onboarding-card">
+        <p class="eyebrow">First setup</p>
+        <h1>Tell us your goal</h1>
+        <p class="auth-copy">Complete this once to personalize your Khayubdi dashboard.</p>
+        <form id="onboardingForm">
+          <label>Display name<input id="onboardingDisplayName" autocomplete="name" required /></label>
+          <div class="form-grid">
+            <label>Gender
+              <select id="onboardingGender">
+                <option value="">Prefer not to say</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="non_binary">Non-binary</option>
+                <option value="self_describe">Self describe</option>
+              </select>
+            </label>
+            <label>Age<input id="onboardingAge" type="number" min="13" max="120" step="1" required /></label>
+            <label>Height cm<input id="onboardingHeight" type="number" min="80" max="250" step="1" required /></label>
+            <label>Current weight kg<input id="onboardingCurrentWeight" type="number" min="20" max="350" step="0.5" required /></label>
+            <label>Target weight kg<input id="onboardingTargetWeight" type="number" min="20" max="350" step="0.5" required /></label>
+            <label>Goal
+              <select id="onboardingGoal">
+                <option value="health">General health</option>
+                <option value="fat_loss">Fat loss</option>
+                <option value="muscle_gain">Muscle gain</option>
+                <option value="endurance">Endurance</option>
+              </select>
+            </label>
+          </div>
+          <label>Activity level
+            <select id="onboardingActivityLevel">
+              <option value="sedentary">Sedentary</option>
+              <option value="light">Light</option>
+              <option value="moderate">Moderate</option>
+              <option value="active">Active</option>
+              <option value="athlete">Athlete</option>
+            </select>
+          </label>
+          <button type="submit">Continue to dashboard</button>
+        </form>
+      </div>
+    </section>
+
+    <main class="app hidden" id="appShell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">??????</p>
+          <h1>?????? Health</h1>
+          <p class="user-line" id="currentUser"></p>
+        </div>
+        <div class="top-actions">
+          <button class="icon-button" id="installButton" type="button" hidden>Install</button>
+          <button class="secondary icon-button" id="logoutButton" type="button">Logout</button>
+        </div>
+      </header>
+
+      <section class="motif-banner" aria-hidden="true">
+        <span>RUN</span>
+        <span>LIFT</span>
+        <span>SWEAT</span>
+        <span>RECOVER</span>
+      </section>
+
+      <section class="summary hidden">
+        <article><span id="todayMinutes">0</span><p>??????????</p></article>
+        <article><span id="todayWorkouts">0</span><p>workout</p></article>
+        <article><span id="todayCalories">0</span><p>kcal</p></article>
+      </section>
+
+      <section class="summary nutrition-summary hidden">
+        <article><span id="todayFoodCalories">0</span><p>????????</p></article>
+        <article><span id="todayProtein">0g</span><p>??????</p></article>
+        <article><span id="todayMeals">0</span><p>?????????</p></article>
+      </section>
+
+      <nav class="tabs top-nav">
+        <button class="tab active" data-tab="dashboard" type="button">Dashboard</button>
+        <button class="tab" data-tab="health" type="button">Check-in</button>
+        <button class="tab" data-tab="weightPage" type="button">Weight</button>
+        <button class="tab" data-tab="waterPage" type="button">Water</button>
+        <button class="tab" data-tab="sleepPage" type="button">Sleep</button>
+        <button class="tab" data-tab="nutrition" type="button">Food</button>
+        <button class="tab" data-tab="track" type="button">Workout</button>
+        <button class="tab" data-tab="coachChat" type="button">Coach</button>
+        <button class="tab" data-tab="trainerPortal" type="button">Trainer</button>
+        <button class="tab" data-tab="progress" type="button">Progress</button>
+        <button class="tab" data-tab="profile" type="button">Profile</button>
+      </nav>
+
+      <section class="screen active" id="dashboard">
+        <section class="dashboard-hero ai-coach-hero">
+          <p class="eyebrow">??????</p>
+          <h2 id="dashboardGreeting">??????</h2>
+          <p id="dashboardGoal">????????: ????????????</p>
+          <div class="hero-actions">
+            <button class="quick-action" data-tab-target="track" type="button">Quick Start Workout</button>
+            <button class="secondary quick-action" data-tab-target="coachChat" type="button">Ask AI Coach</button>
+          </div>
+        </section>
+        <section class="chart-card coach-dashboard-card">
+          <div class="section-title">
+            <h2>Today's Coach</h2>
+            <span id="coachPriority">Ready</span>
+          </div>
+          <div class="coach-card-head">
+            <div>
+              <strong id="coachRecommendationType">เริ่มต้น</strong>
+              <p id="coachMainMessage">บันทึกข้อมูลสุขภาพและ workout เพื่อให้โค้ชแนะนำได้แม่นยำขึ้น</p>
+            </div>
+            <span class="ai-badge">AI</span>
+          </div>
+          <div class="coach-summary-grid" id="coachDailySummary"></div>
+          <div class="coach-line-list" id="coachReminders"></div>
+          <div class="coach-weekly-review" id="coachWeeklyReview"></div>
+          <p class="coach-motivation" id="coachMotivation">วันนี้เริ่มจากก้าวเล็ก ๆ ที่ทำได้จริง</p>
+          <button class="secondary quick-action coach-open-chat" data-tab-target="coachChat" type="button">คุยกับโค้ช</button>
+        </section>
+        <section class="chart-card recovery-readiness-card" id="recoveryReadinessCard">
+          <div class="section-title">
+            <h2>Recovery Readiness</h2>
+            <span id="recoveryReadinessBadge">Read-only</span>
+          </div>
+          <div class="recovery-readiness-layout">
+            <div class="readiness-score-ring" id="recoveryScoreRing">
+              <span id="recoveryReadinessScore">0</span>
+              <small>/100</small>
+            </div>
+            <div>
+              <strong id="recoveryReadinessLevel">Insufficient data</strong>
+              <p id="recoveryTrainingRecommendation">Log sleep, check-in, and workouts to calculate readiness.</p>
+            </div>
+          </div>
+          <div class="recovery-factor-grid" id="recoveryTopFactors"></div>
+          <div class="coach-line-list" id="recoveryNutritionRecommendations"></div>
+          <div class="coach-line-list" id="recoveryAlerts"></div>
+          <p class="trend-line" id="recoverySevenDayTrend">7-day trend: waiting for data</p>
+        </section>
+        <section class="chart-card habit-adherence-card" id="habitAdherenceCard">
+          <div class="section-title">
+            <h2>Habit Adherence</h2>
+            <span id="habitAdherenceBadge">Read-only</span>
+          </div>
+          <div class="habit-adherence-layout">
+            <div class="readiness-score-ring" id="habitScoreRing">
+              <span id="habitAdherenceScore">0</span>
+              <small>/100</small>
+            </div>
+            <div>
+              <strong id="habitAdherenceLevel">Insufficient data</strong>
+              <p id="habitTopInsight">Log workouts and meals to calculate adherence.</p>
+            </div>
+          </div>
+          <div class="habit-metric-grid">
+            <article><strong id="habitWorkoutPercent">0%</strong><span>Workout adherence</span></article>
+            <article><strong id="habitNutritionPercent">0%</strong><span>Nutrition adherence</span></article>
+            <article><strong id="habitCurrentStreak">0</strong><span>Current streak</span></article>
+            <article><strong id="habitLongestStreak">0</strong><span>Longest streak</span></article>
+          </div>
+          <div class="coach-line-list" id="habitRecommendations"></div>
+          <div class="coach-line-list" id="habitAlerts"></div>
+          <p class="trend-line" id="habitTrendSummary">Trends: waiting for data</p>
+        </section>
+        <section class="chart-card progress-prediction-card" id="progressPredictionCard">
+          <div class="section-title">
+            <h2>Progress Prediction</h2>
+            <span id="predictionBadge">Estimates only</span>
+          </div>
+          <div class="prediction-card-layout">
+            <div class="readiness-score-ring" id="predictionScoreRing">
+              <span id="predictionScore">0</span>
+              <small>%</small>
+            </div>
+            <div>
+              <strong id="predictionGoal">Goal: waiting for data</strong>
+              <p id="predictionTimeline">Log weight, workouts, meals, recovery, and habits to estimate progress ranges.</p>
+            </div>
+          </div>
+          <div class="prediction-metric-grid">
+            <article><strong id="predictionProbability">-</strong><span>Success probability</span></article>
+            <article><strong id="predictionTopRisk">-</strong><span>Top risk</span></article>
+          </div>
+          <div class="coach-line-list" id="predictionTopRecommendation"></div>
+          <p class="trend-line" id="predictionTrendSummary">Predictions are informational and never guaranteed.</p>
+        </section>
+        <section class="chart-card smart-notifications-card" id="smartNotificationsCard">
+          <div class="section-title">
+            <h2>Smart Notifications</h2>
+            <span id="notificationPriorityBadge">Coach-ready</span>
+          </div>
+          <div class="notification-summary-grid">
+            <article><strong id="notificationUnreadCount">0</strong><span>Unread</span></article>
+            <article><strong id="notificationRecentCount">0</strong><span>Recent</span></article>
+          </div>
+          <div class="coach-line-list notification-list" id="notificationRecentList"></div>
+          <div class="weekly-notification-summary" id="notificationWeeklySummary">Weekly summary is building from your latest activity.</div>
+        </section>
+        <section class="score-card">
+          <p class="label">?????????????????</p>
+          <div class="score-ring"><span id="healthScore">0</span><small>/100</small></div>
+          <strong class="score-status" id="healthScoreStatus">????????</strong>
+          <p class="trend-line" id="healthTrendIndicator">??????????????????????????</p>
+          <div class="health-score-preview" id="healthScorePreview"></div>
+          <p class="health-score-recommendation" id="healthScoreRecommendation">??????????? ??? ????????????????????????????????</p>
+          <div class="health-score-history" id="healthScoreHistory"></div>
+          <p id="dailyMissionText">???????????????????????</p>
+        </section>
+        <section class="dashboard-section">
+          <div class="section-title"><h2>Today's Health</h2><span>????????????</span></div>
+          <div class="dashboard-grid compact-dashboard-grid">
+            <article><strong id="dashCurrentWeight">-</strong><span>???????????????</span></article>
+            <article><strong id="dashTargetWeight">-</strong><span>???????????????</span></article>
+            <article><strong id="dashWeightDifference">-</strong><span>???????????????</span></article>
+            <article><strong id="dashWeightTrend">-</strong><span>??????????????</span></article>
+            <article><strong id="dashCheckinStatus">?????????????</strong><span>Daily check-in</span></article>
+            <article><strong id="dashCheckinStreak">0</strong><span>check-in streak</span></article>
+          </div>
+        </section>
+        <section class="dashboard-section">
+          <div class="section-title"><h2>Nutrition</h2><span>????????????????</span></div>
+          <div class="dashboard-grid compact-dashboard-grid">
+            <article><strong id="dashFoodCalories">0</strong><span>?????????</span></article>
+            <article><strong id="dashFoodProtein">0g</strong><span>????????????</span></article>
+            <article><strong id="dashKcalTarget">0</strong><span>kcal target</span></article>
+            <article><strong id="dashProteinTarget">0g</strong><span>protein target</span></article>
+          </div>
+        </section>
+        <section class="dashboard-section">
+          <div class="section-title"><h2>Hydration</h2><span>??????????????</span></div>
+          <div class="dashboard-grid compact-dashboard-grid">
+            <article><strong id="dashWaterToday">0 ml</strong><span>?????????</span></article>
+            <article><strong id="dashWaterRemaining">3000 ml</strong><span>???????????</span></article>
+            <article><strong id="dashWaterTarget">3L</strong><span>water target</span></article>
+          </div>
+        </section>
+        <section class="dashboard-section">
+          <div class="section-title"><h2>Sleep</h2><span>??????????</span></div>
+          <div class="dashboard-grid compact-dashboard-grid">
+            <article><strong id="dashSleepHours">0 ??.</strong><span>?????????</span></article>
+            <article><strong id="dashSleepQuality">-</strong><span>????????????</span></article>
+            <article><strong id="dashSleepGoal">8 ??.</strong><span>sleep goal</span></article>
+            <article><strong id="dashSleepPercent">0%</strong><span>sleep completion</span></article>
+          </div>
+        </section>
+        <section class="dashboard-section">
+          <div class="section-title"><h2>Training</h2><span>Progressive Overload</span></div>
+          <div class="dashboard-grid compact-dashboard-grid">
+            <article><strong id="dashLastWorkout">-</strong><span>workout ??????</span></article>
+            <article><strong id="dashWorkoutStreak">0 ???</strong><span>current streak</span></article>
+            <article><strong id="dashWeeklyVolume">0 kg</strong><span>weekly volume</span></article>
+            <article><strong id="dashPrCount">0</strong><span>personal records</span></article>
+            <article><strong id="dashCurrentProgram">-</strong><span>current program</span></article>
+            <article><strong id="dashTodayWorkout">-</strong><span>today's workout</span></article>
+            <article><strong id="dashWeeklyCompletion">0%</strong><span>weekly completion</span></article>
+            <article><strong id="dashProgramVersion">v1</strong><span>program version</span></article>
+            <article><strong id="dashRecoveryScore">0</strong><span>recovery score</span></article>
+            <article><strong id="dashFatigueScore">0</strong><span>fatigue score</span></article>
+            <article><strong id="dashMuscleVolume">0 sets</strong><span>weekly muscle volume</span></article>
+            <article><strong id="dashTrainingBalance">-</strong><span>training balance</span></article>
+          </div>
+        </section>
+        <section class="chart-card dashboard-water-card">
+          <div class="section-title">
+            <h2>?????????</h2>
+            <span id="dashWaterPercent">0%</span>
+          </div>
+          <div class="dashboard-water-layout">
+            <div class="water-ring small" id="dashWaterRing"><span id="dashWaterRingText">0%</span></div>
+            <div>
+              <strong id="dashWaterSummary">0 / 3000 ml</strong>
+              <p id="dashWaterHint">??????????????????????</p>
+              <button class="secondary water-add-button" data-water-add="250" type="button">+250 ml</button>
+            </div>
+          </div>
+        </section>
+        <section class="chart-card ai-draft-dashboard-card hidden" id="dashDraftProgramCard">
+          <div class="section-title"><h2>AI Draft Program</h2><span id="dashDraftStatus">Draft</span></div>
+          <div class="draft-dashboard-grid"><div><strong id="dashDraftGoal">-</strong><span>Goal</span></div><div><strong id="dashDraftSplit">-</strong><span>Split</span></div><div><strong id="dashDraftCreated">-</strong><span>Created</span></div></div>
+          <button class="secondary" id="openDraftProgram" type="button">Review draft</button>
+        </section>
+        <section class="chart-card nutrition-draft-dashboard-card hidden" id="dashNutritionDraftCard">
+          <div class="section-title"><h2>Nutrition Draft</h2><span id="dashNutritionDraftStatus">Review required</span></div>
+          <div class="draft-dashboard-grid"><div><strong id="dashNutritionDraftGoal">-</strong><span>Goal</span></div><div><strong id="dashNutritionDraftCalories">-</strong><span>Calories</span></div><div><strong id="dashNutritionDraftMeals">-</strong><span>Meals</span></div></div>
+          <button class="secondary" id="openNutritionDraft" type="button">Review draft</button>
+        </section>
+        <section class="quick-list dashboard-actions">
+          <div class="section-title">
+            <h2>Quick Actions</h2>
+          </div>
+          <div class="quick-action-grid">
+            <button class="secondary quick-action" data-tab-target="health" type="button">?????????????</button>
+            <button class="secondary quick-action" data-tab-target="weightPage" type="button">?????????????</button>
+            <button class="secondary quick-action" data-tab-target="waterPage" type="button">?????????</button>
+            <button class="secondary quick-action" data-tab-target="sleepPage" type="button">????????????</button>
+            <button class="secondary quick-action" data-tab-target="nutrition" type="button">???????????</button>
+            <button class="secondary quick-action" data-tab-target="track" type="button">?????????????????</button>
+            <button class="secondary quick-action" data-tab-target="trainerPortal" type="button">Trainer Portal</button>
+            <button class="secondary quick-action" data-tab-target="coachChat" type="button">คุยกับโค้ช</button>
+            <button class="secondary quick-action" data-tab-target="trainingAnalytics" type="button">?? Training Analytics</button>
+            <button class="secondary quick-action" data-tab-target="progress" type="button">??????????????</button>
+          </div>
+        </section>
+        <section class="mission-card">
+          <div class="section-title">
+            <h2>Daily Mission Preview</h2>
+            <span id="missionPercent">0%</span>
+          </div>
+          <div class="mission-list" id="missionList"></div>
+        </section>
+      </section>
+
+      <section class="screen" id="track">
+        <section class="dashboard-hero workout-hero">
+          <p class="eyebrow">Workout Intelligence</p>
+          <h2>?????????????????????????????????</h2>
+          <p>????????????? ????? ??????? ???????????? ???????????????????????????????</p>
+        </section>
+
+        <section class="pro-content workout-program-content" id="programProContent">
+          <nav class="workout-subnav" aria-label="Workout sections">
+            <button class="workout-subtab active" data-workout-panel="myProgramPanel" type="button">?????????????</button>
+            <button class="workout-subtab" data-workout-panel="builderPanel" type="button">????????????</button>
+            <button class="workout-subtab" data-workout-panel="libraryPanel" type="button">???????</button>
+            <button class="workout-subtab" data-workout-panel="logPanel" type="button">????????????</button>
+          </nav>
+
+          <div class="workout-panel" id="builderPanel">
+          <section class="chart-card ai-program-generator-card">
+            <div class="section-title"><h2>AI Program Generator</h2><span>Draft only</span></div>
+            <form class="entry-form" id="aiProgramRequestForm">
+              <div class="form-grid">
+                <label>เป้าหมาย<select id="aiProgramGoal"><option value="muscle_gain">เพิ่มกล้าม</option><option value="fat_loss">ลดไขมัน</option><option value="strength">เพิ่มแรง</option><option value="general_health">สุขภาพทั่วไป</option><option value="athletic">Athletic</option></select></label>
+                <label>ประสบการณ์<select id="aiProgramExperience"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></label>
+                <label>วันฝึกต่อสัปดาห์<select id="aiProgramDays"><option value="2">2 วัน</option><option value="3" selected>3 วัน</option><option value="4">4 วัน</option><option value="5">5 วัน</option><option value="6">6 วัน</option></select></label>
+                <label>เวลาต่อครั้ง<select id="aiProgramMinutes"><option value="30">30 นาที</option><option value="45" selected>45 นาที</option><option value="60">60 นาที</option><option value="90">90 นาที</option></select></label>
+                <label>อุปกรณ์<select id="aiProgramEquipment"><option value="home">Home</option><option value="minimal">Minimal Equipment</option><option value="gym">Gym</option></select></label>
+                <label>การฟื้นตัว<select id="aiProgramRecovery"><option value="auto" selected>Auto from analytics</option><option value="low">Low</option><option value="moderate">Moderate</option><option value="high">High</option></select></label>
+                <label>กล้ามเนื้อเป้าหมาย<input id="aiProgramTargets" placeholder="เช่น อก, หลัง, ขา" /></label>
+              </div>
+              <label>อาการบาดเจ็บ / ข้อจำกัด<textarea id="aiProgramInjuries" rows="2" placeholder="ระบุส่วนที่ต้องระวัง"></textarea></label>
+              <label>ท่าที่ชอบ<input id="aiProgramPreferred" placeholder="เช่น Bench Press, Squat" /></label>
+              <label>ท่าที่ไม่ต้องการ<input id="aiProgramAvoid" placeholder="เช่น Deadlift" /></label>
+              <button type="submit">Generate draft</button>
+            </form>
+          </section>
+          <section class="chart-card ai-program-draft hidden" id="aiProgramDraft">
+            <div class="section-title"><h2>Draft Preview</h2><span id="aiDraftStatus">Not saved</span></div>
+            <div id="aiDraftSummary"></div><div class="draft-validation" id="aiDraftValidation"></div>
+            <div class="draft-program-days" id="aiDraftDays"></div><div class="draft-explanation" id="aiDraftExplanation"></div>
+            <div class="program-actions"><button id="acceptAiDraft" type="button">Approve Draft</button><button class="secondary" id="editAiDraft" type="button">Edit</button><button class="secondary" id="regenerateAiDraft" type="button">Regenerate</button><button class="danger" id="discardAiDraft" type="button">Discard</button></div>
+          </section>
+          <form class="entry-form workout-setup-card" id="programForm">
+            <div class="section-title"><h2>Workout Goal Setup</h2><span id="programAdherence">0%</span></div>
+            <label>????????
+              <select id="programGoal">
+                <option value="fat_loss">???????</option>
+                <option value="muscle_gain">??????????</option>
+                <option value="strength">????????</option>
+                <option value="general_health">????????????</option>
+                <option value="beginner">Beginner</option>
+              </select>
+            </label>
+            <div class="form-grid">
+              <label>Experience Level
+                <select id="programExperience">
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                </select>
+              </label>
+              <label>Training Days
+                <select id="programDays">
+                  <option value="2">2 ???/???????</option>
+                  <option value="3" selected>3 ???/???????</option>
+                  <option value="4">4 ???/???????</option>
+                  <option value="5">5 ???/???????</option>
+                  <option value="6">6 ???/???????</option>
+                </select>
+              </label>
+              <label>Equipment
+                <select id="programEquipment">
+                  <option value="home">Home</option>
+                  <option value="gym">Gym</option>
+                  <option value="minimal">Minimal Equipment</option>
+                </select>
+              </label>
+              <label>Workout Duration
+                <select id="programMinutes">
+                  <option value="30">30 ????</option>
+                  <option value="45" selected>45 ????</option>
+                  <option value="60">60 ????</option>
+                  <option value="90">90 ????</option>
+                </select>
+              </label>
+            </div>
+            <label>????????/?????????<textarea id="programInjuries" rows="2" placeholder="???? ????, ????????, ????"></textarea></label>
+            <button type="submit">Generate Weekly Program</button>
+          </form>
+          </div>
+
+          <div class="workout-panel active" id="myProgramPanel">
+
+          <section class="chart-card program-manager-card">
+            <div class="section-title">
+              <h2>Program Manager</h2>
+              <span id="programManagerStatus">Auto saved</span>
+            </div>
+            <form class="inline-form" id="createProgramForm">
+              <div class="form-grid">
+                <label>Program name<input id="newProgramName" placeholder="???? Upper Lower 4 Days" /></label>
+                <label>Goal
+                  <select id="newProgramGoal">
+                    <option value="hypertrophy">Hypertrophy</option>
+                    <option value="strength">Strength</option>
+                    <option value="fat_loss">Fat Loss</option>
+                    <option value="athletic">Athletic</option>
+                    <option value="general_fitness">General Fitness</option>
+                  </select>
+                </label>
+              </div>
+              <div class="program-actions">
+                <button type="submit">Create Program</button>
+                <button class="secondary" id="createBlankProgram" type="button">Blank Program</button>
+              </div>
+            </form>
+            <div class="program-manager-layout">
+              <section>
+                <div class="section-title"><h2>Active Programs</h2><span id="activeProgramCount">0</span></div>
+                <div class="program-manager-list" id="activeProgramList"></div>
+              </section>
+              <section>
+                <div class="section-title"><h2>Archived</h2><span id="archivedProgramCount">0</span></div>
+                <div class="program-manager-list" id="archivedProgramList"></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="chart-card program-detail-card">
+            <div class="section-title">
+              <h2>Program Details</h2>
+              <span id="programVersionLabel">v1</span>
+            </div>
+            <div class="form-grid">
+              <label>Rename<input id="programNameEditor" placeholder="Program name" /></label>
+              <label>Weekly Schedule
+                <select id="programScheduleDay">
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                  <option value="Saturday">Saturday</option>
+                  <option value="Sunday">Sunday</option>
+                </select>
+              </label>
+              <label>Workout
+                <select id="programScheduleWorkout"></select>
+              </label>
+            </div>
+            <label>Program notes<textarea id="programNotesEditor" rows="3" placeholder="?????????????? ??????????? ????????????????????"></textarea></label>
+            <div class="program-actions">
+              <button class="secondary" id="assignWorkoutToDay" type="button">Assign Selected Workout</button>
+              <button class="secondary" id="duplicateProgram" type="button">Duplicate</button>
+              <button class="secondary" id="favoriteProgram" type="button">Favorite</button>
+              <button class="secondary" id="archiveProgram" type="button">Archive</button>
+              <button class="danger" id="deleteProgram" type="button">Delete</button>
+            </div>
+            <div class="program-schedule-grid" id="programScheduleGrid"></div>
+          </section>
+
+          <section class="chart-card workout-summary-card">
+            <div class="section-title"><h2>Workout Summary</h2><span id="programGeneratedAt">???????????</span></div>
+            <p class="safety-warning hidden" id="programSafetyWarning">?????????????????????????????????? ??????????????????????????????????????????</p>
+            <div class="dashboard-grid workout-summary-grid">
+              <article><strong id="programTrainingDays">0</strong><span>Training Days</span></article>
+              <article><strong id="programWeeklyVolume">0 sets</strong><span>Weekly Volume</span></article>
+              <article><strong id="programEstimatedTime">0 ????</strong><span>Estimated Time</span></article>
+            </div>
+          </section>
+
+          <section class="chart-card overload-card">
+            <div class="section-title"><h2>Training Intelligence</h2><span>??????????????</span></div>
+            <div class="dashboard-grid workout-summary-grid" id="workoutOverloadSummary"></div>
+            <div class="overload-list" id="exerciseTrendList"></div>
+          </section>
+
+          <section class="chart-card workout-calendar-card">
+            <div class="section-title"><h2>Weekly Calendar</h2><span>Rest Days ?????????????</span></div>
+            <div class="weekly-calendar" id="programCalendar"></div>
+          </section>
+
+          <section class="quick-list workout-plan-card">
+            <div class="section-title"><h2>?????????????</h2><button class="link-button" id="clearProgram" type="button">???????</button></div>
+            <div class="program-list" id="programPlanList"></div>
+          </section>
+
+          </div>
+
+          <div class="workout-panel" id="libraryPanel">
+          <section class="chart-card exercise-library-card">
+            <div class="section-title">
+              <h2>???????</h2>
+              <span id="exerciseLibraryCount">0 ???</span>
+            </div>
+            <div class="exercise-filter-grid">
+              <label>?????<input id="exerciseSearch" type="search" placeholder="??????????????????????" /></label>
+              <label>??????????<select id="exerciseMuscleFilter"><option value="">???????</option></select></label>
+              <label>Movement<select id="exercisePatternFilter"><option value="">???????</option></select></label>
+              <label>Equipment<select id="exerciseEquipmentFilter"><option value="">???????</option></select></label>
+              <label>Difficulty<select id="exerciseDifficultyFilter"><option value="">???????</option></select></label>
+            </div>
+            <button class="secondary" id="clearExerciseFilters" type="button">Clear filters</button>
+            <div class="exercise-library-list" id="exerciseLibraryList"></div>
+            <div class="exercise-detail-card hidden" id="exerciseDetailCard"></div>
+          </section>
+          </div>
+        </section>
+
+        <div class="workout-panel" id="logPanel">
+        <div class="session-card">
+          <div>
+            <p class="label">Current workout</p>
+            <h2 id="timer">00:00</h2>
+          </div>
+          <div class="session-actions">
+            <button id="toggleSession" type="button">Start</button>
+            <button class="secondary" id="finishSession" type="button">Finish</button>
+          </div>
+        </div>
+
+        <form class="entry-form" id="entryForm">
+          <label>Exercise<input id="exerciseName" list="exerciseOptions" placeholder="???? Squat, Run, Push up" required /></label>
+          <datalist id="exerciseOptions">
+            <option value="Walking"></option>
+            <option value="Running"></option>
+            <option value="Cycling"></option>
+            <option value="Squat"></option>
+            <option value="Push up"></option>
+            <option value="Bench press"></option>
+            <option value="Deadlift"></option>
+          </datalist>
+
+          <div class="form-grid">
+            <label>Sets<input id="sets" type="number" min="0" step="1" value="3" /></label>
+            <label>Reps<input id="reps" type="number" min="0" step="1" value="10" /></label>
+            <label>Weight kg<input id="weight" type="number" min="0" step="0.5" value="0" /></label>
+            <label>Minutes<input id="minutes" type="number" min="1" step="1" value="20" /></label>
+          </div>
+
+          <div class="calorie-estimate">
+            <div>
+              <span id="exerciseCalories">0 kcal</span>
+              <p>estimated burn from activity, minutes, and body weight</p>
+            </div>
+            <button class="secondary" id="calculateExerciseCalories" type="button">Calculate</button>
+          </div>
+
+          <label>Notes<textarea id="notes" rows="3" placeholder="??????????, RPE, ?????????, ?????????????????"></textarea></label>
+          <button type="submit">Save exercise</button>
+        </form>
+
+        <section class="quick-list">
+          <div class="section-title">
+            <h2>Quick add</h2>
+            <button class="link-button" id="clearToday" type="button">Clear today</button>
+          </div>
+          <div class="chips" id="quickAdd"></div>
+        </section>
+        </div>
+      </section>
+
+      <section class="screen" id="nutrition">
+        <section class="chart-card ai-nutrition-planner-card">
+          <div class="section-title"><h2>AI Nutrition Planner</h2><span>Draft only · ไม่ใช่คำแนะนำทางการแพทย์</span></div>
+          <form class="entry-form" id="nutritionPlannerForm">
+            <div class="form-grid">
+              <label>เป้าหมาย<select id="nutritionPlanGoal"><option value="fat_loss">ลดไขมัน</option><option value="muscle_gain">เพิ่มกล้าม</option><option value="maintenance">รักษาน้ำหนัก</option></select></label>
+              <label>กลยุทธ์<select id="nutritionPlanStrategy"><option value="fat_loss">Fat Loss</option><option value="maintenance">Maintenance</option><option value="lean_bulk">Lean Bulk</option><option value="aggressive_cut">Aggressive Cut</option></select></label>
+              <label>น้ำหนัก (kg)<input id="nutritionPlanWeight" type="number" min="30" max="300" step="0.1" required></label>
+              <label>น้ำหนักเป้าหมาย (kg)<input id="nutritionPlanTargetWeight" type="number" min="30" max="300" step="0.1"></label>
+              <label>ส่วนสูง (cm)<input id="nutritionPlanHeight" type="number" min="120" max="230" step="1" required></label>
+              <label>อายุ<input id="nutritionPlanAge" type="number" min="15" max="100" required></label>
+              <label>ไขมันโดยประมาณ (%)<input id="nutritionPlanBodyFat" type="number" min="3" max="70" step="0.1"></label>
+              <label>เพศ<select id="nutritionPlanSex"><option value="male">ชาย</option><option value="female">หญิง</option><option value="other">อื่นๆ / ไม่ระบุ</option></select></label>
+              <label>กิจกรรม<select id="nutritionPlanActivity"><option value="sedentary">น้อย</option><option value="light">เบา</option><option value="moderate" selected>ปานกลาง</option><option value="active">สูง</option><option value="very_active">สูงมาก</option></select></label>
+              <label>วันฝึก/สัปดาห์<select id="nutritionPlanTrainingDays"><option value="0">0 วัน</option><option value="2">2 วัน</option><option value="3" selected>3 วัน</option><option value="4">4 วัน</option><option value="5">5 วัน</option><option value="6">6 วัน</option></select></label>
+              <label>รูปแบบอาหาร<select id="nutritionPlanDiet"><option value="balanced">Balanced</option><option value="vegetarian">Vegetarian</option><option value="vegan">Vegan</option><option value="pescatarian">Pescatarian</option></select></label>
+              <label>งบประมาณ<select id="nutritionPlanBudget"><option value="low">ประหยัด</option><option value="medium" selected>ปานกลาง</option><option value="high">ยืดหยุ่น</option></select></label>
+              <label>จำนวนมื้อ/วัน<select id="nutritionPlanMeals"><option value="3">3 มื้อ</option><option value="4" selected>4 มื้อ</option><option value="5">5 มื้อ</option><option value="6">6 มื้อ</option></select></label>
+              <label>ทักษะทำอาหาร<select id="nutritionPlanCookingSkill"><option value="beginner">Beginner</option><option value="intermediate" selected>Intermediate</option><option value="advanced">Advanced</option></select></label>
+            </div>
+            <label>อาหารที่แพ้ / ต้องหลีกเลี่ยง<input id="nutritionPlanAllergies" placeholder="เช่น นม, ถั่ว, กุ้ง"></label>
+            <label>อาหารโปรด<input id="nutritionPlanFavorites" placeholder="เช่น ไก่, เต้าหู้, ข้าวโอ๊ต"></label>
+            <label>อาหารที่ไม่ต้องการ<input id="nutritionPlanAvoid" placeholder="เช่น ปลา, เห็ด"></label>
+            <button type="submit">Generate nutrition draft</button>
+          </form>
+        </section>
+
+        <section class="chart-card nutrition-plan-draft hidden" id="nutritionPlanDraft">
+          <div class="section-title"><h2>Nutrition Draft Preview</h2><span id="nutritionDraftStatus">Not saved</span></div>
+          <div id="nutritionDraftSummary"></div><div class="draft-validation" id="nutritionDraftValidation"></div>
+          <div class="nutrition-meal-plan" id="nutritionDraftMeals"></div>
+          <div class="shopping-list-grid" id="nutritionShoppingList"></div>
+          <div class="draft-explanation" id="nutritionDraftExplanation"></div>
+          <div class="program-actions"><button id="acceptNutritionDraft" type="button">Approve Draft</button><button class="secondary" id="editNutritionDraft" type="button">Edit</button><button class="secondary" id="regenerateNutritionDraft" type="button">Regenerate</button><button class="danger" id="discardNutritionDraft" type="button">Discard</button></div>
+        </section>
+
+        <section class="chart-card nutrition-coach food-summary-card">
+          <div class="section-title">
+            <h2>??????????????????</h2>
+            <span id="nutritionTargetStatus">??????????????????</span>
+          </div>
+          <div class="macro-grid">
+            <article><strong id="targetCalories">0</strong><span>???? kcal</span></article>
+            <article><strong id="remainingCalories">0</strong><span>kcal ???????</span></article>
+            <article><strong id="remainingProtein">0g</strong><span>?????????????</span></article>
+            <article><strong id="totalCarbs">0g</strong><span>????????</span></article>
+            <article><strong id="totalFat">0g</strong><span>????????</span></article>
+            <article><strong id="totalFoodItems">0</strong><span>????????????</span></article>
+          </div>
+          <div class="macro-bars">
+            <div><span>Calories</span><div class="macro-track"><div id="calorieBar" class="macro-fill"></div></div></div>
+            <div><span>Protein</span><div class="macro-track"><div id="proteinBar" class="macro-fill protein"></div></div></div>
+            <div><span>Carbs</span><div class="macro-track"><div id="carbBar" class="macro-fill carbs"></div></div></div>
+            <div><span>Fat</span><div class="macro-track"><div id="fatBar" class="macro-fill fat"></div></div></div>
+          </div>
+          <p class="ai-coach-text" id="nutritionCoachText">??????????????????? ????????????????????????</p>
+        </section>
+
+        <form class="entry-form food-form-card" id="foodForm">
+          <div class="section-title">
+            <h2>???????????</h2>
+            <button class="link-button" id="clearFoodToday" type="button">??????????</button>
+          </div>
+          <label>
+            ?????????
+            <select id="mealType">
+              <option value="breakfast">????</option>
+              <option value="lunch">???????</option>
+              <option value="dinner">????</option>
+              <option value="snack">???????</option>
+            </select>
+          </label>
+          <label>?????????<input id="foodName" placeholder="???? ?????????????" required /></label>
+          <div class="ai-actions hidden">
+            <button class="secondary ai-button" id="scanFoodPhotosButton" type="button">?? ?????????????????</button>
+            <button class="secondary ai-button" id="estimateFoodButton" type="button">AI estimate text</button>
+          </div>
+          <div class="ai-result hidden" id="foodEstimateResult"></div>
+          <label class="hidden">?????????<input id="mealTime" type="time" /></label>
+          <label class="hidden">???????? (?????? 3 ???)<input id="foodPhotos" type="file" accept="image/*" capture="environment" multiple /></label>
+          <div class="photo-preview hidden" id="foodPhotoPreview"></div>
+          <div class="form-grid">
+            <label>???????<input id="foodCalories" type="number" min="0" step="1" value="0" /></label>
+            <label>?????? g<input id="foodProtein" type="number" min="0" step="1" value="0" /></label>
+            <label>????? g<input id="foodCarbs" type="number" min="0" step="1" value="0" /></label>
+            <label>????? g<input id="foodFat" type="number" min="0" step="1" value="0" /></label>
+            <label class="hidden">??????? g<input id="foodFiber" type="number" min="0" step="1" value="0" /></label>
+          </div>
+          <label>?????????????<textarea id="foodNotes" rows="3" placeholder="?????????"></textarea></label>
+          <button id="saveFoodButton" type="submit">???????????</button>
+          <p class="save-feedback hidden" id="foodSaveFeedback">???????????????</p>
+        </form>
+
+        <section class="quick-list hidden">
+          <div class="section-title">
+            <h2>Quick food</h2>
+          </div>
+          <div class="chips" id="quickFood"></div>
+        </section>
+
+        <section class="quick-list food-log-card">
+          <div class="section-title">
+            <h2>???????????</h2>
+          </div>
+          <div class="history-list" id="foodHistoryList"></div>
+        </section>
+      </section>
+
+      <section class="screen" id="weightPage">
+        <section class="dashboard-hero weight-hero">
+          <p class="eyebrow">Weight Tracking</p>
+          <h2>?????????????</h2>
+          <p>????????????????? ????????????? ???????????????????????????????</p>
+        </section>
+
+        <section class="chart-card weight-latest-card">
+          <div class="section-title">
+            <h2>?????????????</h2>
+            <span id="weightTrendBadge">??????????????</span>
+          </div>
+          <div class="weight-latest-grid">
+            <article>
+              <span>Current Weight</span>
+              <strong id="latestWeightValue">-</strong>
+            </article>
+            <article>
+              <span>Goal Weight</span>
+              <strong id="latestGoalWeight">-</strong>
+            </article>
+            <article>
+              <span>Difference</span>
+              <strong id="latestWeightDifference">-</strong>
+            </article>
+          </div>
+        </section>
+
+        <form class="entry-form weight-form-card" id="weightTrackingForm">
+          <div class="section-title">
+            <h2 id="weightFormTitle">??????????????????</h2>
+            <button class="link-button hidden" id="cancelWeightEdit" type="button">???????????</button>
+          </div>
+          <input id="weightRecordId" type="hidden" />
+          <div class="form-grid">
+            <label>??????<input id="weightDate" type="date" required /></label>
+            <label>Weight kg<input id="weightValue" type="number" min="20" max="350" step="0.1" required /></label>
+            <label>Body Fat %<input id="weightBodyFat" type="number" min="0" max="80" step="0.1" /></label>
+            <label>Waist cm<input id="weightWaist" type="number" min="20" max="250" step="0.1" /></label>
+          </div>
+          <label>Progress Photo
+            <div class="photo-placeholder" id="weightPhotoPlaceholder">Progress photo placeholder</div>
+          </label>
+          <label>Note<textarea id="weightNote" rows="3" placeholder="???? ??????????? / ???????????????"></textarea></label>
+          <button id="saveWeightButton" type="submit">?????????????</button>
+          <p class="form-feedback hidden" id="weightSaveFeedback">?????????????????</p>
+        </form>
+
+        <section class="chart-card weight-stats-card">
+          <div class="section-title">
+            <h2>????????????</h2>
+            <span id="weightStatsCount">0 records</span>
+          </div>
+          <div class="dashboard-grid weight-stats-grid">
+            <article><strong id="highestWeight">-</strong><span>Highest Weight</span></article>
+            <article><strong id="lowestWeight">-</strong><span>Lowest Weight</span></article>
+            <article><strong id="averageWeight">-</strong><span>Average Weight</span></article>
+            <article><strong id="currentWeightChange">-</strong><span>Current Change</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card weight-chart-card">
+          <div class="section-title">
+            <h2>Weekly Trend</h2>
+            <span>7 ?????????</span>
+          </div>
+          <div class="weight-line-chart" id="weightLineChart"></div>
+        </section>
+
+        <section class="chart-card weight-history-card">
+          <div class="section-title">
+            <h2>??????????????</h2>
+            <span id="weightHistoryCount">0 ??????</span>
+          </div>
+          <div class="history-list" id="weightHistoryList"></div>
+        </section>
+      </section>
+
+      <section class="screen" id="waterPage">
+        <section class="dashboard-hero water-hero">
+          <p class="eyebrow">Water Tracking</p>
+          <h2>?????????</h2>
+          <p>?????????????????????? ?????????????? ??? streak ????????????????????</p>
+        </section>
+
+        <section class="chart-card water-today-card">
+          <div class="section-title">
+            <h2>?????????</h2>
+            <span id="waterHydrationStatus">Low</span>
+          </div>
+          <div class="water-today-layout">
+            <div class="water-ring" id="waterProgressRing">
+              <span id="waterRingPercent">0%</span>
+            </div>
+            <div class="water-today-copy">
+              <strong id="waterTodayAmount">0 ml</strong>
+              <span id="waterGoalAmount">Goal 3000 ml</span>
+              <p id="waterRemainingAmount">????? 3000 ml</p>
+            </div>
+          </div>
+          <div class="water-summary-grid">
+            <article><strong id="waterCompletionPercent">0%</strong><span>Completion</span></article>
+            <article><strong id="waterDailyGoalView">3000 ml</strong><span>Daily Goal</span></article>
+            <article><strong id="waterRemainingView">3000 ml</strong><span>Remaining</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card water-actions-card">
+          <div class="section-title">
+            <h2>Quick Add</h2>
+            <span>?????????????</span>
+          </div>
+          <div class="water-quick-grid">
+            <button class="secondary water-add-button" data-water-add="250" type="button">+250 ml</button>
+            <button class="secondary water-add-button" data-water-add="500" type="button">+500 ml</button>
+            <button class="secondary water-add-button" data-water-add="750" type="button">+750 ml</button>
+            <button class="secondary water-add-button" data-water-add="1000" type="button">+1000 ml</button>
+          </div>
+          <form class="inline-form" id="customWaterForm">
+            <label>Custom Amount ml<input id="customWaterAmount" type="number" min="1" max="5000" step="50" placeholder="???? 350" /></label>
+            <button type="submit">????????</button>
+          </form>
+        </section>
+
+        <form class="entry-form water-goal-card" id="waterGoalForm">
+          <div class="section-title">
+            <h2>Daily Goal</h2>
+            <span>??????????? 3000 ml</span>
+          </div>
+          <label>????????????????? ml<input id="waterGoalInput" type="number" min="500" max="8000" step="100" value="3000" required /></label>
+          <button type="submit">??????????????</button>
+          <p class="form-feedback hidden" id="waterSaveFeedback">???????????????????</p>
+        </form>
+
+        <section class="chart-card water-streak-card">
+          <div class="section-title">
+            <h2>Hydration Streak</h2>
+            <span id="waterStreakStatus">0 ???</span>
+          </div>
+          <div class="dashboard-grid water-streak-grid">
+            <article><strong id="waterCurrentStreak">0</strong><span>Current Streak</span></article>
+            <article><strong id="waterBestStreak">0</strong><span>Best Streak</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card water-stats-card">
+          <div class="section-title">
+            <h2>????????</h2>
+            <span>30 ?????????</span>
+          </div>
+          <div class="dashboard-grid water-stats-grid">
+            <article><strong id="waterAverage">-</strong><span>Average Water</span></article>
+            <article><strong id="waterHighestDay">-</strong><span>Highest Day</span></article>
+            <article><strong id="waterLowestDay">-</strong><span>Lowest Day</span></article>
+            <article><strong id="waterWeeklyAverage">-</strong><span>Weekly Average</span></article>
+            <article><strong id="waterMonthlyAverage">-</strong><span>Monthly Average</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card water-history-card">
+          <div class="section-title">
+            <h2>?????????? 30 ???</h2>
+            <span id="waterHistoryCount">0 ??????</span>
+          </div>
+          <form class="inline-form hidden" id="waterEditForm">
+            <input id="waterEditDate" type="hidden" />
+            <label>?????????????? ml<input id="waterEditAmount" type="number" min="0" max="10000" step="50" /></label>
+            <div class="history-actions">
+              <button type="submit">??????????????</button>
+              <button class="secondary" id="cancelWaterEdit" type="button">??????</button>
+            </div>
+          </form>
+          <div class="history-list" id="waterHistoryList"></div>
+        </section>
+      </section>
+
+      <section class="screen" id="sleepPage">
+        <section class="dashboard-hero sleep-hero">
+          <p class="eyebrow">Sleep Tracking</p>
+          <h2>????????????</h2>
+          <p>???????????????? ???????????? ???????? ??? streak ????????????????</p>
+        </section>
+
+        <section class="chart-card sleep-today-card">
+          <div class="section-title">
+            <h2>????????????</h2>
+            <span id="sleepTodayStatus">??????????????</span>
+          </div>
+          <div class="sleep-summary-grid">
+            <article><strong id="sleepTodayHours">0 ??.</strong><span>Today's Sleep</span></article>
+            <article><strong id="sleepGoalView">8 ??.</strong><span>Sleep Goal</span></article>
+            <article><strong id="sleepQualityView">-</strong><span>Sleep Quality</span></article>
+            <article><strong id="sleepCompletionView">0%</strong><span>Completion</span></article>
+          </div>
+        </section>
+
+        <form class="entry-form sleep-form-card" id="sleepTrackingForm">
+          <div class="section-title">
+            <h2 id="sleepFormTitle">?????????????????</h2>
+            <button class="link-button hidden" id="cancelSleepEdit" type="button">???????????</button>
+          </div>
+          <input id="sleepRecordId" type="hidden" />
+          <div class="form-grid">
+            <label>Date<input id="sleepDate" type="date" required /></label>
+            <label>Sleep Time<input id="sleepStartTime" type="time" required /></label>
+            <label>Wake Time<input id="sleepWakeTime" type="time" required /></label>
+            <label>Sleep Hours<input id="sleepHoursCalculated" type="number" min="0" max="24" step="0.1" readonly /></label>
+          </div>
+          <div class="checkin-field">
+            <strong>Sleep Quality <span id="sleepQualityLabel">3/5</span></strong>
+            <div class="sleep-stars" id="sleepQualityStars">
+              <button type="button" data-quality="1">?</button>
+              <button type="button" data-quality="2">?</button>
+              <button type="button" data-quality="3">?</button>
+              <button type="button" data-quality="4">?</button>
+              <button type="button" data-quality="5">?</button>
+            </div>
+          </div>
+          <input id="sleepQualityValue" type="hidden" value="3" />
+          <label>Note<textarea id="sleepNote" rows="3" placeholder="???? ??????? / ??????????? / ???????????"></textarea></label>
+          <button id="saveSleepButton" type="submit">????????????</button>
+          <p class="form-feedback hidden" id="sleepSaveFeedback">????????????????</p>
+        </form>
+
+        <form class="entry-form sleep-goal-card" id="sleepGoalForm">
+          <div class="section-title">
+            <h2>Sleep Goal</h2>
+            <span>??????????? 8 ???????</span>
+          </div>
+          <label>?????????????? ???????<input id="sleepGoalInput" type="number" min="4" max="12" step="0.25" value="8" required /></label>
+          <button type="submit">??????????????</button>
+        </form>
+
+        <section class="chart-card sleep-summary-card">
+          <div class="section-title">
+            <h2>Sleep Summary</h2>
+            <span>30 ?????????</span>
+          </div>
+          <div class="dashboard-grid sleep-stats-grid">
+            <article><strong id="sleepWeeklyAverage">-</strong><span>Weekly Average</span></article>
+            <article><strong id="sleepMonthlyAverage">-</strong><span>Monthly Average</span></article>
+            <article><strong id="sleepBest">-</strong><span>Best Sleep</span></article>
+            <article><strong id="sleepWorst">-</strong><span>Worst Sleep</span></article>
+            <article><strong id="sleepAverageQuality">-</strong><span>Average Quality</span></article>
+            <article><strong id="sleepConsistency">-</strong><span>Consistency</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card sleep-streak-card">
+          <div class="section-title">
+            <h2>Sleep Streak</h2>
+            <span>Sleep = Goal</span>
+          </div>
+          <div class="dashboard-grid sleep-streak-grid">
+            <article><strong id="sleepCurrentStreak">0</strong><span>Current Streak</span></article>
+            <article><strong id="sleepBestStreak">0</strong><span>Best Streak</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card sleep-history-card">
+          <div class="section-title">
+            <h2>Sleep History</h2>
+            <span id="sleepHistoryCount">0 ??????</span>
+          </div>
+          <div class="history-list" id="sleepHistoryList"></div>
+        </section>
+      </section>
+
+      <section class="screen" id="health">
+        <section class="dashboard-hero checkin-hero">
+          <p class="eyebrow">Morning Check-in</p>
+          <h2>?????????????</h2>
+          <p id="checkinCompletionText">?????????????????????????????????????</p>
+        </section>
+
+        <form class="entry-form checkin-card" id="dailyCheckinForm">
+          <div class="section-title">
+            <h2>Daily Check-in</h2>
+            <span id="checkinStreakLabel">0 day streak</span>
+          </div>
+
+          <label>????????????? kg (?????????)<input id="checkinWeight" type="number" min="20" max="350" step="0.1" /></label>
+          <label>??????????<input id="checkinSleepHours" type="number" min="0" max="24" step="0.25" value="7" /></label>
+
+          <div class="checkin-field">
+            <strong>Mood</strong>
+            <div class="mood-grid checkin-mood-grid" id="checkinMoodGrid">
+              <button type="button" data-mood="??">??</button>
+              <button type="button" data-mood="??">??</button>
+              <button type="button" data-mood="??">??</button>
+              <button type="button" data-mood="??">??</button>
+              <button type="button" data-mood="??">??</button>
+            </div>
+          </div>
+
+          <label>Energy Level <span id="energyValue">5/10</span><input id="energyLevel" type="range" min="1" max="10" step="1" value="5" /></label>
+          <label>Water Goal
+            <select id="checkinWaterGoal">
+              <option value="2000">2 L</option>
+              <option value="2500">2.5 L</option>
+              <option value="3000" selected>3 L</option>
+              <option value="3500">3.5 L</option>
+              <option value="4000">4 L</option>
+            </select>
+          </label>
+          <label>Today's Goal
+            <select id="checkinTodayGoal">
+              <option value="lose_fat">Lose Fat</option>
+              <option value="build_muscle">Build Muscle</option>
+              <option value="stay_healthy">Stay Healthy</option>
+            </select>
+          </label>
+          <button type="submit">?????? Check-in</button>
+          <p class="save-feedback hidden" id="checkinSaveFeedback">?????????????????</p>
+        </form>
+
+        <section class="quick-list checkin-history-card">
+          <div class="section-title">
+            <h2>??????? 7 ?????????</h2>
+            <span id="checkinHistoryCount">0/7</span>
+          </div>
+          <div class="history-list" id="checkinHistoryList"></div>
+        </section>
+
+        <section class="chart-card checkin-hydration-card">
+          <div class="section-title">
+            <h2>Hydration Status</h2>
+            <span id="checkinHydrationStatus">Low</span>
+          </div>
+          <p id="checkinHydrationText">??????????????????????</p>
+        </section>
+
+        <section class="chart-card health-card hidden">
+          <div class="section-title">
+            <h2>?????????</h2>
+            <span id="waterTotal">0 / 3L</span>
+          </div>
+          <div class="macro-track"><div id="waterBar" class="macro-fill"></div></div>
+          <div class="health-connect-grid">
+            <button class="secondary water-button" data-water="250" type="button">+250 ml</button>
+            <button class="secondary water-button" data-water="500" type="button">+500 ml</button>
+            <button class="secondary water-button" data-water="1000" type="button">+1000 ml</button>
+          </div>
+        </section>
+
+        <form class="entry-form hidden" id="weightForm">
+          <div class="section-title"><h2>???????????</h2></div>
+          <div class="form-grid">
+            <label>????????????? kg<input id="dailyWeight" type="number" min="20" max="350" step="0.1" /></label>
+            <label>Body fat %<input id="bodyFat" type="number" min="0" max="80" step="0.1" /></label>
+            <label>?????? cm<input id="waist" type="number" min="20" max="250" step="0.1" /></label>
+            <label>??? progress<input id="progressPhoto" type="file" accept="image/*" capture="environment" /></label>
+          </div>
+          <div class="photo-preview" id="progressPhotoPreview"></div>
+          <button type="submit">?????????????</button>
+        </form>
+
+        <form class="entry-form hidden" id="sleepForm">
+          <div class="section-title"><h2>??????</h2><span id="sleepDuration">0 ??.</span></div>
+          <div class="form-grid">
+            <label>???????<input id="sleepTime" type="time" /></label>
+            <label>????????<input id="wakeTime" type="time" /></label>
+          </div>
+          <label>????????????
+            <select id="sleepQuality">
+              <option value="5">?????</option>
+              <option value="4">??</option>
+              <option value="3">???????</option>
+              <option value="2">???</option>
+              <option value="1">??????</option>
+            </select>
+          </label>
+          <button type="submit">????????????</button>
+        </form>
+
+        <section class="quick-list hidden">
+          <div class="section-title"><h2>Mood check</h2><span id="moodToday">-</span></div>
+          <div class="mood-grid" id="moodGrid">
+            <button type="button" data-mood="??">??</button>
+            <button type="button" data-mood="??">??</button>
+            <button type="button" data-mood="??">??</button>
+            <button type="button" data-mood="??">??</button>
+            <button type="button" data-mood="??">??</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="screen" id="history">
+        <div class="section-title">
+          <h2>Workout history</h2>
+          <button class="link-button" id="exportData" type="button">Export</button>
+        </div>
+        <section class="chart-card overload-card">
+          <div class="section-title"><h2>Previous Performance</h2><span id="previousPerformanceCount">0 ???</span></div>
+          <div class="overload-list" id="previousPerformanceList"></div>
+        </section>
+        <section class="chart-card overload-card">
+          <div class="section-title"><h2>Personal Records</h2><span id="personalRecordCount">0 PR</span></div>
+          <div class="overload-list" id="personalRecordList"></div>
+        </section>
+        <section class="chart-card overload-card">
+          <div class="section-title"><h2>Weekly Statistics</h2><span>7 ?????????</span></div>
+          <div class="dashboard-grid workout-summary-grid" id="weeklyWorkoutStats"></div>
+        </section>
+        <section class="chart-card overload-card">
+          <div class="section-title"><h2>Monthly Statistics</h2><span>30 ?????????</span></div>
+          <div class="dashboard-grid workout-summary-grid" id="monthlyWorkoutStats"></div>
+        </section>
+        <div class="history-list" id="historyList"></div>
+      </section>
+
+      <section class="screen" id="coach">
+        <section class="score-card premium-preview" id="coachPremiumGate">
+          <p class="eyebrow">Khayubdi Pro</p>
+          <h2>AI Coach MVP</h2>
+          <p>???????? daily feedback ??? weekly review ?????????????? ??? ??? ??????? ??? workout</p>
+          <button id="upgradeCoachButton" type="button">??????? Pro</button>
+        </section>
+        <section class="pro-content hidden" id="coachProContent">
+          <section class="coach-card">
+            <div class="section-title"><h2>?????????????</h2><span class="ai-badge">AI MVP</span></div>
+            <p id="dailyCoachText"></p>
+          </section>
+          <section class="coach-card">
+            <div class="section-title"><h2>Weekly review</h2><button class="link-button" id="refreshCoach" type="button">??????</button></div>
+            <div id="weeklyCoachText"></div>
+          </section>
+        </section>
+      </section>
+
+      <section class="screen" id="progress">
+        <section class="dashboard-hero progress-hero">
+          <p class="eyebrow">Progress Dashboard</p>
+          <h2>??????????????????</h2>
+          <p>????????????????????????????: ??????? ????? ??? ?????? ??????????????</p>
+        </section>
+
+        <section class="chart-card progress-empty-card hidden" id="progressEmptyState">
+          <p>??????????????????????????????????????????????</p>
+        </section>
+
+        <section class="chart-card progress-overall-card">
+          <div class="section-title">
+            <h2>Overall Progress</h2>
+            <span id="progressDataDays">0 ???</span>
+          </div>
+          <div class="dashboard-grid progress-overall-grid">
+            <article><strong id="progressTodayScore">0</strong><span>???????????</span></article>
+            <article><strong id="progressSevenAverage">0</strong><span>?????? 7 ???</span></article>
+            <article><strong id="progressThirtyAverage">0</strong><span>?????? 30 ???</span></article>
+            <article><strong id="progressTrend">??????</strong><span>???????</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card progress-score-card">
+          <div class="section-title">
+            <h2>Health Score Trend</h2>
+            <span id="progressScoreRange">30 ?????????</span>
+          </div>
+          <div class="progress-chart" id="healthScoreChart"></div>
+          <div class="dashboard-grid progress-score-grid">
+            <article><strong id="progressHighestScore">0</strong><span>Highest Score</span></article>
+            <article><strong id="progressLowestScore">0</strong><span>Lowest Score</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card progress-weight-card">
+          <div class="section-title">
+            <h2>Body Progress</h2>
+            <span id="progressWeightStatus">??????????????</span>
+          </div>
+          <div class="progress-line-chart" id="weightProgressChart"></div>
+          <div class="dashboard-grid progress-weight-grid">
+            <article><strong id="progressLatestWeight">-</strong><span>Latest Weight</span></article>
+            <article><strong id="progressGoalWeight">-</strong><span>Goal Weight</span></article>
+            <article><strong id="progressWeightDiff">-</strong><span>Difference</span></article>
+            <article><strong id="progressHighestWeight">-</strong><span>Highest Weight</span></article>
+            <article><strong id="progressLowestWeight">-</strong><span>Lowest Weight</span></article>
+            <article><strong id="progressAverageWeight">-</strong><span>Average Weight</span></article>
+            <article><strong id="progressWeeklyWeightChange">-</strong><span>Weekly Change</span></article>
+            <article><strong id="progressMonthlyWeightChange">-</strong><span>Monthly Change</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card progress-nutrition-card">
+          <div class="section-title">
+            <h2>Nutrition Progress</h2>
+            <span id="progressNutritionDays">0 ???</span>
+          </div>
+          <div class="dashboard-grid progress-nutrition-grid">
+            <article><strong id="progressAverageCalories">0</strong><span>Average Calories</span></article>
+            <article><strong id="progressAverageProtein">0g</strong><span>Average Protein</span></article>
+            <article><strong id="progressAverageCarbs">0g</strong><span>Average Carbs</span></article>
+            <article><strong id="progressAverageFat">0g</strong><span>Average Fat</span></article>
+          </div>
+          <div class="progress-bars">
+            <label>Calories vs Target<span id="progressCaloriesVsTarget">0%</span></label>
+            <div class="macro-track"><div class="macro-fill" id="progressCaloriesBar"></div></div>
+            <label>Protein vs Target<span id="progressProteinVsTarget">0%</span></label>
+            <div class="macro-track"><div class="macro-fill" id="progressProteinBar"></div></div>
+          </div>
+        </section>
+
+        <section class="chart-card progress-water-card">
+          <div class="section-title">
+            <h2>Hydration Progress</h2>
+            <span id="progressWaterAchievement">0%</span>
+          </div>
+          <div class="progress-chart" id="waterProgressChart"></div>
+          <div class="dashboard-grid progress-water-grid">
+            <article><strong id="progressWaterDailyAverage">0 ml</strong><span>Daily Average</span></article>
+            <article><strong id="progressWaterWeeklyAverage">0 ml</strong><span>Weekly Average</span></article>
+            <article><strong id="progressWaterMonthlyAverage">0 ml</strong><span>Monthly Average</span></article>
+            <article><strong id="progressWaterCurrentStreak">0</strong><span>Current Streak</span></article>
+            <article><strong id="progressWaterBestStreak">0</strong><span>Best Streak</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card progress-sleep-card">
+          <div class="section-title">
+            <h2>Sleep Progress</h2>
+            <span id="progressSleepAchievement">0%</span>
+          </div>
+          <div class="progress-chart" id="sleepProgressChart"></div>
+          <div class="dashboard-grid progress-sleep-grid">
+            <article><strong id="progressSleepAverageHours">0 ??.</strong><span>Average Hours</span></article>
+            <article><strong id="progressSleepAverageQuality">0/5</strong><span>Average Quality</span></article>
+            <article><strong id="progressSleepCurrentStreak">0</strong><span>Current Streak</span></article>
+            <article><strong id="progressSleepBestStreak">0</strong><span>Best Streak</span></article>
+          </div>
+        </section>
+
+        <section class="chart-card progress-summary-card">
+          <div class="section-title">
+            <h2>Weekly Summary</h2>
+            <span>?????? AI</span>
+          </div>
+          <div class="summary-grid" id="weeklySummaryGrid"></div>
+        </section>
+
+        <section class="chart-card progress-summary-card">
+          <div class="section-title">
+            <h2>Monthly Summary</h2>
+            <span>?????????? 30 ???</span>
+          </div>
+          <div class="summary-grid" id="monthlySummaryGrid"></div>
+        </section>
+
+        <section class="chart-card progress-achievements-card">
+          <div class="section-title">
+            <h2>Achievements</h2>
+            <span id="achievementStatus">0 earned</span>
+          </div>
+          <div class="achievement-grid" id="achievementGrid"></div>
+        </section>
+      </section>
+
+      <section class="screen" id="trainingAnalytics">
+        <section class="dashboard-hero analytics-hero">
+          <p class="eyebrow">Training Intelligence</p>
+          <h2>Advanced Training Analytics</h2>
+          <p>????????? volume, balance, recovery, fatigue ??? weak points ??? workout history ????????????</p>
+        </section>
+
+        <section class="chart-card analytics-overview-card">
+          <div class="section-title"><h2>Overview</h2><span id="analyticsStatus">Rule-based</span></div>
+          <div class="dashboard-grid workout-summary-grid">
+            <article><strong id="analyticsRecoveryScore">0</strong><span>Recovery Score</span></article>
+            <article><strong id="analyticsFatigueScore">0</strong><span>Fatigue Score</span></article>
+            <article><strong id="analyticsWeeklySets">0</strong><span>Weekly Sets</span></article>
+            <article><strong id="analyticsDensity">0</strong><span>Sets / Minute</span></article>
+          </div>
+          <p class="analytics-recommendation" id="analyticsRecommendation">??????????? workout ??????????????</p>
+        </section>
+
+        <section class="chart-card analytics-volume-card">
+          <div class="section-title"><h2>Weekly Volume</h2><span>Current Week</span></div>
+          <div class="analytics-volume-list" id="weeklyMuscleVolumeList"></div>
+        </section>
+
+        <section class="chart-card analytics-volume-card">
+          <div class="section-title"><h2>Monthly Volume</h2><span>30 ?????????</span></div>
+          <div class="analytics-volume-list" id="monthlyMuscleVolumeList"></div>
+        </section>
+
+        <section class="chart-card analytics-balance-card">
+          <div class="section-title"><h2>Balance</h2><span id="balanceStatus">-</span></div>
+          <div class="dashboard-grid workout-summary-grid" id="trainingBalanceGrid"></div>
+          <div class="analytics-volume-list" id="leftRightBalance"></div>
+        </section>
+
+        <section class="chart-card analytics-recovery-card">
+          <div class="section-title"><h2>Recovery & Fatigue</h2><span>Rule-based</span></div>
+          <div class="dashboard-grid workout-summary-grid" id="recoveryFatigueGrid"></div>
+        </section>
+
+        <section class="chart-card analytics-heatmap-card">
+          <div class="section-title"><h2>Muscle Heatmap</h2><span>Very High / High / Medium / Low</span></div>
+          <div class="muscle-heatmap" id="muscleHeatmap"></div>
+        </section>
+
+        <section class="chart-card analytics-landmarks-card">
+          <div class="section-title"><h2>Volume Landmarks</h2><span>Recommended range</span></div>
+          <div class="analytics-volume-list" id="volumeLandmarkList"></div>
+        </section>
+
+        <section class="chart-card analytics-weak-card">
+          <div class="section-title"><h2>Weak Points</h2><span>Rule-based suggestions</span></div>
+          <div class="overload-list" id="weakPointList"></div>
+        </section>
+
+        <section class="chart-card analytics-frequency-card">
+          <div class="section-title"><h2>Exercise Statistics</h2><span id="exerciseStatsCount">0 exercises</span></div>
+          <div class="overload-list" id="exerciseFrequencyList"></div>
+        </section>
+      </section>
+
+      <section class="screen" id="coachChat">
+        <section class="dashboard-hero coach-chat-hero">
+          <p class="eyebrow">Conversational AI Coach</p>
+          <h2>คุยกับโค้ชขยับดิ</h2>
+          <p>ถามเรื่อง workout, recovery, fatigue, nutrition, progress หรือแรงใจ โดยใช้ข้อมูลจริงในแอปนี้เท่านั้น</p>
+        </section>
+
+        <section class="chart-card coach-chat-card">
+          <div class="section-title">
+            <h2>Coach Chat</h2>
+            <span id="chatStatus">Local memory</span>
+          </div>
+          <div class="persona-control" role="group" aria-label="Coach persona">
+            <button class="persona-chip active" data-persona="friendly" type="button">Friendly</button>
+            <button class="persona-chip" data-persona="professional" type="button">Professional</button>
+            <button class="persona-chip" data-persona="motivational" type="button">Motivational</button>
+          </div>
+          <div class="suggested-question-grid" id="suggestedQuestions"></div>
+          <div class="chat-history" id="chatHistory" aria-live="polite"></div>
+          <div class="quick-reply-grid" id="quickReplies"></div>
+          <form class="chat-input-row" id="coachChatForm">
+            <input id="coachChatInput" autocomplete="off" placeholder="ถามโค้ช เช่น วันนี้ควรซ้อมอะไรดี?" />
+            <button id="coachChatSend" type="submit">ส่ง</button>
+          </form>
+          <button class="secondary clear-chat-button" id="clearCoachChat" type="button">ล้างบทสนทนา</button>
+        </section>
+      </section>
+
+      <section class="screen" id="trainerPortal">
+        <section class="dashboard-hero trainer-hero">
+          <p class="eyebrow">Trainer Portal</p>
+          <h2>ศูนย์โค้ชและลูกค้า</h2>
+          <p>Trainer mode ใช้ข้อมูลในเครื่องนี้เท่านั้น และสร้างได้เฉพาะ notes หรือ recommendation drafts</p>
+        </section>
+
+        <section class="trainer-dashboard-grid">
+          <article><strong id="trainerTotalClients">0</strong><span>Total Clients</span></article>
+          <article><strong id="trainerTodaySessions">0</strong><span>Today's Sessions</span></article>
+          <article><strong id="trainerNeedsReview">0</strong><span>Need Review</span></article>
+          <article><strong id="trainerPlateauRisk">0</strong><span>Plateau Risk</span></article>
+          <article><strong id="trainerMissedWorkouts">0</strong><span>Missed Workouts</span></article>
+          <article><strong id="trainerPendingDrafts">0</strong><span>Pending Drafts</span></article>
+        </section>
+
+        <form class="entry-form trainer-profile-card" id="trainerProfileForm">
+          <div class="section-title"><h2>Trainer Profile</h2><span id="trainerModeStatus">Local</span></div>
+          <div class="form-grid">
+            <label>Trainer Name<input id="trainerName" autocomplete="name" /></label>
+            <label>Gym<input id="trainerGym" /></label>
+            <label>Specialty<input id="trainerSpecialty" placeholder="Fat loss, strength, rehab" /></label>
+            <label>Certification<input id="trainerCertification" /></label>
+          </div>
+          <label>Notes<textarea id="trainerProfileNotes" rows="3"></textarea></label>
+          <button type="submit">Save trainer profile</button>
+        </form>
+
+        <section class="chart-card trainer-client-card">
+          <div class="section-title"><h2>Client Directory</h2><span id="trainerClientCount">0 clients</span></div>
+          <div class="trainer-filter-row">
+            <input id="trainerClientSearch" type="search" placeholder="Search client" />
+            <select id="trainerClientSort">
+              <option value="status">Sort: Status</option>
+              <option value="name">Sort: Name</option>
+              <option value="compliance">Sort: Compliance</option>
+              <option value="lastWorkout">Sort: Last Workout</option>
+            </select>
+          </div>
+          <div class="trainer-client-list" id="trainerClientList"></div>
+        </section>
+
+        <section class="chart-card trainer-overview-card" id="trainerClientOverview">
+          <div class="section-title"><h2 id="trainerSelectedName">Client Overview</h2><span id="trainerSelectedStatus">Select client</span></div>
+          <div class="trainer-overview-grid" id="trainerOverviewGrid"></div>
+          <div class="trainer-timeline" id="trainerTimeline"></div>
+        </section>
+
+        <form class="entry-form trainer-note-card" id="trainerNoteForm">
+          <div class="section-title"><h2>Trainer Notes</h2><span>Timestamped</span></div>
+          <div class="form-grid">
+            <label>Type
+              <select id="trainerNoteType">
+                <option value="session">Session Note</option>
+                <option value="assessment">Assessment Note</option>
+                <option value="progress">Progress Note</option>
+                <option value="goal">Goal</option>
+              </select>
+            </label>
+            <label>Client<input id="trainerNoteClient" readonly /></label>
+          </div>
+          <label>Note<textarea id="trainerNoteText" rows="3" required></textarea></label>
+          <button type="submit">Save note</button>
+        </form>
+
+        <form class="entry-form trainer-recommendation-card" id="trainerRecommendationForm">
+          <div class="section-title"><h2>Recommendation Draft</h2><span>Review-first</span></div>
+          <div class="form-grid">
+            <label>Type
+              <select id="trainerRecommendationType">
+                <option value="program">Program Recommendation Draft</option>
+                <option value="nutrition">Nutrition Recommendation Draft</option>
+              </select>
+            </label>
+            <label>Client<input id="trainerRecommendationClient" readonly /></label>
+          </div>
+          <label>Recommendation<textarea id="trainerRecommendationText" rows="4" required></textarea></label>
+          <button type="submit">Create recommendation draft</button>
+        </form>
+
+        <section class="chart-card trainer-ai-card">
+          <div class="section-title"><h2>Trainer AI Support</h2><span>Rule-based</span></div>
+          <form class="chat-input-row" id="trainerAiForm">
+            <input id="trainerAiInput" placeholder="เช่น Which clients are plateauing?" />
+            <button type="submit">Ask</button>
+          </form>
+          <div class="coach-line-list" id="trainerAiAnswer"></div>
+        </section>
+      </section>
+
+      <section class="screen" id="profile">
+        <form class="entry-form" id="clientForm">
+          <div class="section-title">
+            <h2>Client profile</h2>
+          </div>
+          <label>Client ID<input id="clientId" readonly /></label>
+          <label>Full name<input id="clientName" autocomplete="name" placeholder="Customer name" /></label>
+          <div class="form-grid">
+            <label>Phone<input id="clientPhone" autocomplete="tel" /></label>
+            <label>Email<input id="clientEmail" autocomplete="email" /></label>
+          </div>
+          <label>Birthday<input id="clientBirthday" type="date" /></label>
+          <label>Client note<textarea id="clientNote" rows="3" placeholder="Goals, limitations, preferences"></textarea></label>
+          <button type="submit">Save client</button>
+        </form>
+
+        <form class="entry-form" id="profileForm">
+          <div class="section-title">
+            <h2>Edit profile</h2>
+          </div>
+          <label>Display name<input id="profileDisplayName" autocomplete="name" /></label>
+          <div class="form-grid">
+            <label>Gender
+              <select id="profileGender">
+                <option value="">Prefer not to say</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="non_binary">Non-binary</option>
+                <option value="self_describe">Self describe</option>
+              </select>
+            </label>
+            <label>Age<input id="profileAge" type="number" min="13" max="120" step="1" /></label>
+            <label>Height cm<input id="profileHeight" type="number" min="80" max="250" step="1" /></label>
+            <label>Target weight kg<input id="targetWeight" type="number" min="20" max="350" step="0.5" /></label>
+          </div>
+          <label>
+            Goal
+            <select id="goal">
+              <option value="fat_loss">???????</option>
+              <option value="muscle_gain">??????????</option>
+              <option value="endurance">????????????</option>
+              <option value="health">????????????</option>
+            </select>
+          </label>
+          <div class="form-grid">
+            <label>Current weight kg<input id="bodyWeight" type="number" min="20" step="0.5" value="70" /></label>
+            <label>Activity level
+              <select id="activityLevel">
+                <option value="sedentary">Sedentary</option>
+                <option value="light">Light</option>
+                <option value="moderate">Moderate</option>
+                <option value="active">Active</option>
+                <option value="athlete">Athlete</option>
+              </select>
+            </label>
+            <label>Weekly target<input id="weeklyTarget" type="number" min="1" step="1" value="150" /></label>
+          </div>
+          <button type="submit">Save profile</button>
+        </form>
+
+        <div class="store-card">
+          <h2>Store-ready base</h2>
+          <p>Mobile-first PWA ????? config ????????????? iOS/Android ???? Capacitor</p>
+        </div>
+        <section class="chart-card beta-settings-card">
+          <div class="section-title">
+            <h2>Closed Beta</h2>
+            <span>Version 1.0.0-rc2 · Build 53</span>
+          </div>
+          <div class="beta-status-pill">Closed Beta · Release Candidate</div>
+          <div class="quick-action-grid">
+            <button class="secondary quick-action" data-tab-target="about" type="button">About</button>
+            <button class="secondary quick-action" data-tab-target="feedback" type="button">Feedback</button>
+            <button class="secondary quick-action" data-tab-target="diagnostics" type="button">Diagnostics</button>
+            <button class="secondary quick-action" data-tab-target="privacy" type="button">Privacy / Terms</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="screen" id="about">
+        <section class="dashboard-hero">
+          <p class="eyebrow">Closed Beta</p>
+          <h2>Khayubdi AI Fitness</h2>
+          <p>Release Candidate v1.0.0-rc2 · Build 53</p>
+        </section>
+        <section class="chart-card beta-info-card">
+          <div class="section-title"><h2>About</h2><span id="aboutReleaseBadge">Closed Beta</span></div>
+          <div class="dashboard-grid compact-dashboard-grid" id="aboutInfoGrid">
+            <article><strong>Khayubdi AI Fitness</strong><span>App Name</span></article>
+            <article><strong>1.0.0-rc2</strong><span>Version</span></article>
+            <article><strong>53</strong><span>Build Number</span></article>
+            <article><strong>Closed Beta</strong><span>Environment</span></article>
+            <article><strong>Release Candidate</strong><span>Release Channel</span></article>
+            <article><strong>Khayubdi</strong><span>Developer</span></article>
+            <article><strong>Coming soon</strong><span>Website</span></article>
+            <article><strong>Placeholder</strong><span>License</span></article>
+          </div>
+          <p class="trend-line">Copyright © 2026 Khayubdi. Closed Beta software.</p>
+          <div class="quick-action-grid">
+            <button class="secondary quick-action" data-tab-target="privacy" type="button">Privacy Policy</button>
+            <button class="secondary quick-action" data-tab-target="privacy" type="button">Terms</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="screen" id="feedback">
+        <section class="dashboard-hero">
+          <p class="eyebrow">Beta Feedback</p>
+          <h2>Help shape Khayubdi</h2>
+          <p>Report bugs, suggestions, and experience notes. This beta form is local-only for now.</p>
+        </section>
+        <form class="entry-form beta-feedback-form" id="feedbackForm">
+          <div class="section-title"><h2>Feedback Center</h2><span>Placeholder submit</span></div>
+          <label>Feedback type
+            <select id="feedbackType">
+              <option value="bug">Report Bug</option>
+              <option value="feature">Suggest Feature</option>
+              <option value="general">General Feedback</option>
+            </select>
+          </label>
+          <label>Rate experience
+            <select id="feedbackRating">
+              <option value="5">5 - Excellent</option>
+              <option value="4">4 - Good</option>
+              <option value="3">3 - Okay</option>
+              <option value="2">2 - Needs work</option>
+              <option value="1">1 - Blocked</option>
+            </select>
+          </label>
+          <label>Message<textarea id="feedbackMessage" rows="5" placeholder="What happened? What would make this better?" required></textarea></label>
+          <button type="submit">Submit Feedback</button>
+          <p class="save-feedback hidden" id="feedbackThanks">Thank you — feedback captured locally for beta review. No backend was contacted.</p>
+        </form>
+      </section>
+
+      <section class="screen" id="diagnostics">
+        <section class="dashboard-hero">
+          <p class="eyebrow">Beta Diagnostics</p>
+          <h2>Device & app status</h2>
+          <p>Safe technical details only. Personal workout, health, nutrition, and AI data are excluded.</p>
+        </section>
+        <section class="chart-card diagnostics-card">
+          <div class="section-title"><h2>Diagnostics</h2><span id="diagnosticsStatus">Ready</span></div>
+          <div class="dashboard-grid compact-dashboard-grid" id="diagnosticsGrid"></div>
+          <button class="secondary" id="refreshDiagnostics" type="button">Refresh Diagnostics</button>
+          <button id="exportDiagnostics" type="button">Export Diagnostics JSON</button>
+        </section>
+      </section>
+
+      <section class="screen" id="privacy">
+        <div class="store-card">
+          <h2>Privacy controls</h2>
+          <p>Your exercise log is private to your account. You can export or delete it here.</p>
+          <p><a href="/privacy" target="_blank">Privacy Policy</a> · <a href="/terms" target="_blank">Terms</a></p>
+        </div>
+
+        <form class="entry-form" id="privacyForm">
+          <label class="check-row"><input id="privacyAnalytics" type="checkbox" /> Allow anonymous product analytics</label>
+          <label class="check-row"><input id="privacyMarketing" type="checkbox" /> Allow marketing messages</label>
+          <label class="check-row"><input id="privacyCoaching" type="checkbox" /> Allow sharing data for coaching review</label>
+          <button type="submit">Save privacy</button>
+        </form>
+
+        <div class="danger-zone">
+          <button class="secondary" id="exportAccount" type="button">Export my data</button>
+          <button class="danger" id="deleteAccount" type="button">Delete account</button>
+        </div>
+      </section>
+      <nav class="bottom-nav" aria-label="Primary">
+        <button class="tab" data-tab="track" type="button"><span>↟</span><small>Workout</small></button>
+        <button class="tab active" data-tab="dashboard" type="button"><span>¦</span><small>Dashboard</small></button>
+        <button class="tab" data-tab="health" type="button"><span>?</span><small>Health</small></button>
+        <button class="tab" data-tab="nutrition" type="button"><span>?</span><small>Food</small></button>
+        <button class="tab" data-tab="track" type="button"><span>＋</span><small>Quick</small></button>
+        <button class="tab" data-tab="coachChat" type="button"><span>AI</span><small>Coach</small></button>
+        <button class="tab" data-tab="trainerPortal" type="button"><span>TR</span><small>Trainer</small></button>
+        <button class="tab" data-tab="trainingAnalytics" type="button"><span>?</span><small>Analytics</small></button>
+        <button class="tab" data-tab="progress" type="button"><span>?</span><small>Progress</small></button>
+        <button class="tab" data-tab="profile" type="button"><span>?</span><small>Settings</small></button>
+      </nav>
+    </main>
+
+    <div class="toast hidden" id="appToast" role="status" aria-live="polite"></div>
+
+    <div class="modal-backdrop hidden" id="comingSoonModal" role="dialog" aria-modal="true" aria-labelledby="comingSoonTitle">
+      <div class="modal-card">
+        <p class="eyebrow">Khayubdi v2</p>
+        <h2 id="comingSoonTitle">Coming soon</h2>
+        <p id="comingSoonText">?????????????????? Sprint ?????</p>
+        <button id="closeComingSoon" type="button">???</button>
+      </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="betaWelcomeModal" role="dialog" aria-modal="true" aria-labelledby="betaWelcomeTitle">
+      <div class="modal-card beta-welcome-card">
+        <p class="eyebrow">Closed Beta</p>
+        <h2 id="betaWelcomeTitle">Welcome to Closed Beta</h2>
+        <p>Thank you for testing Khayubdi. Please report bugs and suggestions from the Feedback Center so we can make the release stronger.</p>
+        <button id="betaWelcomeContinue" type="button">Continue</button>
+      </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="appErrorModal" role="dialog" aria-modal="true" aria-labelledby="appErrorTitle">
+      <div class="modal-card app-error-card">
+        <p class="eyebrow">Something went wrong</p>
+        <h2 id="appErrorTitle">We hit a temporary issue</h2>
+        <p id="appErrorText">Please retry, or go back to the Dashboard.</p>
+        <div class="hero-actions">
+          <button id="appErrorRetry" type="button">Retry</button>
+          <button class="secondary quick-action" data-tab-target="dashboard" id="appErrorBack" type="button">Back to Dashboard</button>
+        </div>
+      </div>
+    </div>
+
+  <script src="/exercise.js?v=53"></script>
+  </body>
+</html>
