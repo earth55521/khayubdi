@@ -14,13 +14,13 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icon.svg" />
-  <link rel="stylesheet" href="/exercise.css?v=53" />
+  <link rel="stylesheet" href="/exercise.css?v=54" />
   </head>
   <body>
     <section class="splash-shell" id="splashShell">
       <div class="splash-card">
         <p class="eyebrow">Khayubdi</p>
-        <h1>??????</h1>
+        <h1>ขยับดิ</h1>
         <p>Premium health and exercise tracker for your daily foundation.</p>
         <div class="landing-actions">
           <button id="landingRegisterButton" type="button">Create account</button>
@@ -79,13 +79,13 @@
         <button class="link-button auth-toggle login-only" id="forgotPassword" type="button">Forgot password?</button>
         <div class="oauth-divider"><span>or continue with</span></div>
         <div class="oauth-grid">
-          <button class="oauth-button" data-provider="google" type="button">Google</button>
-          <button class="oauth-button" data-provider="apple" type="button">Apple ID</button>
-          <button class="oauth-button" data-provider="facebook" type="button">Facebook</button>
+          <button class="oauth-button" data-provider="google" type="button" disabled aria-disabled="true">Google · Coming Soon</button>
+          <button class="oauth-button" data-provider="apple" type="button" disabled aria-disabled="true">Apple ID · Coming Soon</button>
+          <button class="oauth-button" data-provider="facebook" type="button" disabled aria-disabled="true">Facebook · Coming Soon</button>
         </div>
         <button class="link-button auth-toggle" id="authModeToggle" type="button">Create account</button>
         <p class="auth-note" id="authMessage"></p>
-        <p class="legal-links"><a href="/privacy" target="_blank">Privacy Policy</a> · <a href="/terms" target="_blank">Terms</a></p>
+        <p class="legal-links"><a href="/privacy.html" target="_blank">Privacy Policy</a> · <a href="/terms.html" target="_blank">Terms</a></p>
       </div>
     </section>
 
@@ -136,8 +136,8 @@
     <main class="app hidden" id="appShell">
       <header class="topbar">
         <div>
-          <p class="eyebrow">??????</p>
-          <h1>?????? Health</h1>
+          <p class="eyebrow">สุขภาพ</p>
+          <h1>ขยับดิ Health</h1>
           <p class="user-line" id="currentUser"></p>
         </div>
         <div class="top-actions">
@@ -154,15 +154,15 @@
       </section>
 
       <section class="summary hidden">
-        <article><span id="todayMinutes">0</span><p>??????????</p></article>
+        <article><span id="todayMinutes">0</span><p>นาทีออกกำลังกาย</p></article>
         <article><span id="todayWorkouts">0</span><p>workout</p></article>
         <article><span id="todayCalories">0</span><p>kcal</p></article>
       </section>
 
       <section class="summary nutrition-summary hidden">
-        <article><span id="todayFoodCalories">0</span><p>????????</p></article>
-        <article><span id="todayProtein">0g</span><p>??????</p></article>
-        <article><span id="todayMeals">0</span><p>?????????</p></article>
+        <article><span id="todayFoodCalories">0</span><p>แคลอรี</p></article>
+        <article><span id="todayProtein">0g</span><p>โปรตีน</p></article>
+        <article><span id="todayMeals">0</span><p>มื้ออาหาร</p></article>
       </section>
 
       <nav class="tabs top-nav">
@@ -181,9 +181,9 @@
 
       <section class="screen active" id="dashboard">
         <section class="dashboard-hero ai-coach-hero">
-          <p class="eyebrow">??????</p>
-          <h2 id="dashboardGreeting">??????</h2>
-          <p id="dashboardGoal">????????: ????????????</p>
+          <p class="eyebrow">วันนี้</p>
+          <h2 id="dashboardGreeting">สวัสดี</h2>
+          <p id="dashboardGoal">เป้าหมาย: สุขภาพ</p>
           <div class="hero-actions">
             <button class="quick-action" data-tab-target="track" type="button">Quick Start Workout</button>
             <button class="secondary quick-action" data-tab-target="coachChat" type="button">Ask AI Coach</button>
@@ -287,48 +287,48 @@
           <div class="weekly-notification-summary" id="notificationWeeklySummary">Weekly summary is building from your latest activity.</div>
         </section>
         <section class="score-card">
-          <p class="label">?????????????????</p>
+          <p class="label">ข้อมูล</p>
           <div class="score-ring"><span id="healthScore">0</span><small>/100</small></div>
-          <strong class="score-status" id="healthScoreStatus">????????</strong>
-          <p class="trend-line" id="healthTrendIndicator">??????????????????????????</p>
+          <strong class="score-status" id="healthScoreStatus">ข้อมูล</strong>
+          <p class="trend-line" id="healthTrendIndicator">ข้อมูล</p>
           <div class="health-score-preview" id="healthScorePreview"></div>
-          <p class="health-score-recommendation" id="healthScoreRecommendation">??????????? ??? ????????????????????????????????</p>
+          <p class="health-score-recommendation" id="healthScoreRecommendation">ข้อมูล ข้อมูล ข้อมูล</p>
           <div class="health-score-history" id="healthScoreHistory"></div>
-          <p id="dailyMissionText">???????????????????????</p>
+          <p id="dailyMissionText">ข้อมูล</p>
         </section>
         <section class="dashboard-section">
-          <div class="section-title"><h2>Today's Health</h2><span>????????????</span></div>
+          <div class="section-title"><h2>Today's Health</h2><span>ข้อมูล</span></div>
           <div class="dashboard-grid compact-dashboard-grid">
-            <article><strong id="dashCurrentWeight">-</strong><span>???????????????</span></article>
-            <article><strong id="dashTargetWeight">-</strong><span>???????????????</span></article>
-            <article><strong id="dashWeightDifference">-</strong><span>???????????????</span></article>
-            <article><strong id="dashWeightTrend">-</strong><span>??????????????</span></article>
-            <article><strong id="dashCheckinStatus">?????????????</strong><span>Daily check-in</span></article>
+            <article><strong id="dashCurrentWeight">-</strong><span>ข้อมูล</span></article>
+            <article><strong id="dashTargetWeight">-</strong><span>ข้อมูล</span></article>
+            <article><strong id="dashWeightDifference">-</strong><span>ข้อมูล</span></article>
+            <article><strong id="dashWeightTrend">-</strong><span>ข้อมูล</span></article>
+            <article><strong id="dashCheckinStatus">ข้อมูล</strong><span>Daily check-in</span></article>
             <article><strong id="dashCheckinStreak">0</strong><span>check-in streak</span></article>
           </div>
         </section>
         <section class="dashboard-section">
-          <div class="section-title"><h2>Nutrition</h2><span>????????????????</span></div>
+          <div class="section-title"><h2>Nutrition</h2><span>ข้อมูล</span></div>
           <div class="dashboard-grid compact-dashboard-grid">
-            <article><strong id="dashFoodCalories">0</strong><span>?????????</span></article>
-            <article><strong id="dashFoodProtein">0g</strong><span>????????????</span></article>
+            <article><strong id="dashFoodCalories">0</strong><span>ข้อมูล</span></article>
+            <article><strong id="dashFoodProtein">0g</strong><span>ข้อมูล</span></article>
             <article><strong id="dashKcalTarget">0</strong><span>kcal target</span></article>
             <article><strong id="dashProteinTarget">0g</strong><span>protein target</span></article>
           </div>
         </section>
         <section class="dashboard-section">
-          <div class="section-title"><h2>Hydration</h2><span>??????????????</span></div>
+          <div class="section-title"><h2>Hydration</h2><span>ข้อมูล</span></div>
           <div class="dashboard-grid compact-dashboard-grid">
-            <article><strong id="dashWaterToday">0 ml</strong><span>?????????</span></article>
-            <article><strong id="dashWaterRemaining">3000 ml</strong><span>???????????</span></article>
+            <article><strong id="dashWaterToday">0 ml</strong><span>ข้อมูล</span></article>
+            <article><strong id="dashWaterRemaining">3000 ml</strong><span>ข้อมูล</span></article>
             <article><strong id="dashWaterTarget">3L</strong><span>water target</span></article>
           </div>
         </section>
         <section class="dashboard-section">
-          <div class="section-title"><h2>Sleep</h2><span>??????????</span></div>
+          <div class="section-title"><h2>Sleep</h2><span>ข้อมูล</span></div>
           <div class="dashboard-grid compact-dashboard-grid">
-            <article><strong id="dashSleepHours">0 ??.</strong><span>?????????</span></article>
-            <article><strong id="dashSleepQuality">-</strong><span>????????????</span></article>
+            <article><strong id="dashSleepHours">0 ??.</strong><span>ข้อมูล</span></article>
+            <article><strong id="dashSleepQuality">-</strong><span>ข้อมูล</span></article>
             <article><strong id="dashSleepGoal">8 ??.</strong><span>sleep goal</span></article>
             <article><strong id="dashSleepPercent">0%</strong><span>sleep completion</span></article>
           </div>
@@ -336,8 +336,8 @@
         <section class="dashboard-section">
           <div class="section-title"><h2>Training</h2><span>Progressive Overload</span></div>
           <div class="dashboard-grid compact-dashboard-grid">
-            <article><strong id="dashLastWorkout">-</strong><span>workout ??????</span></article>
-            <article><strong id="dashWorkoutStreak">0 ???</strong><span>current streak</span></article>
+            <article><strong id="dashLastWorkout">-</strong><span>workout ข้อมูล</span></article>
+            <article><strong id="dashWorkoutStreak">0 ข้อมูล</strong><span>current streak</span></article>
             <article><strong id="dashWeeklyVolume">0 kg</strong><span>weekly volume</span></article>
             <article><strong id="dashPrCount">0</strong><span>personal records</span></article>
             <article><strong id="dashCurrentProgram">-</strong><span>current program</span></article>
@@ -352,14 +352,14 @@
         </section>
         <section class="chart-card dashboard-water-card">
           <div class="section-title">
-            <h2>?????????</h2>
+            <h2>ข้อมูล</h2>
             <span id="dashWaterPercent">0%</span>
           </div>
           <div class="dashboard-water-layout">
             <div class="water-ring small" id="dashWaterRing"><span id="dashWaterRingText">0%</span></div>
             <div>
               <strong id="dashWaterSummary">0 / 3000 ml</strong>
-              <p id="dashWaterHint">??????????????????????</p>
+              <p id="dashWaterHint">ข้อมูล</p>
               <button class="secondary water-add-button" data-water-add="250" type="button">+250 ml</button>
             </div>
           </div>
@@ -379,16 +379,16 @@
             <h2>Quick Actions</h2>
           </div>
           <div class="quick-action-grid">
-            <button class="secondary quick-action" data-tab-target="health" type="button">?????????????</button>
-            <button class="secondary quick-action" data-tab-target="weightPage" type="button">?????????????</button>
-            <button class="secondary quick-action" data-tab-target="waterPage" type="button">?????????</button>
-            <button class="secondary quick-action" data-tab-target="sleepPage" type="button">????????????</button>
-            <button class="secondary quick-action" data-tab-target="nutrition" type="button">???????????</button>
-            <button class="secondary quick-action" data-tab-target="track" type="button">?????????????????</button>
+            <button class="secondary quick-action" data-tab-target="health" type="button">ข้อมูล</button>
+            <button class="secondary quick-action" data-tab-target="weightPage" type="button">ข้อมูล</button>
+            <button class="secondary quick-action" data-tab-target="waterPage" type="button">ข้อมูล</button>
+            <button class="secondary quick-action" data-tab-target="sleepPage" type="button">ข้อมูล</button>
+            <button class="secondary quick-action" data-tab-target="nutrition" type="button">ข้อมูล</button>
+            <button class="secondary quick-action" data-tab-target="track" type="button">ข้อมูล</button>
             <button class="secondary quick-action" data-tab-target="trainerPortal" type="button">Trainer Portal</button>
             <button class="secondary quick-action" data-tab-target="coachChat" type="button">คุยกับโค้ช</button>
             <button class="secondary quick-action" data-tab-target="trainingAnalytics" type="button">?? Training Analytics</button>
-            <button class="secondary quick-action" data-tab-target="progress" type="button">??????????????</button>
+            <button class="secondary quick-action" data-tab-target="progress" type="button">ข้อมูล</button>
           </div>
         </section>
         <section class="mission-card">
@@ -403,16 +403,16 @@
       <section class="screen" id="track">
         <section class="dashboard-hero workout-hero">
           <p class="eyebrow">Workout Intelligence</p>
-          <h2>?????????????????????????????????</h2>
-          <p>????????????? ????? ??????? ???????????? ???????????????????????????????</p>
+          <h2>ข้อมูล</h2>
+          <p>ข้อมูล ข้อมูล ข้อมูล ข้อมูล ข้อมูล</p>
         </section>
 
         <section class="pro-content workout-program-content" id="programProContent">
           <nav class="workout-subnav" aria-label="Workout sections">
-            <button class="workout-subtab active" data-workout-panel="myProgramPanel" type="button">?????????????</button>
-            <button class="workout-subtab" data-workout-panel="builderPanel" type="button">????????????</button>
-            <button class="workout-subtab" data-workout-panel="libraryPanel" type="button">???????</button>
-            <button class="workout-subtab" data-workout-panel="logPanel" type="button">????????????</button>
+            <button class="workout-subtab active" data-workout-panel="myProgramPanel" type="button">ข้อมูล</button>
+            <button class="workout-subtab" data-workout-panel="builderPanel" type="button">ข้อมูล</button>
+            <button class="workout-subtab" data-workout-panel="libraryPanel" type="button">ข้อมูล</button>
+            <button class="workout-subtab" data-workout-panel="logPanel" type="button">ข้อมูล</button>
           </nav>
 
           <div class="workout-panel" id="builderPanel">
@@ -442,12 +442,12 @@
           </section>
           <form class="entry-form workout-setup-card" id="programForm">
             <div class="section-title"><h2>Workout Goal Setup</h2><span id="programAdherence">0%</span></div>
-            <label>????????
+            <label>ข้อมูล
               <select id="programGoal">
-                <option value="fat_loss">???????</option>
-                <option value="muscle_gain">??????????</option>
-                <option value="strength">????????</option>
-                <option value="general_health">????????????</option>
+                <option value="fat_loss">ข้อมูล</option>
+                <option value="muscle_gain">ข้อมูล</option>
+                <option value="strength">ข้อมูล</option>
+                <option value="general_health">ข้อมูล</option>
                 <option value="beginner">Beginner</option>
               </select>
             </label>
@@ -461,11 +461,11 @@
               </label>
               <label>Training Days
                 <select id="programDays">
-                  <option value="2">2 ???/???????</option>
-                  <option value="3" selected>3 ???/???????</option>
-                  <option value="4">4 ???/???????</option>
-                  <option value="5">5 ???/???????</option>
-                  <option value="6">6 ???/???????</option>
+                  <option value="2">2 ข้อมูล/ข้อมูล</option>
+                  <option value="3" selected>3 ข้อมูล/ข้อมูล</option>
+                  <option value="4">4 ข้อมูล/ข้อมูล</option>
+                  <option value="5">5 ข้อมูล/ข้อมูล</option>
+                  <option value="6">6 ข้อมูล/ข้อมูล</option>
                 </select>
               </label>
               <label>Equipment
@@ -477,14 +477,14 @@
               </label>
               <label>Workout Duration
                 <select id="programMinutes">
-                  <option value="30">30 ????</option>
-                  <option value="45" selected>45 ????</option>
-                  <option value="60">60 ????</option>
-                  <option value="90">90 ????</option>
+                  <option value="30">30 ข้อมูล</option>
+                  <option value="45" selected>45 ข้อมูล</option>
+                  <option value="60">60 ข้อมูล</option>
+                  <option value="90">90 ข้อมูล</option>
                 </select>
               </label>
             </div>
-            <label>????????/?????????<textarea id="programInjuries" rows="2" placeholder="???? ????, ????????, ????"></textarea></label>
+            <label>ข้อมูล/ข้อมูล<textarea id="programInjuries" rows="2" placeholder="ข้อมูล ข้อมูล, ข้อมูล, ข้อมูล"></textarea></label>
             <button type="submit">Generate Weekly Program</button>
           </form>
           </div>
@@ -498,7 +498,7 @@
             </div>
             <form class="inline-form" id="createProgramForm">
               <div class="form-grid">
-                <label>Program name<input id="newProgramName" placeholder="???? Upper Lower 4 Days" /></label>
+                <label>Program name<input id="newProgramName" placeholder="ข้อมูล Upper Lower 4 Days" /></label>
                 <label>Goal
                   <select id="newProgramGoal">
                     <option value="hypertrophy">Hypertrophy</option>
@@ -548,7 +548,7 @@
                 <select id="programScheduleWorkout"></select>
               </label>
             </div>
-            <label>Program notes<textarea id="programNotesEditor" rows="3" placeholder="?????????????? ??????????? ????????????????????"></textarea></label>
+            <label>Program notes<textarea id="programNotesEditor" rows="3" placeholder="ข้อมูล ข้อมูล ข้อมูล"></textarea></label>
             <div class="program-actions">
               <button class="secondary" id="assignWorkoutToDay" type="button">Assign Selected Workout</button>
               <button class="secondary" id="duplicateProgram" type="button">Duplicate</button>
@@ -560,28 +560,28 @@
           </section>
 
           <section class="chart-card workout-summary-card">
-            <div class="section-title"><h2>Workout Summary</h2><span id="programGeneratedAt">???????????</span></div>
-            <p class="safety-warning hidden" id="programSafetyWarning">?????????????????????????????????? ??????????????????????????????????????????</p>
+            <div class="section-title"><h2>Workout Summary</h2><span id="programGeneratedAt">ข้อมูล</span></div>
+            <p class="safety-warning hidden" id="programSafetyWarning">ข้อมูล ข้อมูล</p>
             <div class="dashboard-grid workout-summary-grid">
               <article><strong id="programTrainingDays">0</strong><span>Training Days</span></article>
               <article><strong id="programWeeklyVolume">0 sets</strong><span>Weekly Volume</span></article>
-              <article><strong id="programEstimatedTime">0 ????</strong><span>Estimated Time</span></article>
+              <article><strong id="programEstimatedTime">0 ข้อมูล</strong><span>Estimated Time</span></article>
             </div>
           </section>
 
           <section class="chart-card overload-card">
-            <div class="section-title"><h2>Training Intelligence</h2><span>??????????????</span></div>
+            <div class="section-title"><h2>Training Intelligence</h2><span>ข้อมูล</span></div>
             <div class="dashboard-grid workout-summary-grid" id="workoutOverloadSummary"></div>
             <div class="overload-list" id="exerciseTrendList"></div>
           </section>
 
           <section class="chart-card workout-calendar-card">
-            <div class="section-title"><h2>Weekly Calendar</h2><span>Rest Days ?????????????</span></div>
+            <div class="section-title"><h2>Weekly Calendar</h2><span>Rest Days ข้อมูล</span></div>
             <div class="weekly-calendar" id="programCalendar"></div>
           </section>
 
           <section class="quick-list workout-plan-card">
-            <div class="section-title"><h2>?????????????</h2><button class="link-button" id="clearProgram" type="button">???????</button></div>
+            <div class="section-title"><h2>ข้อมูล</h2><button class="link-button" id="clearProgram" type="button">ข้อมูล</button></div>
             <div class="program-list" id="programPlanList"></div>
           </section>
 
@@ -590,15 +590,15 @@
           <div class="workout-panel" id="libraryPanel">
           <section class="chart-card exercise-library-card">
             <div class="section-title">
-              <h2>???????</h2>
-              <span id="exerciseLibraryCount">0 ???</span>
+              <h2>ข้อมูล</h2>
+              <span id="exerciseLibraryCount">0 ข้อมูล</span>
             </div>
             <div class="exercise-filter-grid">
-              <label>?????<input id="exerciseSearch" type="search" placeholder="??????????????????????" /></label>
-              <label>??????????<select id="exerciseMuscleFilter"><option value="">???????</option></select></label>
-              <label>Movement<select id="exercisePatternFilter"><option value="">???????</option></select></label>
-              <label>Equipment<select id="exerciseEquipmentFilter"><option value="">???????</option></select></label>
-              <label>Difficulty<select id="exerciseDifficultyFilter"><option value="">???????</option></select></label>
+              <label>ข้อมูล<input id="exerciseSearch" type="search" placeholder="ข้อมูล" /></label>
+              <label>ข้อมูล<select id="exerciseMuscleFilter"><option value="">ข้อมูล</option></select></label>
+              <label>Movement<select id="exercisePatternFilter"><option value="">ข้อมูล</option></select></label>
+              <label>Equipment<select id="exerciseEquipmentFilter"><option value="">ข้อมูล</option></select></label>
+              <label>Difficulty<select id="exerciseDifficultyFilter"><option value="">ข้อมูล</option></select></label>
             </div>
             <button class="secondary" id="clearExerciseFilters" type="button">Clear filters</button>
             <div class="exercise-library-list" id="exerciseLibraryList"></div>
@@ -620,7 +620,7 @@
         </div>
 
         <form class="entry-form" id="entryForm">
-          <label>Exercise<input id="exerciseName" list="exerciseOptions" placeholder="???? Squat, Run, Push up" required /></label>
+          <label>Exercise<input id="exerciseName" list="exerciseOptions" placeholder="ข้อมูล Squat, Run, Push up" required /></label>
           <datalist id="exerciseOptions">
             <option value="Walking"></option>
             <option value="Running"></option>
@@ -646,7 +646,7 @@
             <button class="secondary" id="calculateExerciseCalories" type="button">Calculate</button>
           </div>
 
-          <label>Notes<textarea id="notes" rows="3" placeholder="??????????, RPE, ?????????, ?????????????????"></textarea></label>
+          <label>Notes<textarea id="notes" rows="3" placeholder="ข้อมูล, RPE, ข้อมูล, ข้อมูล"></textarea></label>
           <button type="submit">Save exercise</button>
         </form>
 
@@ -698,16 +698,16 @@
 
         <section class="chart-card nutrition-coach food-summary-card">
           <div class="section-title">
-            <h2>??????????????????</h2>
-            <span id="nutritionTargetStatus">??????????????????</span>
+            <h2>ข้อมูล</h2>
+            <span id="nutritionTargetStatus">ข้อมูล</span>
           </div>
           <div class="macro-grid">
-            <article><strong id="targetCalories">0</strong><span>???? kcal</span></article>
-            <article><strong id="remainingCalories">0</strong><span>kcal ???????</span></article>
-            <article><strong id="remainingProtein">0g</strong><span>?????????????</span></article>
-            <article><strong id="totalCarbs">0g</strong><span>????????</span></article>
-            <article><strong id="totalFat">0g</strong><span>????????</span></article>
-            <article><strong id="totalFoodItems">0</strong><span>????????????</span></article>
+            <article><strong id="targetCalories">0</strong><span>ข้อมูล kcal</span></article>
+            <article><strong id="remainingCalories">0</strong><span>kcal ข้อมูล</span></article>
+            <article><strong id="remainingProtein">0g</strong><span>ข้อมูล</span></article>
+            <article><strong id="totalCarbs">0g</strong><span>ข้อมูล</span></article>
+            <article><strong id="totalFat">0g</strong><span>ข้อมูล</span></article>
+            <article><strong id="totalFoodItems">0</strong><span>ข้อมูล</span></article>
           </div>
           <div class="macro-bars">
             <div><span>Calories</span><div class="macro-track"><div id="calorieBar" class="macro-fill"></div></div></div>
@@ -715,42 +715,42 @@
             <div><span>Carbs</span><div class="macro-track"><div id="carbBar" class="macro-fill carbs"></div></div></div>
             <div><span>Fat</span><div class="macro-track"><div id="fatBar" class="macro-fill fat"></div></div></div>
           </div>
-          <p class="ai-coach-text" id="nutritionCoachText">??????????????????? ????????????????????????</p>
+          <p class="ai-coach-text" id="nutritionCoachText">ข้อมูล ข้อมูล</p>
         </section>
 
         <form class="entry-form food-form-card" id="foodForm">
           <div class="section-title">
-            <h2>???????????</h2>
-            <button class="link-button" id="clearFoodToday" type="button">??????????</button>
+            <h2>ข้อมูล</h2>
+            <button class="link-button" id="clearFoodToday" type="button">ข้อมูล</button>
           </div>
           <label>
-            ?????????
+            ข้อมูล
             <select id="mealType">
-              <option value="breakfast">????</option>
-              <option value="lunch">???????</option>
-              <option value="dinner">????</option>
-              <option value="snack">???????</option>
+              <option value="breakfast">ข้อมูล</option>
+              <option value="lunch">ข้อมูล</option>
+              <option value="dinner">ข้อมูล</option>
+              <option value="snack">ข้อมูล</option>
             </select>
           </label>
-          <label>?????????<input id="foodName" placeholder="???? ?????????????" required /></label>
+          <label>ข้อมูล<input id="foodName" placeholder="ข้อมูล ข้อมูล" required /></label>
           <div class="ai-actions hidden">
-            <button class="secondary ai-button" id="scanFoodPhotosButton" type="button">?? ?????????????????</button>
+            <button class="secondary ai-button" id="scanFoodPhotosButton" type="button">?? ข้อมูล</button>
             <button class="secondary ai-button" id="estimateFoodButton" type="button">AI estimate text</button>
           </div>
           <div class="ai-result hidden" id="foodEstimateResult"></div>
-          <label class="hidden">?????????<input id="mealTime" type="time" /></label>
-          <label class="hidden">???????? (?????? 3 ???)<input id="foodPhotos" type="file" accept="image/*" capture="environment" multiple /></label>
+          <label class="hidden">ข้อมูล<input id="mealTime" type="time" /></label>
+          <label class="hidden">ข้อมูล (ข้อมูล 3 ข้อมูล)<input id="foodPhotos" type="file" accept="image/*" capture="environment" multiple /></label>
           <div class="photo-preview hidden" id="foodPhotoPreview"></div>
           <div class="form-grid">
-            <label>???????<input id="foodCalories" type="number" min="0" step="1" value="0" /></label>
-            <label>?????? g<input id="foodProtein" type="number" min="0" step="1" value="0" /></label>
-            <label>????? g<input id="foodCarbs" type="number" min="0" step="1" value="0" /></label>
-            <label>????? g<input id="foodFat" type="number" min="0" step="1" value="0" /></label>
-            <label class="hidden">??????? g<input id="foodFiber" type="number" min="0" step="1" value="0" /></label>
+            <label>ข้อมูล<input id="foodCalories" type="number" min="0" step="1" value="0" /></label>
+            <label>ข้อมูล g<input id="foodProtein" type="number" min="0" step="1" value="0" /></label>
+            <label>ข้อมูล g<input id="foodCarbs" type="number" min="0" step="1" value="0" /></label>
+            <label>ข้อมูล g<input id="foodFat" type="number" min="0" step="1" value="0" /></label>
+            <label class="hidden">ข้อมูล g<input id="foodFiber" type="number" min="0" step="1" value="0" /></label>
           </div>
-          <label>?????????????<textarea id="foodNotes" rows="3" placeholder="?????????"></textarea></label>
-          <button id="saveFoodButton" type="submit">???????????</button>
-          <p class="save-feedback hidden" id="foodSaveFeedback">???????????????</p>
+          <label>ข้อมูล<textarea id="foodNotes" rows="3" placeholder="ข้อมูล"></textarea></label>
+          <button id="saveFoodButton" type="submit">ข้อมูล</button>
+          <p class="save-feedback hidden" id="foodSaveFeedback">ข้อมูล</p>
         </form>
 
         <section class="quick-list hidden">
@@ -762,7 +762,7 @@
 
         <section class="quick-list food-log-card">
           <div class="section-title">
-            <h2>???????????</h2>
+            <h2>ข้อมูล</h2>
           </div>
           <div class="history-list" id="foodHistoryList"></div>
         </section>
@@ -771,14 +771,14 @@
       <section class="screen" id="weightPage">
         <section class="dashboard-hero weight-hero">
           <p class="eyebrow">Weight Tracking</p>
-          <h2>?????????????</h2>
-          <p>????????????????? ????????????? ???????????????????????????????</p>
+          <h2>ข้อมูล</h2>
+          <p>ข้อมูล ข้อมูล ข้อมูล</p>
         </section>
 
         <section class="chart-card weight-latest-card">
           <div class="section-title">
-            <h2>?????????????</h2>
-            <span id="weightTrendBadge">??????????????</span>
+            <h2>ข้อมูล</h2>
+            <span id="weightTrendBadge">ข้อมูล</span>
           </div>
           <div class="weight-latest-grid">
             <article>
@@ -798,12 +798,12 @@
 
         <form class="entry-form weight-form-card" id="weightTrackingForm">
           <div class="section-title">
-            <h2 id="weightFormTitle">??????????????????</h2>
-            <button class="link-button hidden" id="cancelWeightEdit" type="button">???????????</button>
+            <h2 id="weightFormTitle">ข้อมูล</h2>
+            <button class="link-button hidden" id="cancelWeightEdit" type="button">ข้อมูล</button>
           </div>
           <input id="weightRecordId" type="hidden" />
           <div class="form-grid">
-            <label>??????<input id="weightDate" type="date" required /></label>
+            <label>ข้อมูล<input id="weightDate" type="date" required /></label>
             <label>Weight kg<input id="weightValue" type="number" min="20" max="350" step="0.1" required /></label>
             <label>Body Fat %<input id="weightBodyFat" type="number" min="0" max="80" step="0.1" /></label>
             <label>Waist cm<input id="weightWaist" type="number" min="20" max="250" step="0.1" /></label>
@@ -811,14 +811,14 @@
           <label>Progress Photo
             <div class="photo-placeholder" id="weightPhotoPlaceholder">Progress photo placeholder</div>
           </label>
-          <label>Note<textarea id="weightNote" rows="3" placeholder="???? ??????????? / ???????????????"></textarea></label>
-          <button id="saveWeightButton" type="submit">?????????????</button>
-          <p class="form-feedback hidden" id="weightSaveFeedback">?????????????????</p>
+          <label>Note<textarea id="weightNote" rows="3" placeholder="ข้อมูล ข้อมูล / ข้อมูล"></textarea></label>
+          <button id="saveWeightButton" type="submit">ข้อมูล</button>
+          <p class="form-feedback hidden" id="weightSaveFeedback">ข้อมูล</p>
         </form>
 
         <section class="chart-card weight-stats-card">
           <div class="section-title">
-            <h2>????????????</h2>
+            <h2>ข้อมูล</h2>
             <span id="weightStatsCount">0 records</span>
           </div>
           <div class="dashboard-grid weight-stats-grid">
@@ -832,15 +832,15 @@
         <section class="chart-card weight-chart-card">
           <div class="section-title">
             <h2>Weekly Trend</h2>
-            <span>7 ?????????</span>
+            <span>7 ข้อมูล</span>
           </div>
           <div class="weight-line-chart" id="weightLineChart"></div>
         </section>
 
         <section class="chart-card weight-history-card">
           <div class="section-title">
-            <h2>??????????????</h2>
-            <span id="weightHistoryCount">0 ??????</span>
+            <h2>ข้อมูล</h2>
+            <span id="weightHistoryCount">0 ข้อมูล</span>
           </div>
           <div class="history-list" id="weightHistoryList"></div>
         </section>
@@ -849,13 +849,13 @@
       <section class="screen" id="waterPage">
         <section class="dashboard-hero water-hero">
           <p class="eyebrow">Water Tracking</p>
-          <h2>?????????</h2>
-          <p>?????????????????????? ?????????????? ??? streak ????????????????????</p>
+          <h2>ข้อมูล</h2>
+          <p>ข้อมูล ข้อมูล ข้อมูล streak ข้อมูล</p>
         </section>
 
         <section class="chart-card water-today-card">
           <div class="section-title">
-            <h2>?????????</h2>
+            <h2>ข้อมูล</h2>
             <span id="waterHydrationStatus">Low</span>
           </div>
           <div class="water-today-layout">
@@ -865,7 +865,7 @@
             <div class="water-today-copy">
               <strong id="waterTodayAmount">0 ml</strong>
               <span id="waterGoalAmount">Goal 3000 ml</span>
-              <p id="waterRemainingAmount">????? 3000 ml</p>
+              <p id="waterRemainingAmount">ข้อมูล 3000 ml</p>
             </div>
           </div>
           <div class="water-summary-grid">
@@ -878,7 +878,7 @@
         <section class="chart-card water-actions-card">
           <div class="section-title">
             <h2>Quick Add</h2>
-            <span>?????????????</span>
+            <span>ข้อมูล</span>
           </div>
           <div class="water-quick-grid">
             <button class="secondary water-add-button" data-water-add="250" type="button">+250 ml</button>
@@ -887,25 +887,25 @@
             <button class="secondary water-add-button" data-water-add="1000" type="button">+1000 ml</button>
           </div>
           <form class="inline-form" id="customWaterForm">
-            <label>Custom Amount ml<input id="customWaterAmount" type="number" min="1" max="5000" step="50" placeholder="???? 350" /></label>
-            <button type="submit">????????</button>
+            <label>Custom Amount ml<input id="customWaterAmount" type="number" min="1" max="5000" step="50" placeholder="ข้อมูล 350" /></label>
+            <button type="submit">ข้อมูล</button>
           </form>
         </section>
 
         <form class="entry-form water-goal-card" id="waterGoalForm">
           <div class="section-title">
             <h2>Daily Goal</h2>
-            <span>??????????? 3000 ml</span>
+            <span>ข้อมูล 3000 ml</span>
           </div>
-          <label>????????????????? ml<input id="waterGoalInput" type="number" min="500" max="8000" step="100" value="3000" required /></label>
-          <button type="submit">??????????????</button>
-          <p class="form-feedback hidden" id="waterSaveFeedback">???????????????????</p>
+          <label>ข้อมูล ml<input id="waterGoalInput" type="number" min="500" max="8000" step="100" value="3000" required /></label>
+          <button type="submit">ข้อมูล</button>
+          <p class="form-feedback hidden" id="waterSaveFeedback">ข้อมูล</p>
         </form>
 
         <section class="chart-card water-streak-card">
           <div class="section-title">
             <h2>Hydration Streak</h2>
-            <span id="waterStreakStatus">0 ???</span>
+            <span id="waterStreakStatus">0 ข้อมูล</span>
           </div>
           <div class="dashboard-grid water-streak-grid">
             <article><strong id="waterCurrentStreak">0</strong><span>Current Streak</span></article>
@@ -915,8 +915,8 @@
 
         <section class="chart-card water-stats-card">
           <div class="section-title">
-            <h2>????????</h2>
-            <span>30 ?????????</span>
+            <h2>ข้อมูล</h2>
+            <span>30 ข้อมูล</span>
           </div>
           <div class="dashboard-grid water-stats-grid">
             <article><strong id="waterAverage">-</strong><span>Average Water</span></article>
@@ -929,15 +929,15 @@
 
         <section class="chart-card water-history-card">
           <div class="section-title">
-            <h2>?????????? 30 ???</h2>
-            <span id="waterHistoryCount">0 ??????</span>
+            <h2>ข้อมูล 30 ข้อมูล</h2>
+            <span id="waterHistoryCount">0 ข้อมูล</span>
           </div>
           <form class="inline-form hidden" id="waterEditForm">
             <input id="waterEditDate" type="hidden" />
-            <label>?????????????? ml<input id="waterEditAmount" type="number" min="0" max="10000" step="50" /></label>
+            <label>ข้อมูล ml<input id="waterEditAmount" type="number" min="0" max="10000" step="50" /></label>
             <div class="history-actions">
-              <button type="submit">??????????????</button>
-              <button class="secondary" id="cancelWaterEdit" type="button">??????</button>
+              <button type="submit">ข้อมูล</button>
+              <button class="secondary" id="cancelWaterEdit" type="button">ข้อมูล</button>
             </div>
           </form>
           <div class="history-list" id="waterHistoryList"></div>
@@ -947,14 +947,14 @@
       <section class="screen" id="sleepPage">
         <section class="dashboard-hero sleep-hero">
           <p class="eyebrow">Sleep Tracking</p>
-          <h2>????????????</h2>
-          <p>???????????????? ???????????? ???????? ??? streak ????????????????</p>
+          <h2>ข้อมูล</h2>
+          <p>ข้อมูล ข้อมูล ข้อมูล ข้อมูล streak ข้อมูล</p>
         </section>
 
         <section class="chart-card sleep-today-card">
           <div class="section-title">
-            <h2>????????????</h2>
-            <span id="sleepTodayStatus">??????????????</span>
+            <h2>ข้อมูล</h2>
+            <span id="sleepTodayStatus">ข้อมูล</span>
           </div>
           <div class="sleep-summary-grid">
             <article><strong id="sleepTodayHours">0 ??.</strong><span>Today's Sleep</span></article>
@@ -966,8 +966,8 @@
 
         <form class="entry-form sleep-form-card" id="sleepTrackingForm">
           <div class="section-title">
-            <h2 id="sleepFormTitle">?????????????????</h2>
-            <button class="link-button hidden" id="cancelSleepEdit" type="button">???????????</button>
+            <h2 id="sleepFormTitle">ข้อมูล</h2>
+            <button class="link-button hidden" id="cancelSleepEdit" type="button">ข้อมูล</button>
           </div>
           <input id="sleepRecordId" type="hidden" />
           <div class="form-grid">
@@ -987,24 +987,24 @@
             </div>
           </div>
           <input id="sleepQualityValue" type="hidden" value="3" />
-          <label>Note<textarea id="sleepNote" rows="3" placeholder="???? ??????? / ??????????? / ???????????"></textarea></label>
-          <button id="saveSleepButton" type="submit">????????????</button>
-          <p class="form-feedback hidden" id="sleepSaveFeedback">????????????????</p>
+          <label>Note<textarea id="sleepNote" rows="3" placeholder="ข้อมูล ข้อมูล / ข้อมูล / ข้อมูล"></textarea></label>
+          <button id="saveSleepButton" type="submit">ข้อมูล</button>
+          <p class="form-feedback hidden" id="sleepSaveFeedback">ข้อมูล</p>
         </form>
 
         <form class="entry-form sleep-goal-card" id="sleepGoalForm">
           <div class="section-title">
             <h2>Sleep Goal</h2>
-            <span>??????????? 8 ???????</span>
+            <span>ข้อมูล 8 ข้อมูล</span>
           </div>
-          <label>?????????????? ???????<input id="sleepGoalInput" type="number" min="4" max="12" step="0.25" value="8" required /></label>
-          <button type="submit">??????????????</button>
+          <label>ข้อมูล ข้อมูล<input id="sleepGoalInput" type="number" min="4" max="12" step="0.25" value="8" required /></label>
+          <button type="submit">ข้อมูล</button>
         </form>
 
         <section class="chart-card sleep-summary-card">
           <div class="section-title">
             <h2>Sleep Summary</h2>
-            <span>30 ?????????</span>
+            <span>30 ข้อมูล</span>
           </div>
           <div class="dashboard-grid sleep-stats-grid">
             <article><strong id="sleepWeeklyAverage">-</strong><span>Weekly Average</span></article>
@@ -1030,7 +1030,7 @@
         <section class="chart-card sleep-history-card">
           <div class="section-title">
             <h2>Sleep History</h2>
-            <span id="sleepHistoryCount">0 ??????</span>
+            <span id="sleepHistoryCount">0 ข้อมูล</span>
           </div>
           <div class="history-list" id="sleepHistoryList"></div>
         </section>
@@ -1039,8 +1039,8 @@
       <section class="screen" id="health">
         <section class="dashboard-hero checkin-hero">
           <p class="eyebrow">Morning Check-in</p>
-          <h2>?????????????</h2>
-          <p id="checkinCompletionText">?????????????????????????????????????</p>
+          <h2>ข้อมูล</h2>
+          <p id="checkinCompletionText">ข้อมูล</p>
         </section>
 
         <form class="entry-form checkin-card" id="dailyCheckinForm">
@@ -1049,8 +1049,8 @@
             <span id="checkinStreakLabel">0 day streak</span>
           </div>
 
-          <label>????????????? kg (?????????)<input id="checkinWeight" type="number" min="20" max="350" step="0.1" /></label>
-          <label>??????????<input id="checkinSleepHours" type="number" min="0" max="24" step="0.25" value="7" /></label>
+          <label>ข้อมูล kg (ข้อมูล)<input id="checkinWeight" type="number" min="20" max="350" step="0.1" /></label>
+          <label>ข้อมูล<input id="checkinSleepHours" type="number" min="0" max="24" step="0.25" value="7" /></label>
 
           <div class="checkin-field">
             <strong>Mood</strong>
@@ -1080,13 +1080,13 @@
               <option value="stay_healthy">Stay Healthy</option>
             </select>
           </label>
-          <button type="submit">?????? Check-in</button>
-          <p class="save-feedback hidden" id="checkinSaveFeedback">?????????????????</p>
+          <button type="submit">ข้อมูล Check-in</button>
+          <p class="save-feedback hidden" id="checkinSaveFeedback">ข้อมูล</p>
         </form>
 
         <section class="quick-list checkin-history-card">
           <div class="section-title">
-            <h2>??????? 7 ?????????</h2>
+            <h2>ข้อมูล 7 ข้อมูล</h2>
             <span id="checkinHistoryCount">0/7</span>
           </div>
           <div class="history-list" id="checkinHistoryList"></div>
@@ -1097,12 +1097,12 @@
             <h2>Hydration Status</h2>
             <span id="checkinHydrationStatus">Low</span>
           </div>
-          <p id="checkinHydrationText">??????????????????????</p>
+          <p id="checkinHydrationText">ข้อมูล</p>
         </section>
 
         <section class="chart-card health-card hidden">
           <div class="section-title">
-            <h2>?????????</h2>
+            <h2>ข้อมูล</h2>
             <span id="waterTotal">0 / 3L</span>
           </div>
           <div class="macro-track"><div id="waterBar" class="macro-fill"></div></div>
@@ -1114,33 +1114,33 @@
         </section>
 
         <form class="entry-form hidden" id="weightForm">
-          <div class="section-title"><h2>???????????</h2></div>
+          <div class="section-title"><h2>ข้อมูล</h2></div>
           <div class="form-grid">
-            <label>????????????? kg<input id="dailyWeight" type="number" min="20" max="350" step="0.1" /></label>
+            <label>ข้อมูล kg<input id="dailyWeight" type="number" min="20" max="350" step="0.1" /></label>
             <label>Body fat %<input id="bodyFat" type="number" min="0" max="80" step="0.1" /></label>
-            <label>?????? cm<input id="waist" type="number" min="20" max="250" step="0.1" /></label>
-            <label>??? progress<input id="progressPhoto" type="file" accept="image/*" capture="environment" /></label>
+            <label>ข้อมูล cm<input id="waist" type="number" min="20" max="250" step="0.1" /></label>
+            <label>ข้อมูล progress<input id="progressPhoto" type="file" accept="image/*" capture="environment" /></label>
           </div>
           <div class="photo-preview" id="progressPhotoPreview"></div>
-          <button type="submit">?????????????</button>
+          <button type="submit">ข้อมูล</button>
         </form>
 
         <form class="entry-form hidden" id="sleepForm">
-          <div class="section-title"><h2>??????</h2><span id="sleepDuration">0 ??.</span></div>
+          <div class="section-title"><h2>ข้อมูล</h2><span id="sleepDuration">0 ??.</span></div>
           <div class="form-grid">
-            <label>???????<input id="sleepTime" type="time" /></label>
-            <label>????????<input id="wakeTime" type="time" /></label>
+            <label>ข้อมูล<input id="sleepTime" type="time" /></label>
+            <label>ข้อมูล<input id="wakeTime" type="time" /></label>
           </div>
-          <label>????????????
+          <label>ข้อมูล
             <select id="sleepQuality">
-              <option value="5">?????</option>
+              <option value="5">ข้อมูล</option>
               <option value="4">??</option>
-              <option value="3">???????</option>
-              <option value="2">???</option>
-              <option value="1">??????</option>
+              <option value="3">ข้อมูล</option>
+              <option value="2">ข้อมูล</option>
+              <option value="1">ข้อมูล</option>
             </select>
           </label>
-          <button type="submit">????????????</button>
+          <button type="submit">ข้อมูล</button>
         </form>
 
         <section class="quick-list hidden">
@@ -1161,7 +1161,7 @@
           <button class="link-button" id="exportData" type="button">Export</button>
         </div>
         <section class="chart-card overload-card">
-          <div class="section-title"><h2>Previous Performance</h2><span id="previousPerformanceCount">0 ???</span></div>
+          <div class="section-title"><h2>Previous Performance</h2><span id="previousPerformanceCount">0 ข้อมูล</span></div>
           <div class="overload-list" id="previousPerformanceList"></div>
         </section>
         <section class="chart-card overload-card">
@@ -1169,11 +1169,11 @@
           <div class="overload-list" id="personalRecordList"></div>
         </section>
         <section class="chart-card overload-card">
-          <div class="section-title"><h2>Weekly Statistics</h2><span>7 ?????????</span></div>
+          <div class="section-title"><h2>Weekly Statistics</h2><span>7 ข้อมูล</span></div>
           <div class="dashboard-grid workout-summary-grid" id="weeklyWorkoutStats"></div>
         </section>
         <section class="chart-card overload-card">
-          <div class="section-title"><h2>Monthly Statistics</h2><span>30 ?????????</span></div>
+          <div class="section-title"><h2>Monthly Statistics</h2><span>30 ข้อมูล</span></div>
           <div class="dashboard-grid workout-summary-grid" id="monthlyWorkoutStats"></div>
         </section>
         <div class="history-list" id="historyList"></div>
@@ -1183,16 +1183,16 @@
         <section class="score-card premium-preview" id="coachPremiumGate">
           <p class="eyebrow">Khayubdi Pro</p>
           <h2>AI Coach MVP</h2>
-          <p>???????? daily feedback ??? weekly review ?????????????? ??? ??? ??????? ??? workout</p>
-          <button id="upgradeCoachButton" type="button">??????? Pro</button>
+          <p>ข้อมูล daily feedback ข้อมูล weekly review ข้อมูล ข้อมูล ข้อมูล ข้อมูล ข้อมูล workout</p>
+          <button id="upgradeCoachButton" type="button">ข้อมูล Pro</button>
         </section>
         <section class="pro-content hidden" id="coachProContent">
           <section class="coach-card">
-            <div class="section-title"><h2>?????????????</h2><span class="ai-badge">AI MVP</span></div>
+            <div class="section-title"><h2>ข้อมูล</h2><span class="ai-badge">AI MVP</span></div>
             <p id="dailyCoachText"></p>
           </section>
           <section class="coach-card">
-            <div class="section-title"><h2>Weekly review</h2><button class="link-button" id="refreshCoach" type="button">??????</button></div>
+            <div class="section-title"><h2>Weekly review</h2><button class="link-button" id="refreshCoach" type="button">ข้อมูล</button></div>
             <div id="weeklyCoachText"></div>
           </section>
         </section>
@@ -1201,31 +1201,31 @@
       <section class="screen" id="progress">
         <section class="dashboard-hero progress-hero">
           <p class="eyebrow">Progress Dashboard</p>
-          <h2>??????????????????</h2>
-          <p>????????????????????????????: ??????? ????? ??? ?????? ??????????????</p>
+          <h2>ข้อมูล</h2>
+          <p>ข้อมูล: ข้อมูล ข้อมูล ข้อมูล ข้อมูล ข้อมูล</p>
         </section>
 
         <section class="chart-card progress-empty-card hidden" id="progressEmptyState">
-          <p>??????????????????????????????????????????????</p>
+          <p>ข้อมูล</p>
         </section>
 
         <section class="chart-card progress-overall-card">
           <div class="section-title">
             <h2>Overall Progress</h2>
-            <span id="progressDataDays">0 ???</span>
+            <span id="progressDataDays">0 ข้อมูล</span>
           </div>
           <div class="dashboard-grid progress-overall-grid">
-            <article><strong id="progressTodayScore">0</strong><span>???????????</span></article>
-            <article><strong id="progressSevenAverage">0</strong><span>?????? 7 ???</span></article>
-            <article><strong id="progressThirtyAverage">0</strong><span>?????? 30 ???</span></article>
-            <article><strong id="progressTrend">??????</strong><span>???????</span></article>
+            <article><strong id="progressTodayScore">0</strong><span>ข้อมูล</span></article>
+            <article><strong id="progressSevenAverage">0</strong><span>ข้อมูล 7 ข้อมูล</span></article>
+            <article><strong id="progressThirtyAverage">0</strong><span>ข้อมูล 30 ข้อมูล</span></article>
+            <article><strong id="progressTrend">ข้อมูล</strong><span>ข้อมูล</span></article>
           </div>
         </section>
 
         <section class="chart-card progress-score-card">
           <div class="section-title">
             <h2>Health Score Trend</h2>
-            <span id="progressScoreRange">30 ?????????</span>
+            <span id="progressScoreRange">30 ข้อมูล</span>
           </div>
           <div class="progress-chart" id="healthScoreChart"></div>
           <div class="dashboard-grid progress-score-grid">
@@ -1237,7 +1237,7 @@
         <section class="chart-card progress-weight-card">
           <div class="section-title">
             <h2>Body Progress</h2>
-            <span id="progressWeightStatus">??????????????</span>
+            <span id="progressWeightStatus">ข้อมูล</span>
           </div>
           <div class="progress-line-chart" id="weightProgressChart"></div>
           <div class="dashboard-grid progress-weight-grid">
@@ -1255,7 +1255,7 @@
         <section class="chart-card progress-nutrition-card">
           <div class="section-title">
             <h2>Nutrition Progress</h2>
-            <span id="progressNutritionDays">0 ???</span>
+            <span id="progressNutritionDays">0 ข้อมูล</span>
           </div>
           <div class="dashboard-grid progress-nutrition-grid">
             <article><strong id="progressAverageCalories">0</strong><span>Average Calories</span></article>
@@ -1303,7 +1303,7 @@
         <section class="chart-card progress-summary-card">
           <div class="section-title">
             <h2>Weekly Summary</h2>
-            <span>?????? AI</span>
+            <span>ข้อมูล AI</span>
           </div>
           <div class="summary-grid" id="weeklySummaryGrid"></div>
         </section>
@@ -1311,7 +1311,7 @@
         <section class="chart-card progress-summary-card">
           <div class="section-title">
             <h2>Monthly Summary</h2>
-            <span>?????????? 30 ???</span>
+            <span>ข้อมูล 30 ข้อมูล</span>
           </div>
           <div class="summary-grid" id="monthlySummaryGrid"></div>
         </section>
@@ -1329,7 +1329,7 @@
         <section class="dashboard-hero analytics-hero">
           <p class="eyebrow">Training Intelligence</p>
           <h2>Advanced Training Analytics</h2>
-          <p>????????? volume, balance, recovery, fatigue ??? weak points ??? workout history ????????????</p>
+          <p>ข้อมูล volume, balance, recovery, fatigue ข้อมูล weak points ข้อมูล workout history ข้อมูล</p>
         </section>
 
         <section class="chart-card analytics-overview-card">
@@ -1340,7 +1340,7 @@
             <article><strong id="analyticsWeeklySets">0</strong><span>Weekly Sets</span></article>
             <article><strong id="analyticsDensity">0</strong><span>Sets / Minute</span></article>
           </div>
-          <p class="analytics-recommendation" id="analyticsRecommendation">??????????? workout ??????????????</p>
+          <p class="analytics-recommendation" id="analyticsRecommendation">ข้อมูล workout ข้อมูล</p>
         </section>
 
         <section class="chart-card analytics-volume-card">
@@ -1349,7 +1349,7 @@
         </section>
 
         <section class="chart-card analytics-volume-card">
-          <div class="section-title"><h2>Monthly Volume</h2><span>30 ?????????</span></div>
+          <div class="section-title"><h2>Monthly Volume</h2><span>30 ข้อมูล</span></div>
           <div class="analytics-volume-list" id="monthlyMuscleVolumeList"></div>
         </section>
 
@@ -1541,10 +1541,10 @@
           <label>
             Goal
             <select id="goal">
-              <option value="fat_loss">???????</option>
-              <option value="muscle_gain">??????????</option>
-              <option value="endurance">????????????</option>
-              <option value="health">????????????</option>
+              <option value="fat_loss">ข้อมูล</option>
+              <option value="muscle_gain">ข้อมูล</option>
+              <option value="endurance">ข้อมูล</option>
+              <option value="health">ข้อมูล</option>
             </select>
           </label>
           <div class="form-grid">
@@ -1565,12 +1565,12 @@
 
         <div class="store-card">
           <h2>Store-ready base</h2>
-          <p>Mobile-first PWA ????? config ????????????? iOS/Android ???? Capacitor</p>
+          <p>Mobile-first PWA ข้อมูล config ข้อมูล iOS/Android ข้อมูล Capacitor</p>
         </div>
         <section class="chart-card beta-settings-card">
           <div class="section-title">
             <h2>Closed Beta</h2>
-            <span>Version 1.0.0-rc2 · Build 53</span>
+            <span>Version 1.0.0-rc3 · Build 53</span>
           </div>
           <div class="beta-status-pill">Closed Beta · Release Candidate</div>
           <div class="quick-action-grid">
@@ -1586,13 +1586,13 @@
         <section class="dashboard-hero">
           <p class="eyebrow">Closed Beta</p>
           <h2>Khayubdi AI Fitness</h2>
-          <p>Release Candidate v1.0.0-rc2 · Build 53</p>
+          <p>Release Candidate v1.0.0-rc3 · Build 53</p>
         </section>
         <section class="chart-card beta-info-card">
           <div class="section-title"><h2>About</h2><span id="aboutReleaseBadge">Closed Beta</span></div>
           <div class="dashboard-grid compact-dashboard-grid" id="aboutInfoGrid">
             <article><strong>Khayubdi AI Fitness</strong><span>App Name</span></article>
-            <article><strong>1.0.0-rc2</strong><span>Version</span></article>
+            <article><strong>1.0.0-rc3</strong><span>Version</span></article>
             <article><strong>53</strong><span>Build Number</span></article>
             <article><strong>Closed Beta</strong><span>Environment</span></article>
             <article><strong>Release Candidate</strong><span>Release Channel</span></article>
@@ -1602,8 +1602,8 @@
           </div>
           <p class="trend-line">Copyright © 2026 Khayubdi. Closed Beta software.</p>
           <div class="quick-action-grid">
-            <button class="secondary quick-action" data-tab-target="privacy" type="button">Privacy Policy</button>
-            <button class="secondary quick-action" data-tab-target="privacy" type="button">Terms</button>
+            <a class="secondary quick-action" href="/privacy.html">Privacy Policy</a>
+            <a class="secondary quick-action" href="/terms.html">Terms</a>
           </div>
         </section>
       </section>
@@ -1656,7 +1656,7 @@
         <div class="store-card">
           <h2>Privacy controls</h2>
           <p>Your exercise log is private to your account. You can export or delete it here.</p>
-          <p><a href="/privacy" target="_blank">Privacy Policy</a> · <a href="/terms" target="_blank">Terms</a></p>
+          <p><a href="/privacy.html" target="_blank">Privacy Policy</a> · <a href="/terms.html" target="_blank">Terms</a></p>
         </div>
 
         <form class="entry-form" id="privacyForm">
@@ -1691,8 +1691,8 @@
       <div class="modal-card">
         <p class="eyebrow">Khayubdi v2</p>
         <h2 id="comingSoonTitle">Coming soon</h2>
-        <p id="comingSoonText">?????????????????? Sprint ?????</p>
-        <button id="closeComingSoon" type="button">???</button>
+        <p id="comingSoonText">ข้อมูล Sprint ข้อมูล</p>
+        <button id="closeComingSoon" type="button">ข้อมูล</button>
       </div>
     </div>
 
@@ -1717,6 +1717,6 @@
       </div>
     </div>
 
-  <script src="/exercise.js?v=53"></script>
+  <script src="/exercise.js?v=54"></script>
   </body>
 </html>

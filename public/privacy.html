@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+  <title>Privacy Policy - Khayubdi Closed Beta</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <style>
+    :root { color-scheme: dark; --bg:#050505; --surface:rgba(18,18,18,.84); --line:rgba(255,255,255,.12); --text:#f5f5f5; --muted:#a7a7a7; --accent:#8cff3f; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: radial-gradient(circle at top left, rgba(140,255,63,.18), transparent 34rem), var(--bg); color:var(--text); padding: max(24px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(32px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); }
+    main { width:min(860px, 100%); margin:0 auto; }
+    .card { border:1px solid var(--line); background:var(--surface); border-radius:24px; padding:clamp(22px, 5vw, 44px); box-shadow:0 24px 80px rgba(0,0,0,.38); backdrop-filter: blur(18px); }
+    .badge { display:inline-flex; border:1px solid rgba(140,255,63,.32); color:var(--accent); border-radius:999px; padding:8px 12px; font-size:13px; margin-bottom:18px; }
+    h1 { font-size:clamp(32px, 7vw, 48px); line-height:1; margin:0 0 14px; }
+    h2 { margin:30px 0 10px; font-size:20px; }
+    p, li { color:var(--muted); line-height:1.7; font-size:16px; }
+    a { color:var(--accent); }
+    .back { display:inline-flex; align-items:center; min-height:44px; margin-top:28px; padding:0 18px; border-radius:999px; color:#071007; background:var(--accent); text-decoration:none; font-weight:700; }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="card">
+      <span class="badge">Closed Beta · Release Candidate</span>
+      <h1>Privacy Policy</h1>
+      <p>Khayubdi is currently a Closed Beta fitness application. This page explains how the beta build handles data on your device.</p>
+
+      <h2>Local-device storage</h2>
+      <p>The current beta stores workout entries, food logs, preferences, draft plans, diagnostics settings, and app state in your browser on the device you use. This helps the app work like a mobile PWA without requiring a production account backend for beta testing.</p>
+
+      <h2>Diagnostics</h2>
+      <p>Diagnostics exports are designed for troubleshooting. They include app version, build, platform, browser, viewport, language, timezone, PWA status, service worker/cache version, and storage summary only. They should not include personal workout history, nutrition logs, localStorage values, API keys, auth tokens, or private user data.</p>
+
+      <h2>Beta feedback</h2>
+      <p>Feedback forms in this beta are placeholders unless a tester separately sends feedback through an approved channel. Do not include sensitive personal information in beta feedback.</p>
+
+      <h2>Fitness guidance</h2>
+      <p>Khayubdi provides fitness and wellness guidance for beta testing. It is not medical advice and does not diagnose or treat health conditions.</p>
+
+      <h2>Changes during beta</h2>
+      <p>Because this is a Closed Beta, storage behavior, diagnostics, and account features may change before public release. Material changes should be reflected in future beta notes or release pages.</p>
+
+      <a class="back" href="/index.html">Back to Khayubdi</a>
+    </section>
+  </main>
+</body>
+</html>

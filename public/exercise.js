@@ -20,12 +20,12 @@ const USERS_KEY = "khayubdi_users";
 const SESSION_KEY = "khayubdi_session_user";
 const TOKEN_KEY = "khayubdi_auth_token";
 const REMEMBER_KEY = "khayubdi_remember_login";
-const APP_VERSION = "1.0.0-rc2";
+const APP_VERSION = "1.0.0-rc3";
 const APP_BUILD = "53";
 const APP_ENVIRONMENT = "Closed Beta";
 const APP_RELEASE_CHANNEL = "Release Candidate";
 const APP_DEVELOPER = "Khayubdi";
-const APP_CACHE_VERSION = "khayubdi-exercise-v53";
+const APP_CACHE_VERSION = "khayubdi-exercise-v54";
 const BETA_WELCOME_KEY = "khayubdi_beta_welcome_dismissed";
 const USE_BACKEND = location.protocol === "http:" || location.protocol === "https:";
 const LOCAL_TRACKING_ONLY = true;
@@ -81,18 +81,18 @@ const healthProviderLabels = {
   health_connect: "Health Connect",
 };
 const foodKnowledgeBase = [
-  { keywords: ["à¸‚à¹‰à¸²à¸§à¸¡à¸±à¸™à¹„à¸à¹ˆ", "chicken rice"], name: "Chicken rice", calories: 620, protein: 28, carbs: 72, fat: 22 },
-  { keywords: ["à¸‚à¹‰à¸²à¸§à¸à¸°à¹€à¸žà¸£à¸²", "à¸à¸°à¹€à¸žà¸£à¸²", "pad kra pao", "kaprao"], name: "Pad kra pao", calories: 580, protein: 30, carbs: 62, fat: 22 },
-  { keywords: ["à¸‚à¹‰à¸²à¸§à¹„à¸‚à¹ˆà¹€à¸ˆà¸µà¸¢à¸§", "omelette rice"], name: "Omelette rice", calories: 520, protein: 18, carbs: 58, fat: 24 },
-  { keywords: ["à¸­à¸à¹„à¸à¹ˆ", "chicken breast"], name: "Chicken breast", calories: 165, protein: 31, carbs: 0, fat: 4 },
-  { keywords: ["à¹„à¸à¹ˆà¸¢à¹ˆà¸²à¸‡", "grilled chicken"], name: "Grilled chicken", calories: 280, protein: 42, carbs: 0, fat: 10 },
-  { keywords: ["à¹„à¸‚à¹ˆà¸•à¹‰à¸¡", "boiled egg", "egg"], name: "Boiled egg", calories: 70, protein: 6, carbs: 1, fat: 5 },
-  { keywords: ["à¹‚à¸›à¸£à¸•à¸µà¸™à¹€à¸Šà¸„", "protein shake", "whey"], name: "Protein shake", calories: 160, protein: 25, carbs: 6, fat: 3 },
-  { keywords: ["à¸‚à¹‰à¸²à¸§à¸ªà¸§à¸¢", "rice"], name: "Cooked rice", calories: 205, protein: 4, carbs: 45, fat: 0 },
-  { keywords: ["à¸à¸¥à¹‰à¸§à¸¢", "banana"], name: "Banana", calories: 105, protein: 1, carbs: 27, fat: 0 },
-  { keywords: ["à¸ªà¸¥à¸±à¸”", "salad"], name: "Salad", calories: 180, protein: 6, carbs: 18, fat: 9 },
-  { keywords: ["à¸à¸²à¹à¸Ÿ", "coffee"], name: "Coffee", calories: 80, protein: 2, carbs: 12, fat: 2 },
-  { keywords: ["à¸™à¸¡", "milk"], name: "Milk", calories: 150, protein: 8, carbs: 12, fat: 8 },
+  { keywords: ["ข้าวมันไก่", "chicken rice"], name: "Chicken rice", calories: 620, protein: 28, carbs: 72, fat: 22 },
+  { keywords: ["ข้าวกะเพรา", "กะเพรา", "pad kra pao", "kaprao"], name: "Pad kra pao", calories: 580, protein: 30, carbs: 62, fat: 22 },
+  { keywords: ["ข้าวไข่เจียว", "omelette rice"], name: "Omelette rice", calories: 520, protein: 18, carbs: 58, fat: 24 },
+  { keywords: ["อกไก่", "chicken breast"], name: "Chicken breast", calories: 165, protein: 31, carbs: 0, fat: 4 },
+  { keywords: ["ไก่ย่าง", "grilled chicken"], name: "Grilled chicken", calories: 280, protein: 42, carbs: 0, fat: 10 },
+  { keywords: ["ไข่ต้ม", "boiled egg", "egg"], name: "Boiled egg", calories: 70, protein: 6, carbs: 1, fat: 5 },
+  { keywords: ["โปรตีนเชค", "protein shake", "whey"], name: "Protein shake", calories: 160, protein: 25, carbs: 6, fat: 3 },
+  { keywords: ["ข้าวสวย", "rice"], name: "Cooked rice", calories: 205, protein: 4, carbs: 45, fat: 0 },
+  { keywords: ["กล้วย", "banana"], name: "Banana", calories: 105, protein: 1, carbs: 27, fat: 0 },
+  { keywords: ["สลัด", "salad"], name: "Salad", calories: 180, protein: 6, carbs: 18, fat: 9 },
+  { keywords: ["กาแฟ", "coffee"], name: "Coffee", calories: 80, protein: 2, carbs: 12, fat: 2 },
+  { keywords: ["นม", "milk"], name: "Milk", calories: 150, protein: 8, carbs: 12, fat: 8 },
 ];
 
 let currentUserId = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY) || "";
@@ -1864,7 +1864,7 @@ function bindForms() {
 
   [fields.sleepTime, fields.wakeTime].forEach((field) => {
     field.addEventListener("change", () => {
-      fields.sleepDuration.textContent = `${calculateSleepHours(fields.sleepTime.value, fields.wakeTime.value).toFixed(1)} à¸Šà¸¡.`;
+      fields.sleepDuration.textContent = `${calculateSleepHours(fields.sleepTime.value, fields.wakeTime.value).toFixed(1)} ชม.`;
     });
   });
 
@@ -2588,7 +2588,7 @@ function renderHealth() {
   fields.sleepTime.value = log.sleepTime || "";
   fields.wakeTime.value = log.wakeTime || "";
   fields.sleepQuality.value = String(log.sleepQuality || 3);
-  fields.sleepDuration.textContent = `${Number(log.sleepHours || calculateSleepHours(log.sleepTime, log.wakeTime) || 0).toFixed(1)} à¸Šà¸¡.`;
+  fields.sleepDuration.textContent = `${Number(log.sleepHours || calculateSleepHours(log.sleepTime, log.wakeTime) || 0).toFixed(1)} ชม.`;
   fields.moodToday.textContent = log.mood || "-";
   fields.moodButtons.forEach((button) => button.classList.toggle("active-mood", button.dataset.mood === log.mood));
   renderProgressPhotoPreview();
@@ -4766,11 +4766,11 @@ function goalLabel(goal) {
 }
 
 function nutritionAdvice(actual, target, meals) {
-  if (!meals) return "à¹€à¸£à¸´à¹ˆà¸¡à¸ˆà¸²à¸à¸šà¸±à¸™à¸—à¸¶à¸à¸­à¸²à¸«à¸²à¸£à¸¡à¸·à¹‰à¸­à¹à¸£à¸ à¸«à¸£à¸·à¸­à¹ƒà¸Šà¹‰ AI estimate à¹€à¸žà¸·à¹ˆà¸­à¸›à¸£à¸°à¹€à¸¡à¸´à¸™ kcal/P/C/F à¹à¸šà¸šà¹€à¸£à¹‡à¸§";
-  if (actual.protein < target.protein * 0.55) return "à¸§à¸±à¸™à¸™à¸µà¹‰à¹‚à¸›à¸£à¸•à¸µà¸™à¸¢à¸±à¸‡à¸•à¹ˆà¸³ à¸¥à¸­à¸‡à¹€à¸žà¸´à¹ˆà¸¡à¸­à¸à¹„à¸à¹ˆ à¹„à¸‚à¹ˆ à¸›à¸¥à¸² à¹€à¸•à¹‰à¸²à¸«à¸¹à¹‰ à¸«à¸£à¸·à¸­à¹‚à¸›à¸£à¸•à¸µà¸™à¹€à¸Šà¸„à¹ƒà¸™à¸¡à¸·à¹‰à¸­à¸•à¹ˆà¸­à¹„à¸›";
-  if (actual.calories > target.calories * 1.15) return "à¹à¸„à¸¥à¸­à¸£à¸µà¹€à¸à¸´à¸™à¹€à¸›à¹‰à¸²à¹à¸¥à¹‰à¸§ à¸¡à¸·à¹‰à¸­à¸•à¹ˆà¸­à¹„à¸›à¹€à¸™à¹‰à¸™à¹‚à¸›à¸£à¸•à¸µà¸™à¸¥à¸µà¸™ à¸œà¸±à¸ à¹à¸¥à¸°à¸¥à¸”à¸‚à¸­à¸‡à¸—à¸­à¸”/à¸™à¹‰à¸³à¸«à¸§à¸²à¸™";
-  if (actual.calories < target.calories * 0.65) return "à¹à¸„à¸¥à¸­à¸£à¸µà¸¢à¸±à¸‡à¸•à¹ˆà¸³ à¸–à¹‰à¸²à¸¢à¸±à¸‡à¸¡à¸µà¸¡à¸·à¹‰à¸­à¹€à¸«à¸¥à¸·à¸­à¹ƒà¸«à¹‰à¹€à¸žà¸´à¹ˆà¸¡à¸„à¸²à¸£à¹Œà¸šà¸„à¸¸à¸“à¸ à¸²à¸žà¸”à¸µ à¹€à¸Šà¹ˆà¸™ à¸‚à¹‰à¸²à¸§ à¸¡à¸±à¸™à¸«à¸§à¸²à¸™ à¸«à¸£à¸·à¸­à¸œà¸¥à¹„à¸¡à¹‰";
-  return "à¸ à¸²à¸žà¸£à¸§à¸¡à¸”à¸µà¸‚à¸¶à¹‰à¸™à¹à¸¥à¹‰à¸§ à¸£à¸±à¸à¸©à¸²à¹‚à¸›à¸£à¸•à¸µà¸™à¹ƒà¸«à¹‰à¸–à¸¶à¸‡à¹€à¸›à¹‰à¸²à¹à¸¥à¸°à¸à¸£à¸°à¸ˆà¸²à¸¢à¸¡à¸·à¹‰à¸­à¸­à¸²à¸«à¸²à¸£à¹ƒà¸«à¹‰à¸ªà¸¡à¹ˆà¸³à¹€à¸ªà¸¡à¸­";
+  if (!meals) return "เริ่มจากบันทึกอาหารมื้อแรก หรือใช้ AI estimate เพื่อประเมิน kcal/P/C/F แบบเร็ว";
+  if (actual.protein < target.protein * 0.55) return "วันนี้โปรตีนยังต่ำ ลองเพิ่มอกไก่ ไข่ ปลา เต้าหู้ หรือโปรตีนเชคในมื้อต่อไป";
+  if (actual.calories > target.calories * 1.15) return "แคลอรีเกินเป้าแล้ว มื้อต่อไปเน้นโปรตีนลีน ผัก และลดของทอด/น้ำหวาน";
+  if (actual.calories < target.calories * 0.65) return "แคลอรียังต่ำ ถ้ายังมีมื้อเหลือให้เพิ่มคาร์บคุณภาพดี เช่น ข้าว มันหวาน หรือผลไม้";
+  return "ภาพรวมดีขึ้นแล้ว รักษาโปรตีนให้ถึงเป้าและกระจายมื้ออาหารให้สม่ำเสมอ";
 }
 
 function setBar(element, value, target) {
@@ -6079,7 +6079,7 @@ function daysBetween(start, end) {
 function renderHistory() {
   renderProgressiveOverload();
   if (!entries.length) {
-    fields.historyList.innerHTML = `<div class="empty">à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¸¡à¸µ workout à¸—à¸µà¹ˆà¸šà¸±à¸™à¸—à¸¶à¸</div>`;
+    fields.historyList.innerHTML = `<div class="empty">ยังไม่มี workout ที่บันทึก</div>`;
     return;
   }
   fields.historyList.innerHTML = entries.slice(0, 40).map(renderHistoryItem).join("");
@@ -6101,14 +6101,14 @@ function renderHistoryItem(entry) {
     entry.distanceKm ? `${entry.distanceKm} km` : "",
     entry.steps ? `${entry.steps} steps` : "",
     entry.source && entry.source !== "manual" ? `source: ${healthProviderLabels[entry.source] || entry.source}` : "",
-  ].filter(Boolean).join(" Â· ");
+  ].filter(Boolean).join(" · ");
   return `
     <article class="history-item">
       <header>
         <div><strong>${isPr ? `<span class="pr-badge">PR</span> ` : ""}${escapeHtml(entry.name)}</strong><span>${formatDate(entry.createdAt)}</span></div>
-        <span>${entry.minutes} min Â· ${calories} kcal</span>
+        <span>${entry.minutes} min · ${calories} kcal</span>
       </header>
-      <span>${entry.sets} sets Â· ${entry.reps} reps Â· ${entry.weight} kg Â· ${volume} kg volume</span>
+      <span>${entry.sets} sets · ${entry.reps} reps · ${entry.weight} kg · ${volume} kg volume</span>
       <span>${escapeHtml(details)}</span>
       <small class="overload-suggestion">${escapeHtml(suggestion)}</small>
       ${entry.notes ? `<p>${escapeHtml(entry.notes)}</p>` : ""}
@@ -6184,18 +6184,18 @@ function applyFoodEstimate(estimate) {
 
 async function scanFoodPhotos() {
   if (!pendingFoodPhotos.length) {
-    fields.foodEstimateResult.innerHTML = `<strong>à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¸¡à¸µà¸£à¸¹à¸›</strong><br>à¸–à¹ˆà¸²à¸¢à¸«à¸£à¸·à¸­à¸­à¸±à¸›à¹‚à¸«à¸¥à¸”à¸£à¸¹à¸›à¸­à¸²à¸«à¸²à¸£à¸à¹ˆà¸­à¸™ à¸ªà¸¹à¸‡à¸ªà¸¸à¸” 3 à¸£à¸¹à¸›`;
+    fields.foodEstimateResult.innerHTML = `<strong>ยังไม่มีรูป</strong><br>ถ่ายหรืออัปโหลดรูปอาหารก่อน สูงสุด 3 รูป`;
     return;
   }
 
   if (!USE_BACKEND || LOCAL_TRACKING_ONLY) {
     const fallback = estimateFoodMacros(fields.foodName.value, fields.foodNotes.value, fields.mealType.value, pendingFoodPhotos.length);
-    fallback.reason = "à¹€à¸›à¸´à¸”à¸ˆà¸²à¸à¹„à¸Ÿà¸¥à¹Œà¹€à¸”à¸µà¹ˆà¸¢à¸§ à¸ˆà¸¶à¸‡à¹ƒà¸Šà¹‰ local estimate à¸ˆà¸²à¸à¸Šà¸·à¹ˆà¸­à¸­à¸²à¸«à¸²à¸£/à¸¡à¸·à¹‰à¸­/à¸ˆà¸³à¸™à¸§à¸™à¸£à¸¹à¸›";
+    fallback.reason = "เปิดจากไฟล์เดี่ยว จึงใช้ local estimate จากชื่ออาหาร/มื้อ/จำนวนรูป";
     applyFoodEstimate(fallback);
     return;
   }
 
-  fields.foodEstimateResult.innerHTML = `<strong>Scanning photos...</strong><br>à¸à¸³à¸¥à¸±à¸‡à¸ªà¹ˆà¸‡à¸£à¸¹à¸›à¹ƒà¸«à¹‰ Vision AI à¸›à¸£à¸°à¹€à¸¡à¸´à¸™à¸­à¸²à¸«à¸²à¸£`;
+  fields.foodEstimateResult.innerHTML = `<strong>Scanning photos...</strong><br>กำลังส่งรูปให้ Vision AI ประเมินอาหาร`;
   try {
     const data = await apiRequest("/api/app/foods/vision-estimate", {
       method: "POST",
@@ -6221,7 +6221,7 @@ async function addFoodPhotos(fileList) {
   pendingFoodPhotos = [...pendingFoodPhotos, ...encoded].slice(0, 3);
   renderFoodPhotoPreview();
   if (pendingFoodPhotos.length >= 3) {
-    fields.foodEstimateResult.innerHTML = `<strong>à¸£à¸¹à¸›à¸„à¸£à¸š 3 à¸£à¸¹à¸›à¹à¸¥à¹‰à¸§</strong><br>à¸«à¸²à¸à¸•à¹‰à¸­à¸‡à¸à¸²à¸£à¹€à¸›à¸¥à¸µà¹ˆà¸¢à¸™à¸£à¸¹à¸› à¹ƒà¸«à¹‰à¸à¸” x à¸—à¸µà¹ˆà¸£à¸¹à¸›à¹€à¸”à¸´à¸¡à¸à¹ˆà¸­à¸™`;
+    fields.foodEstimateResult.innerHTML = `<strong>รูปครบ 3 รูปแล้ว</strong><br>หากต้องการเปลี่ยนรูป ให้กด x ที่รูปเดิมก่อน`;
   }
 }
 
@@ -6289,16 +6289,16 @@ function estimateFoodMacros(name, notes = "", meal = "meal", photoCount = 0) {
 }
 
 function inferGenericFood(text, meal) {
-  if (text.includes("à¸—à¸­à¸”") || text.includes("fried")) {
+  if (text.includes("ทอด") || text.includes("fried")) {
     return { calories: 520, protein: 22, carbs: 45, fat: 26, fiber: 4 };
   }
-  if (text.includes("à¸•à¹‰à¸¡") || text.includes("soup")) {
+  if (text.includes("ต้ม") || text.includes("soup")) {
     return { calories: 260, protein: 22, carbs: 18, fat: 10, fiber: 3 };
   }
-  if (text.includes("à¸¢à¹ˆà¸²à¸‡") || text.includes("grill")) {
+  if (text.includes("ย่าง") || text.includes("grill")) {
     return { calories: 330, protein: 35, carbs: 12, fat: 14, fiber: 2 };
   }
-  if (text.includes("à¸«à¸§à¸²à¸™") || text.includes("dessert")) {
+  if (text.includes("หวาน") || text.includes("dessert")) {
     return { calories: 360, protein: 5, carbs: 58, fat: 12, fiber: 2 };
   }
   if (meal === "breakfast") return { calories: 380, protein: 20, carbs: 42, fat: 14, fiber: 5 };
@@ -6324,13 +6324,13 @@ function portionMultiplier(text) {
   const number = Number((text.match(/(\d+(?:\.\d+)?)/) || [])[1] || 1);
   let multiplier = Number.isFinite(number) && number > 0 ? number : 1;
 
-  if (text.includes("à¸„à¸£à¸¶à¹ˆà¸‡") || text.includes("half")) multiplier *= 0.5;
-  if (text.includes("à¹€à¸¥à¹‡à¸") || text.includes("small")) multiplier *= 0.75;
-  if (text.includes("à¹ƒà¸«à¸à¹ˆ") || text.includes("large") || text.includes("à¸žà¸´à¹€à¸¨à¸©")) multiplier *= 1.35;
-  if (text.includes("à¸Šà¹‰à¸­à¸™") || text.includes("spoon")) multiplier *= 0.18;
-  if (text.includes("à¸à¸£à¸±à¸¡") || text.includes("gram") || text.includes("g ")) multiplier = Math.max(0.1, number / 100);
-  if (text.includes("à¸Ÿà¸­à¸‡") && number > 0) multiplier = number;
-  if (text.includes("à¹à¸à¹‰à¸§") && number > 0) multiplier = number;
+  if (text.includes("ครึ่ง") || text.includes("half")) multiplier *= 0.5;
+  if (text.includes("เล็ก") || text.includes("small")) multiplier *= 0.75;
+  if (text.includes("ใหญ่") || text.includes("large") || text.includes("พิเศษ")) multiplier *= 1.35;
+  if (text.includes("ช้อน") || text.includes("spoon")) multiplier *= 0.18;
+  if (text.includes("กรัม") || text.includes("gram") || text.includes("g ")) multiplier = Math.max(0.1, number / 100);
+  if (text.includes("ฟอง") && number > 0) multiplier = number;
+  if (text.includes("แก้ว") && number > 0) multiplier = number;
 
   return Math.min(Math.max(multiplier, 0.1), 5);
 }
@@ -6664,9 +6664,9 @@ function progressAchievements(dates30) {
 
 function renderHealthTrends() {
   const windows = [
-    { label: "à¸ªà¸±à¸›à¸”à¸²à¸«à¹Œ", days: 7 },
-    { label: "à¹€à¸”à¸·à¸­à¸™", days: 30 },
-    { label: "à¸›à¸µ", days: 365 },
+    { label: "สัปดาห์", days: 7 },
+    { label: "เดือน", days: 30 },
+    { label: "ปี", days: 365 },
   ];
   const metrics = windows.map((window) => {
     const dates = trailingDateKeys(window.days);
@@ -6688,8 +6688,8 @@ function renderHealthTrends() {
     <article>
       <strong>${item.label}</strong>
       <span>Score ${item.score}/100</span>
-      <span>Cal ${item.calories} Â· P ${item.protein}g</span>
-      <span>Water ${(item.water / 1000).toFixed(1)}L Â· Workout ${item.workoutDays}d</span>
+      <span>Cal ${item.calories} · P ${item.protein}g</span>
+      <span>Water ${(item.water / 1000).toFixed(1)}L · Workout ${item.workoutDays}d</span>
       <span>Weight ${item.weight ? `${item.weight}kg` : "-"}</span>
     </article>
   `).join("");
@@ -7646,8 +7646,8 @@ function progressionSuggestion(exercise, previous) {
   const latest = programHistory.find((record) => record.name === exercise.name);
   if (!latest) return "Maintain: คุม tempo และฟอร์ม";
   if (latest.rpe && latest.rpe <= 7) return latest.weight ? "+2.5 kg" : "+1 rep";
-  if (latest.rpe && latest.rpe >= 9) return "à¹ƒà¸Šà¹‰à¸™à¹‰à¸³à¸«à¸™à¸±à¸à¹€à¸”à¸´à¸¡à¹à¸¥à¸°à¸„à¸¸à¸¡à¸Ÿà¸­à¸£à¹Œà¸¡";
-  return "+1 rep à¸«à¸£à¸·à¸­ tempo à¸Šà¹‰à¸²à¸¥à¸‡";
+  if (latest.rpe && latest.rpe >= 9) return "ใช้น้ำหนักเดิมและคุมฟอร์ม";
+  return "+1 rep หรือ tempo ช้าลง";
 }
 
 function dailyCoachFeedback() {
@@ -7973,6 +7973,4 @@ function downloadJson(data, filename) {
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[char]);
 }
-
-
 
