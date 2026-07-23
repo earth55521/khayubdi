@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="th">
   <head>
     <meta charset="utf-8" />
@@ -14,7 +14,7 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icon.svg" />
-  <link rel="stylesheet" href="/exercise.css?v=55" />
+  <link rel="stylesheet" href="/exercise.css?v=56" />
   </head>
   <body>
     <section class="splash-shell" id="splashShell">
@@ -180,6 +180,32 @@
       </nav>
 
       <section class="screen active" id="dashboard">
+        <section class="ux-home-shell" aria-label="Home overview">
+          <section class="ux-home-hero">
+            <p class="ux-home-greeting" id="uxHomeGreeting">&#128075; &#3626;&#3623;&#3633;&#3626;&#3604;&#3637;</p>
+            <h1>&#3614;&#3619;&#3657;&#3629;&#3617;&#3629;&#3629;&#3585;&#3585;&#3635;&#3621;&#3633;&#3591;&#3585;&#3634;&#3618;&#3627;&#3619;&#3639;&#3629;&#3618;&#3633;&#3591;?</h1>
+            <button class="ux-primary-cta quick-action" data-tab-target="track" type="button">&#3648;&#3619;&#3636;&#3656;&#3617; Workout</button>
+          </section>
+
+          <section class="ux-home-block" aria-labelledby="uxTodaySummaryTitle">
+            <div class="ux-section-heading"><h2 id="uxTodaySummaryTitle">Today's Summary</h2></div>
+            <div class="ux-summary-grid">
+              <article class="ux-mini-card"><span>&#127947;&#65039;</span><small>Workout</small><strong id="uxTodayWorkout">0 &#3609;&#3634;&#3607;&#3637;</strong></article>
+              <article class="ux-mini-card"><span>&#127869;&#65039;</span><small>Nutrition</small><strong id="uxTodayNutrition">0 kcal</strong></article>
+              <article class="ux-mini-card"><span>&#9889;</span><small>Recovery</small><strong id="uxTodayRecovery">0/100</strong></article>
+            </div>
+          </section>
+
+          <section class="ux-home-block" aria-labelledby="uxRecentActivityTitle">
+            <div class="ux-section-heading"><h2 id="uxRecentActivityTitle">Recent Activity</h2></div>
+            <div class="ux-activity-grid">
+              <article class="ux-activity-row"><span>Last Workout</span><strong id="uxLastWorkout">-</strong></article>
+              <article class="ux-activity-row"><span>Calories Today</span><strong id="uxCaloriesToday">0</strong></article>
+              <article class="ux-activity-row"><span>Current Streak</span><strong id="uxCurrentStreak">0 &#3623;&#3633;&#3609;</strong></article>
+            </div>
+          </section>
+        </section>
+
         <section class="dashboard-hero ai-coach-hero">
           <p class="eyebrow">วันนี้</p>
           <h2 id="dashboardGreeting">สวัสดี</h2>
@@ -401,6 +427,16 @@
       </section>
 
       <section class="screen" id="track">
+        <section class="ux-workout-top" aria-label="Workout today">
+          <p class="eyebrow">Workout &#3623;&#3633;&#3609;&#3609;&#3637;&#3657;</p>
+          <h1>Workout &#3623;&#3633;&#3609;&#3609;&#3637;&#3657;</h1>
+          <button class="ux-primary-cta" id="uxStartWorkout" type="button">Start Workout</button>
+          <div class="ux-workout-now-grid">
+            <article><span>Today's Program</span><strong id="uxTodaysProgram">-</strong></article>
+            <article><span>Today's Exercises</span><strong id="uxTodaysExercises">-</strong></article>
+          </div>
+        </section>
+
         <section class="dashboard-hero workout-hero">
           <p class="eyebrow">Workout Intelligence</p>
           <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
@@ -1504,6 +1540,17 @@
       </section>
 
       <section class="screen" id="profile">
+        <section class="ux-profile-overview" aria-label="Profile overview">
+          <div><p class="eyebrow">Profile</p><h1 id="uxProfileName">Khayubdi</h1></div>
+          <div class="ux-profile-grid">
+            <article><span>&#128100;</span><strong>Profile</strong><small>&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;&#3612;&#3641;&#3657;&#3651;&#3594;&#3657;</small></article>
+            <article><span>&#127919;</span><strong>Goals</strong><small>&#3648;&#3611;&#3657;&#3634;&#3627;&#3617;&#3634;&#3618;&#3586;&#3629;&#3591;&#3588;&#3640;&#3603;</small></article>
+            <article><span>&#9878;&#65039;</span><strong>Body Stats</strong><small>&#3609;&#3657;&#3635;&#3627;&#3609;&#3633;&#3585;&#3649;&#3621;&#3632;&#3626;&#3656;&#3623;&#3609;&#3626;&#3641;&#3591;</small></article>
+            <article><span>&#128338;</span><strong>History</strong><small>&#3611;&#3619;&#3632;&#3623;&#3633;&#3605;&#3636;&#3585;&#3634;&#3619;&#3651;&#3594;&#3657;&#3591;&#3634;&#3609;</small></article>
+            <article><span>&#9881;&#65039;</span><strong>Settings</strong><small>&#3605;&#3633;&#3657;&#3591;&#3588;&#3656;&#3634;&#3649;&#3629;&#3611;</small></article>
+          </div>
+        </section>
+
         <form class="entry-form" id="clientForm">
           <div class="section-title">
             <h2>Client profile</h2>
@@ -1672,19 +1719,37 @@
         </div>
       </section>
       <nav class="bottom-nav" aria-label="Primary">
-        <button class="tab" data-tab="track" type="button"><span>↟</span><small>&#3629;&#3629;&#3585;&#3585;&#3635;&#3621;&#3633;&#3591;&#3585;&#3634;&#3618;</small></button>
-        <button class="tab active" data-tab="dashboard" type="button"><span>¦</span><small>&#3627;&#3609;&#3657;&#3634;&#3627;&#3621;&#3633;&#3585;</small></button>
-        <button class="tab" data-tab="health" type="button"><span>?</span><small>Health</small></button>
-        <button class="tab" data-tab="nutrition" type="button"><span>?</span><small>Food</small></button>
-        <button class="tab" data-tab="track" type="button"><span>＋</span><small>&#3648;&#3619;&#3636;&#3656;&#3617;&#3604;&#3656;&#3623;&#3609;</small></button>
-        <button class="tab" data-tab="coachChat" type="button"><span>AI</span><small>&#3650;&#3588;&#3657;&#3594;&#32;&#65;&#73;</small></button>
-        <button class="tab" data-tab="trainerPortal" type="button"><span>TR</span><small>Trainer</small></button>
-        <button class="tab" data-tab="trainingAnalytics" type="button"><span>?</span><small>&#3623;&#3636;&#3648;&#3588;&#3619;&#3634;&#3632;&#3627;&#3660;</small></button>
-        <button class="tab" data-tab="progress" type="button"><span>?</span><small>Progress</small></button>
-        <button class="tab" data-tab="profile" type="button"><span>?</span><small>&#3605;&#3633;&#3657;&#3591;&#3588;&#3656;&#3634;</small></button>
+        <button class="tab active" data-tab="dashboard" type="button"><span>&#8962;</span><small>Home</small></button>
+        <button class="tab" data-tab="track" type="button"><span>&#127947;&#65039;</span><small>Workout</small></button>
+        <button class="tab nav-plus" data-tab="track" type="button"><span>+</span><small>&#3648;&#3619;&#3636;&#3656;&#3617;</small></button>
+        <button class="tab" data-tab="coachChat" type="button"><span>&#129302;</span><small>AI</small></button>
+        <button class="tab" data-tab="profile" type="button"><span>&#128100;</span><small>Profile</small></button>
       </nav>
     </main>
 
+    <div class="ux-floating-actions" aria-label="Quick actions">
+      <button class="quick-action" data-tab-target="track" type="button">Start Workout</button>
+      <button class="quick-action" data-tab-target="nutrition" type="button">Log Meal</button>
+      <button class="quick-action" data-tab-target="coachChat" type="button">Ask AI</button>
+    </div>
+
+    <aside class="ux-checkin-sheet hidden" id="uxCheckinSheet" aria-label="Morning check-in">
+      <div class="ux-sheet-handle"></div>
+      <div class="ux-sheet-head">
+        <div><p class="eyebrow">Morning Check-in</p><h2>&#3648;&#3594;&#3655;&#3585;&#3629;&#3636;&#3609;&#3605;&#3629;&#3609;&#3648;&#3594;&#3657;&#3634;</h2></div>
+        <span id="uxCheckinProgress">1 / 4</span>
+      </div>
+      <div class="ux-checkin-steps">
+        <article class="active"><span>1</span><strong>Sleep</strong></article>
+        <article><span>2</span><strong>Mood</strong></article>
+        <article><span>3</span><strong>Energy</strong></article>
+        <article><span>4</span><strong>Stress</strong></article>
+      </div>
+      <div class="ux-sheet-actions">
+        <button class="secondary" id="uxDismissCheckin" type="button">&#3611;&#3636;&#3604;</button>
+        <button class="quick-action" data-tab-target="health" type="button">Daily Check-in</button>
+      </div>
+    </aside>
     <div class="toast hidden" id="appToast" role="status" aria-live="polite"></div>
 
     <div class="modal-backdrop hidden" id="comingSoonModal" role="dialog" aria-modal="true" aria-labelledby="comingSoonTitle">
@@ -1717,6 +1782,7 @@
       </div>
     </div>
 
-  <script src="/exercise.js?v=55"></script>
+  <script src="/exercise.js?v=56"></script>
   </body>
 </html>
+

@@ -3316,3 +3316,476 @@ input[inputmode="decimal"] {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* UX-01 Home Experience Rewrite */
+:root {
+  --ux-bg: #0B0B0B;
+  --ux-surface: #171717;
+  --ux-card: #222222;
+  --ux-accent: #B8FF3D;
+  --ux-radius: 18px;
+  --ux-shadow: 0 18px 46px rgba(0,0,0,.34);
+  --ux-gap: 16px;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  background: var(--ux-bg);
+}
+
+body {
+  color: #f4f4f4;
+}
+
+.app {
+  background: var(--ux-bg);
+  padding-bottom: calc(136px + env(safe-area-inset-bottom));
+}
+
+.screen {
+  animation: uxFadeIn .22s ease both;
+}
+
+#dashboard > :not(.ux-home-shell) {
+  display: none !important;
+}
+
+.ux-home-shell,
+.ux-workout-top,
+.ux-profile-overview,
+#coachChat .coach-chat-hero,
+#coachChat .coach-chat-card,
+.chart-card,
+.entry-form,
+.store-card,
+.session-card {
+  border-radius: var(--ux-radius);
+  border: 1px solid rgba(255,255,255,.08);
+  background: var(--ux-card);
+  box-shadow: var(--ux-shadow);
+}
+
+.ux-home-shell {
+  display: grid;
+  gap: 14px;
+  min-height: calc(100dvh - 184px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  align-content: start;
+  padding: 18px;
+  background:
+    radial-gradient(circle at 18% 0, rgba(184,255,61,.13), transparent 34%),
+    var(--ux-surface);
+}
+
+.ux-home-hero {
+  display: grid;
+  gap: 12px;
+  padding: 4px 0 2px;
+}
+
+.ux-home-greeting,
+.ux-section-heading h2,
+.ux-workout-top .eyebrow,
+.ux-profile-overview .eyebrow {
+  margin: 0;
+}
+
+.ux-home-greeting {
+  color: rgba(255,255,255,.78);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.ux-home-hero h1,
+.ux-workout-top h1,
+.ux-profile-overview h1,
+#coachChat .coach-chat-hero h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(28px, 7vw, 38px);
+  line-height: 1.04;
+  letter-spacing: -.04em;
+}
+
+.ux-primary-cta,
+button:not(.tab):not(.secondary):not(.danger):not(.ghost) {
+  min-height: 52px;
+  border-radius: 999px;
+  background: var(--ux-accent);
+  color: #071006;
+  font-weight: 950;
+  box-shadow: 0 12px 32px rgba(184,255,61,.18);
+}
+
+.ux-primary-cta {
+  width: 100%;
+  font-size: 16px;
+}
+
+.ux-home-block {
+  display: grid;
+  gap: 10px;
+}
+
+.ux-section-heading h2 {
+  color: rgba(255,255,255,.84);
+  font-size: 15px;
+  letter-spacing: -.01em;
+}
+
+.ux-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ux-mini-card,
+.ux-activity-row,
+.ux-workout-now-grid article,
+.ux-profile-grid article {
+  min-width: 0;
+  border-radius: var(--ux-radius);
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.045);
+}
+
+.ux-mini-card {
+  display: grid;
+  gap: 6px;
+  min-height: 104px;
+  padding: 12px 10px;
+  align-content: center;
+}
+
+.ux-mini-card span {
+  font-size: 22px;
+}
+
+.ux-mini-card small,
+.ux-activity-row span,
+.ux-workout-now-grid span,
+.ux-profile-grid small {
+  color: rgba(255,255,255,.58);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.ux-mini-card strong,
+.ux-activity-row strong,
+.ux-workout-now-grid strong,
+.ux-profile-grid strong {
+  min-width: 0;
+  color: #fff;
+  overflow-wrap: anywhere;
+}
+
+.ux-activity-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.ux-activity-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 10px 12px;
+}
+
+.ux-floating-actions {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: calc(88px + env(safe-area-inset-bottom));
+  z-index: 55;
+  display: flex;
+  gap: 6px;
+  max-width: calc(100vw - 28px - env(safe-area-inset-left) - env(safe-area-inset-right));
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(23,23,23,.88);
+  box-shadow: 0 18px 36px rgba(0,0,0,.35);
+  backdrop-filter: blur(18px);
+}
+
+.ux-floating-actions button {
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  box-shadow: none;
+}
+
+.bottom-nav {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  bottom: max(10px, env(safe-area-inset-bottom));
+  width: min(430px, calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+  padding: 8px;
+  border-radius: 26px;
+  background: rgba(23,23,23,.94);
+}
+
+.bottom-nav .tab,
+.bottom-nav .tab:nth-of-type(5) {
+  top: auto;
+  width: auto;
+  height: 60px;
+  min-height: 60px;
+  border-radius: 18px;
+}
+
+.bottom-nav .tab span {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.bottom-nav .tab small {
+  margin-top: 4px;
+  color: rgba(255,255,255,.58);
+  font-size: 10px;
+}
+
+.bottom-nav .tab.active,
+.bottom-nav .tab.nav-plus.active {
+  background: rgba(184,255,61,.16);
+  color: var(--ux-accent);
+  border-color: rgba(184,255,61,.3);
+}
+
+.bottom-nav .tab.nav-plus {
+  background: var(--ux-accent);
+  color: #071006;
+}
+
+.bottom-nav .tab.nav-plus small {
+  color: rgba(7,16,6,.68);
+}
+
+.ux-checkin-sheet {
+  position: fixed;
+  left: max(10px, env(safe-area-inset-left));
+  right: max(10px, env(safe-area-inset-right));
+  bottom: calc(86px + env(safe-area-inset-bottom));
+  z-index: 70;
+  display: grid;
+  gap: 14px;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 14px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(34,34,34,.96);
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+  backdrop-filter: blur(20px);
+}
+
+.ux-sheet-handle {
+  width: 42px;
+  height: 4px;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: rgba(255,255,255,.22);
+}
+
+.ux-sheet-head,
+.ux-sheet-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ux-sheet-head h2 {
+  margin: 2px 0 0;
+  font-size: 20px;
+}
+
+.ux-sheet-head > span {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.ux-checkin-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ux-checkin-steps article {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 8px 4px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.05);
+}
+
+.ux-checkin-steps span {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.ux-checkin-steps .active span {
+  background: var(--ux-accent);
+  color: #071006;
+}
+
+.ux-sheet-actions button {
+  flex: 1;
+  min-height: 44px;
+}
+
+.ux-workout-top,
+.ux-profile-overview {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  margin-bottom: 14px;
+  background: var(--ux-surface);
+}
+
+.ux-workout-now-grid,
+.ux-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ux-workout-now-grid article,
+.ux-profile-grid article {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+}
+
+.ux-profile-grid article:last-child {
+  grid-column: 1 / -1;
+}
+
+#track > .dashboard-hero.workout-hero,
+#coachChat .persona-control,
+#coachChat .clear-chat-button {
+  display: none !important;
+}
+
+#track .pro-content {
+  margin-top: 0;
+}
+
+#coachChat {
+  min-height: calc(100dvh - 164px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}
+
+#coachChat .coach-chat-hero,
+#coachChat .coach-chat-card {
+  background: var(--ux-surface);
+}
+
+#coachChat .coach-chat-card {
+  min-height: calc(100dvh - 292px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}
+
+#coachChat .section-title {
+  display: none;
+}
+
+#coachChat .suggested-question-grid {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+#coachChat .suggested-question-grid button {
+  flex: 0 0 auto;
+  min-height: 38px;
+  background: rgba(255,255,255,.07);
+  color: #fff;
+  box-shadow: none;
+}
+
+#coachChat .chat-history {
+  min-height: 45dvh;
+  border-radius: 18px;
+  background: rgba(0,0,0,.18);
+}
+
+#coachChat .chat-input-row {
+  bottom: calc(84px + env(safe-area-inset-bottom));
+}
+
+.skeleton,
+.loading {
+  color: transparent !important;
+  background: linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.12), rgba(255,255,255,.05));
+  background-size: 220% 100%;
+  animation: uxSkeleton 1.2s ease-in-out infinite;
+}
+
+@keyframes uxFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes uxSkeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (max-width: 360px) {
+  .ux-home-shell {
+    gap: 10px;
+    padding: 14px;
+  }
+  .ux-mini-card {
+    min-height: 92px;
+    padding: 10px 6px;
+  }
+  .ux-floating-actions {
+    left: max(10px, env(safe-area-inset-left));
+    right: max(10px, env(safe-area-inset-right));
+    justify-content: center;
+  }
+  .ux-floating-actions button {
+    flex: 1;
+    padding-inline: 6px;
+  }
+}
+
+@media (min-width: 760px) {
+  .ux-home-shell,
+  .ux-workout-top,
+  .ux-profile-overview,
+  #coachChat .coach-chat-hero,
+  #coachChat .coach-chat-card {
+    max-width: 720px;
+    margin-inline: auto;
+  }
+  .ux-home-shell {
+    min-height: auto;
+  }
+  .ux-profile-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .ux-profile-grid article:last-child {
+    grid-column: auto;
+  }
+}
+
+/* UX-01 keeps the legacy tab strip available to JS, but presentation uses bottom navigation only. */
+.top-nav {
+  display: none !important;
+}

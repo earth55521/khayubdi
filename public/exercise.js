@@ -1,4 +1,4 @@
-﻿const BASE_STORAGE_KEY = "khayubdi_exercise_entries";
+const BASE_STORAGE_KEY = "khayubdi_exercise_entries";
 const BASE_FOOD_KEY = "khayubdi_food_entries";
 const BASE_PROFILE_KEY = "khayubdi_profile";
 const BASE_CLIENT_KEY = "khayubdi_client";
@@ -25,7 +25,7 @@ const APP_BUILD = "53";
 const APP_ENVIRONMENT = "Closed Beta";
 const APP_RELEASE_CHANNEL = "Release Candidate";
 const APP_DEVELOPER = "Khayubdi";
-const APP_CACHE_VERSION = "khayubdi-exercise-v55";
+const APP_CACHE_VERSION = "khayubdi-exercise-v56";
 const BETA_WELCOME_KEY = "khayubdi_beta_welcome_dismissed";
 const USE_BACKEND = location.protocol === "http:" || location.protocol === "https:";
 const LOCAL_TRACKING_ONLY = true;
@@ -123,6 +123,7 @@ let nutritionPlanDraft = null;
 let nutritionPlans = [];
 let trainerPortal = defaultTrainerPortal();
 let selectedTrainerClientId = "";
+let uxCheckinSheetDismissed = false;
 const AIProvider = (() => {
   return {
     async generateResponse(promptObject) {
@@ -183,6 +184,20 @@ const fields = {
   logoutButton: $("#logoutButton"),
   dashboardGreeting: $("#dashboardGreeting"),
   dashboardGoal: $("#dashboardGoal"),
+  uxHomeGreeting: $("#uxHomeGreeting"),
+  uxTodayWorkout: $("#uxTodayWorkout"),
+  uxTodayNutrition: $("#uxTodayNutrition"),
+  uxTodayRecovery: $("#uxTodayRecovery"),
+  uxLastWorkout: $("#uxLastWorkout"),
+  uxCaloriesToday: $("#uxCaloriesToday"),
+  uxCurrentStreak: $("#uxCurrentStreak"),
+  uxTodaysProgram: $("#uxTodaysProgram"),
+  uxTodaysExercises: $("#uxTodaysExercises"),
+  uxStartWorkout: $("#uxStartWorkout"),
+  uxCoachGreeting: $("#uxCoachGreeting"),
+  uxProfileName: $("#uxProfileName"),
+  uxCheckinSheet: $("#uxCheckinSheet"),
+  uxDismissCheckin: $("#uxDismissCheckin"),
   coachPriority: $("#coachPriority"),
   coachRecommendationType: $("#coachRecommendationType"),
   coachMainMessage: $("#coachMainMessage"),
@@ -964,7 +979,7 @@ function showApp() {
   render();
   renderDiagnostics();
   showBetaWelcomeIfNeeded();
-  if (!isTodayCheckinComplete()) switchTab("health");
+  renderUxCheckinSheet();
 }
 
 function showLanding() {
@@ -1015,6 +1030,11 @@ function bindTabs() {
       }
       showComingSoon(button.textContent.trim());
     });
+  });
+  fields.uxStartWorkout?.addEventListener("click", () => switchTab("track"));
+  fields.uxDismissCheckin?.addEventListener("click", () => {
+    uxCheckinSheetDismissed = true;
+    renderUxCheckinSheet();
   });
   if (fields.notificationRecentList) {
     fields.notificationRecentList.addEventListener("click", (event) => {
@@ -2461,6 +2481,7 @@ function trainerLocalRuleResponse(promptObject) {
 }
 
 function render() {
+  renderUxRewrite();
   renderDashboard();
   renderSummary();
   renderFoodSummary();
@@ -2480,6 +2501,38 @@ function render() {
   renderAiProgramDraft();
   renderNutritionPlanDraft();
   renderTrainerPortal();
+}
+
+function renderUxRewrite() {
+  const today = dateKey(new Date());
+  const displayName = profile.displayName || client.name || currentUserId || "Khayubdi";
+  const todayEntries = entries.filter((entry) => dateKey(new Date(entry.createdAt)) === today);
+  const todayFoods = foods.filter((food) => dateKey(new Date(food.createdAt)) === today);
+  const foodTotals = dailyFoodTotals(todayFoods);
+  const engine = progressiveOverloadEngine();
+  const recovery = recoveryReadinessEngine();
+  const program = activeProgram();
+  const todayPlan = plannedWorkoutForDate(today, program);
+  const exerciseCount = todayPlan?.exercises?.length || 0;
+
+  if (fields.uxHomeGreeting) fields.uxHomeGreeting.textContent = `👋 สวัสดี ${displayName}`;
+  if (fields.uxTodayWorkout) fields.uxTodayWorkout.textContent = `${sum(todayEntries, "minutes")} นาที`;
+  if (fields.uxTodayNutrition) fields.uxTodayNutrition.textContent = `${foodTotals.calories} kcal`;
+  if (fields.uxTodayRecovery) fields.uxTodayRecovery.textContent = `${recovery.score}/100`;
+  if (fields.uxLastWorkout) fields.uxLastWorkout.textContent = engine.lastWorkout ? formatShortDate(engine.lastWorkout.date) : "ยังไม่มี";
+  if (fields.uxCaloriesToday) fields.uxCaloriesToday.textContent = foodTotals.calories;
+  if (fields.uxCurrentStreak) fields.uxCurrentStreak.textContent = `${engine.streak.current} วัน`;
+  if (fields.uxTodaysProgram) fields.uxTodaysProgram.textContent = program.name || "ยังไม่มีโปรแกรม";
+  if (fields.uxTodaysExercises) fields.uxTodaysExercises.textContent = todayPlan ? `${exerciseCount} exercises` : "ยังไม่มีตารางวันนี้";
+  if (fields.uxCoachGreeting) fields.uxCoachGreeting.textContent = `สวัสดี ${displayName} อยากให้ช่วยวางแผนอะไรวันนี้?`;
+  if (fields.uxProfileName) fields.uxProfileName.textContent = displayName;
+  renderUxCheckinSheet();
+}
+
+function renderUxCheckinSheet() {
+  if (!fields.uxCheckinSheet) return;
+  const done = Boolean(healthLogs[dateKey(new Date())]?.checkinCompleted);
+  fields.uxCheckinSheet.classList.toggle("hidden", done || uxCheckinSheetDismissed);
 }
 
 function renderSummary() {
