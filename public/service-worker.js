@@ -1,12 +1,12 @@
-const CACHE_NAME = "khayubdi-exercise-v57";
+const CACHE_NAME = "khayubdi-exercise-v60";
 const ASSETS = [
   "/",
   "/index.html",
   "/exercise.html",
   "/privacy.html",
   "/terms.html",
-  "/exercise.css?v=57",
-  "/exercise.js?v=57",
+  "/exercise.css?v=60",
+  "/exercise.js?v=60",
   "/manifest.webmanifest",
   "/icon.svg",
   "/icon-192.png",
@@ -35,5 +35,8 @@ self.addEventListener("fetch", (event) => {
   }
   event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
 });
+
+
+
 
 

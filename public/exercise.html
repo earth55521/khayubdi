@@ -14,7 +14,7 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icon.svg" />
-  <link rel="stylesheet" href="/exercise.css?v=57" />
+  <link rel="stylesheet" href="/exercise.css?v=60" />
   </head>
   <body>
     <section class="splash-shell" id="splashShell">
@@ -142,7 +142,7 @@
         </div>
         <div class="top-actions">
           <button class="icon-button" id="installButton" type="button" hidden>Install</button>
-          <button class="secondary icon-button" id="logoutButton" type="button">&#3629;&#3629;&#3585;&#3592;&#3634;&#3585;&#3619;&#3632;&#3610;&#3610;</button>
+          <button class="secondary icon-button" id="logoutButton" type="button">ออกจากระบบ</button>
         </div>
       </header>
 
@@ -182,17 +182,17 @@
       <section class="screen active" id="dashboard">
         <section class="ux-home-shell" aria-label="Home overview">
           <section class="ux-home-hero">
-            <p class="ux-home-greeting" id="uxHomeGreeting">&#128075; &#3626;&#3623;&#3633;&#3626;&#3604;&#3637;</p>
-            <h1>&#3614;&#3619;&#3657;&#3629;&#3617;&#3629;&#3629;&#3585;&#3585;&#3635;&#3621;&#3633;&#3591;&#3585;&#3634;&#3618;&#3627;&#3619;&#3639;&#3629;&#3618;&#3633;&#3591;?</h1>
-            <button class="ux-primary-cta quick-action" data-tab-target="track" type="button">&#3648;&#3619;&#3636;&#3656;&#3617; Workout</button>
+            <p class="ux-home-greeting" id="uxHomeGreeting">👋 สวัสดี</p>
+            <h1 id="uxHeroMotivation">พร้อมทำให้วันนี้ดีกว่าเมื่อวานไหม?</h1>
+            <button class="ux-primary-cta quick-action" data-tab-target="track" type="button">เริ่ม Workout</button>
           </section>
 
           <section class="ux-home-block" aria-labelledby="uxTodaySummaryTitle">
             <div class="ux-section-heading"><h2 id="uxTodaySummaryTitle">Today's Summary</h2></div>
             <div class="ux-summary-grid">
-              <article class="ux-mini-card"><span>&#127947;&#65039;</span><small>Workout</small><strong id="uxTodayWorkout">0 &#3609;&#3634;&#3607;&#3637;</strong></article>
-              <article class="ux-mini-card"><span>&#127869;&#65039;</span><small>Nutrition</small><strong id="uxTodayNutrition">0 kcal</strong></article>
-              <article class="ux-mini-card"><span>&#9889;</span><small>Recovery</small><strong id="uxTodayRecovery">0/100</strong></article>
+              <article class="ux-mini-card ux-progress-card" data-progress="0"><span>🏋️</span><small>Workout</small><strong id="uxTodayWorkout">0 นาที</strong><div class="ux-mini-bar"><i id="uxWorkoutProgress"></i></div></article>
+              <article class="ux-mini-card ux-progress-card" data-progress="0"><span>🍽️</span><small>Nutrition</small><strong id="uxTodayNutrition">0 kcal</strong><div class="ux-mini-bar"><i id="uxNutritionProgress"></i></div></article>
+              <article class="ux-mini-card ux-ring-card" data-progress="0"><span>⚡</span><small>Recovery</small><strong id="uxTodayRecovery">0/100</strong><div class="ux-mini-ring" id="uxRecoveryRing"><b></b></div></article>
             </div>
           </section>
 
@@ -201,7 +201,7 @@
             <div class="ux-activity-grid">
               <article class="ux-activity-row"><span>Last Workout</span><strong id="uxLastWorkout">-</strong></article>
               <article class="ux-activity-row"><span>Calories Today</span><strong id="uxCaloriesToday">0</strong></article>
-              <article class="ux-activity-row"><span>Current Streak</span><strong id="uxCurrentStreak">0 &#3623;&#3633;&#3609;</strong></article>
+              <article class="ux-activity-row"><span>Current Streak</span><strong id="uxCurrentStreak">0 วัน</strong></article>
             </div>
           </section>
         </section>
@@ -223,7 +223,7 @@
           <div class="coach-card-head">
             <div>
               <strong id="coachRecommendationType">เริ่มต้น</strong>
-              <p id="coachMainMessage">บันทึก&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;สุขภาพและ workout เพื่อให้โค้ชแนะนำได้แม่นยำขึ้น</p>
+              <p id="coachMainMessage">บันทึกรายละเอียดสุขภาพและ workout เพื่อให้โค้ชแนะนำได้แม่นยำขึ้น</p>
             </div>
             <span class="ai-badge">AI</span>
           </div>
@@ -313,57 +313,57 @@
           <div class="weekly-notification-summary" id="notificationWeeklySummary">Weekly summary is building from your latest activity.</div>
         </section>
         <section class="score-card">
-          <p class="label">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <p class="label">ยังไม่มีข้อมูล</p>
           <div class="score-ring"><span id="healthScore">0</span><small>/100</small></div>
-          <strong class="score-status" id="healthScoreStatus">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</strong>
-          <p class="trend-line" id="healthTrendIndicator">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <strong class="score-status" id="healthScoreStatus">ยังไม่มีข้อมูล</strong>
+          <p class="trend-line" id="healthTrendIndicator">ยังไม่มีข้อมูล</p>
           <div class="health-score-preview" id="healthScorePreview"></div>
-          <p class="health-score-recommendation" id="healthScoreRecommendation">&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
+          <p class="health-score-recommendation" id="healthScoreRecommendation">รายละเอียด รายละเอียด รายละเอียด</p>
           <div class="health-score-history" id="healthScoreHistory"></div>
-          <p id="dailyMissionText">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <p id="dailyMissionText">ยังไม่มีข้อมูล</p>
         </section>
         <section class="dashboard-section">
-          <div class="section-title"><h2>Today's Health</h2><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></div>
+          <div class="section-title"><h2>Today's Health</h2><span>ยังไม่มีข้อมูล</span></div>
           <div class="dashboard-grid compact-dashboard-grid">
-            <article><strong id="dashCurrentWeight">-</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="dashTargetWeight">-</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="dashWeightDifference">-</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="dashWeightTrend">-</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="dashCheckinStatus">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</strong><span>Daily check-in</span></article>
+            <article><strong id="dashCurrentWeight">-</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="dashTargetWeight">-</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="dashWeightDifference">-</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="dashWeightTrend">-</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="dashCheckinStatus">ยังไม่มีข้อมูล</strong><span>Daily check-in</span></article>
             <article><strong id="dashCheckinStreak">0</strong><span>check-in streak</span></article>
           </div>
         </section>
         <section class="dashboard-section">
-          <div class="section-title"><h2>Nutrition</h2><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></div>
+          <div class="section-title"><h2>Nutrition</h2><span>ยังไม่มีข้อมูล</span></div>
           <div class="dashboard-grid compact-dashboard-grid">
-            <article><strong id="dashFoodCalories">0</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="dashFoodProtein">0g</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
+            <article><strong id="dashFoodCalories">0</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="dashFoodProtein">0g</strong><span>ยังไม่มีข้อมูล</span></article>
             <article><strong id="dashKcalTarget">0</strong><span>kcal target</span></article>
             <article><strong id="dashProteinTarget">0g</strong><span>protein target</span></article>
           </div>
         </section>
         <section class="dashboard-section">
-          <div class="section-title"><h2>Hydration</h2><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></div>
+          <div class="section-title"><h2>Hydration</h2><span>ยังไม่มีข้อมูล</span></div>
           <div class="dashboard-grid compact-dashboard-grid">
-            <article><strong id="dashWaterToday">0 ml</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="dashWaterRemaining">3000 ml</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
+            <article><strong id="dashWaterToday">0 ml</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="dashWaterRemaining">3000 ml</strong><span>ยังไม่มีข้อมูล</span></article>
             <article><strong id="dashWaterTarget">3L</strong><span>water target</span></article>
           </div>
         </section>
         <section class="dashboard-section">
-          <div class="section-title"><h2>Sleep</h2><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></div>
+          <div class="section-title"><h2>Sleep</h2><span>ยังไม่มีข้อมูล</span></div>
           <div class="dashboard-grid compact-dashboard-grid">
-            <article><strong id="dashSleepHours">0 &#3594;&#3617;.</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="dashSleepQuality">-</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="dashSleepGoal">8 &#3594;&#3617;.</strong><span>sleep goal</span></article>
+            <article><strong id="dashSleepHours">0 ชม.</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="dashSleepQuality">-</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="dashSleepGoal">8 ชม.</strong><span>sleep goal</span></article>
             <article><strong id="dashSleepPercent">0%</strong><span>sleep completion</span></article>
           </div>
         </section>
         <section class="dashboard-section">
           <div class="section-title"><h2>Training</h2><span>Progressive Overload</span></div>
           <div class="dashboard-grid compact-dashboard-grid">
-            <article><strong id="dashLastWorkout">-</strong><span>workout &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span></article>
-            <article><strong id="dashWorkoutStreak">0 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</strong><span>current streak</span></article>
+            <article><strong id="dashLastWorkout">-</strong><span>workout รายละเอียด</span></article>
+            <article><strong id="dashWorkoutStreak">0 รายละเอียด</strong><span>current streak</span></article>
             <article><strong id="dashWeeklyVolume">0 kg</strong><span>weekly volume</span></article>
             <article><strong id="dashPrCount">0</strong><span>personal records</span></article>
             <article><strong id="dashCurrentProgram">-</strong><span>current program</span></article>
@@ -378,14 +378,14 @@
         </section>
         <section class="chart-card dashboard-water-card">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
+            <h2>ยังไม่มีข้อมูล</h2>
             <span id="dashWaterPercent">0%</span>
           </div>
           <div class="dashboard-water-layout">
             <div class="water-ring small" id="dashWaterRing"><span id="dashWaterRingText">0%</span></div>
             <div>
               <strong id="dashWaterSummary">0 / 3000 ml</strong>
-              <p id="dashWaterHint">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+              <p id="dashWaterHint">ยังไม่มีข้อมูล</p>
               <button class="secondary water-add-button" data-water-add="250" type="button">+250 ml</button>
             </div>
           </div>
@@ -405,16 +405,16 @@
             <h2>Quick Actions</h2>
           </div>
           <div class="quick-action-grid">
-            <button class="secondary quick-action" data-tab-target="health" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-            <button class="secondary quick-action" data-tab-target="weightPage" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-            <button class="secondary quick-action" data-tab-target="waterPage" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-            <button class="secondary quick-action" data-tab-target="sleepPage" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-            <button class="secondary quick-action" data-tab-target="nutrition" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-            <button class="secondary quick-action" data-tab-target="track" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+            <button class="secondary quick-action" data-tab-target="health" type="button">ยังไม่มีข้อมูล</button>
+            <button class="secondary quick-action" data-tab-target="weightPage" type="button">ยังไม่มีข้อมูล</button>
+            <button class="secondary quick-action" data-tab-target="waterPage" type="button">ยังไม่มีข้อมูล</button>
+            <button class="secondary quick-action" data-tab-target="sleepPage" type="button">ยังไม่มีข้อมูล</button>
+            <button class="secondary quick-action" data-tab-target="nutrition" type="button">ยังไม่มีข้อมูล</button>
+            <button class="secondary quick-action" data-tab-target="track" type="button">ยังไม่มีข้อมูล</button>
             <button class="secondary quick-action" data-tab-target="trainerPortal" type="button">Trainer Portal</button>
             <button class="secondary quick-action" data-tab-target="coachChat" type="button">คุยกับโค้ช</button>
-            <button class="secondary quick-action" data-tab-target="trainingAnalytics" type="button">&#3623;&#3636;&#3648;&#3588;&#3619;&#3634;&#3632;&#3627;&#3660;</button>
-            <button class="secondary quick-action" data-tab-target="progress" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+            <button class="secondary quick-action" data-tab-target="trainingAnalytics" type="button">วิเคราะห์</button>
+            <button class="secondary quick-action" data-tab-target="progress" type="button">ยังไม่มีข้อมูล</button>
           </div>
         </section>
         <section class="mission-card">
@@ -428,9 +428,51 @@
 
       <section class="screen" id="track">
         <section class="ux-workout-top" aria-label="Workout today">
-          <p class="eyebrow">Workout &#3623;&#3633;&#3609;&#3609;&#3637;&#3657;</p>
-          <h1>Workout &#3623;&#3633;&#3609;&#3609;&#3637;&#3657;</h1>
-          <button class="ux-primary-cta" id="uxStartWorkout" type="button">Start Workout</button>
+          <p class="eyebrow">Workout วันนี้</p>
+          <h1>Today's Workout</h1>
+          <div class="zero-workout-card" id="zeroWorkoutCard">
+            <div>
+              <p class="eyebrow">Ready in one tap</p>
+              <h2 id="zeroWorkoutTitle">Upper Body</h2>
+              <p><span id="zeroWorkoutDuration">45 min</span> · <span id="zeroWorkoutExerciseCount">8 exercises</span></p>
+            </div>
+            <button class="ux-primary-cta" id="uxStartWorkout" type="button">START WORKOUT</button>
+          </div>
+          <section class="zero-active-workout" aria-label="Active workout preview">
+            <div class="zero-exercise-card">
+              <div>
+                <p class="eyebrow">Current Exercise</p>
+                <h2 id="zeroExerciseName">Push up</h2>
+                <p id="zeroLastPerformance">Last: waiting for data</p>
+              </div>
+              <div class="zero-set-grid">
+                <label>Set<input id="zeroSetPreview" value="1" readonly /></label>
+                <label>Weight<input id="zeroWeightPreview" value="0 kg" readonly /></label>
+                <label>Reps<input id="zeroRepsPreview" value="12" readonly /></label>
+              </div>
+              <div class="zero-workout-actions">
+                <button class="secondary" type="button" id="zeroPrevExercise">Previous</button>
+                <button type="button" id="zeroCompleteSet">✓ Complete</button>
+                <button class="secondary" type="button" id="zeroNextExercise">Next</button>
+              </div>
+            </div>
+          </section>
+          <section class="zero-finish-card hidden" id="zeroFinishCard" aria-label="Workout complete">
+            <p class="eyebrow">Workout Complete</p>
+            <h2>Great work — session saved.</h2>
+            <div class="zero-finish-grid">
+              <article><strong id="zeroFinishDuration">0 min</strong><span>Duration</span></article>
+              <article><strong id="zeroFinishVolume">0 kg</strong><span>Volume</span></article>
+              <article><strong id="zeroFinishSets">0</strong><span>Sets</span></article>
+              <article><strong id="zeroFinishCalories">0</strong><span>Calories</span></article>
+              <article><strong id="zeroFinishPr">0</strong><span>PR</span></article>
+              <article><strong id="zeroFinishStreak">0</strong><span>Streak</span></article>
+            </div>
+            <div class="zero-workout-actions">
+              <button type="button" id="zeroDoneWorkout">Done</button>
+              <button class="secondary quick-action" data-tab-target="trainingAnalytics" type="button">View Analytics</button>
+            </div>
+          </section>
           <div class="ux-workout-now-grid">
             <article><span>Today's Program</span><strong id="uxTodaysProgram">-</strong></article>
             <article><span>Today's Exercises</span><strong id="uxTodaysExercises">-</strong></article>
@@ -439,16 +481,16 @@
 
         <section class="dashboard-hero workout-hero">
           <p class="eyebrow">Workout Intelligence</p>
-          <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-          <p>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
+          <h2>ยังไม่มีข้อมูล</h2>
+          <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
         </section>
 
         <section class="pro-content workout-program-content" id="programProContent">
           <nav class="workout-subnav" aria-label="Workout sections">
-            <button class="workout-subtab active" data-workout-panel="myProgramPanel" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-            <button class="workout-subtab" data-workout-panel="builderPanel" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-            <button class="workout-subtab" data-workout-panel="libraryPanel" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-            <button class="workout-subtab" data-workout-panel="logPanel" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+            <button class="workout-subtab active" data-workout-panel="myProgramPanel" type="button">ยังไม่มีข้อมูล</button>
+            <button class="workout-subtab" data-workout-panel="builderPanel" type="button">ยังไม่มีข้อมูล</button>
+            <button class="workout-subtab" data-workout-panel="libraryPanel" type="button">ยังไม่มีข้อมูล</button>
+            <button class="workout-subtab" data-workout-panel="logPanel" type="button">ยังไม่มีข้อมูล</button>
           </nav>
 
           <div class="workout-panel" id="builderPanel">
@@ -478,12 +520,12 @@
           </section>
           <form class="entry-form workout-setup-card" id="programForm">
             <div class="section-title"><h2>Workout Goal Setup</h2><span id="programAdherence">0%</span></div>
-            <label>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;
+            <label>รายละเอียด
               <select id="programGoal">
-                <option value="fat_loss">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-                <option value="muscle_gain">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-                <option value="strength">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-                <option value="general_health">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
+                <option value="fat_loss">ยังไม่มีข้อมูล</option>
+                <option value="muscle_gain">ยังไม่มีข้อมูล</option>
+                <option value="strength">ยังไม่มีข้อมูล</option>
+                <option value="general_health">ยังไม่มีข้อมูล</option>
                 <option value="beginner">Beginner</option>
               </select>
             </label>
@@ -497,11 +539,11 @@
               </label>
               <label>Training Days
                 <select id="programDays">
-                  <option value="2">2 &#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;/&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-                  <option value="3" selected>3 &#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;/&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-                  <option value="4">4 &#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;/&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-                  <option value="5">5 &#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;/&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-                  <option value="6">6 &#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;/&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
+                  <option value="2">2 ยังไม่มีข้อมูล/ยังไม่มีข้อมูล</option>
+                  <option value="3" selected>3 ยังไม่มีข้อมูล/ยังไม่มีข้อมูล</option>
+                  <option value="4">4 ยังไม่มีข้อมูล/ยังไม่มีข้อมูล</option>
+                  <option value="5">5 ยังไม่มีข้อมูล/ยังไม่มีข้อมูล</option>
+                  <option value="6">6 ยังไม่มีข้อมูล/ยังไม่มีข้อมูล</option>
                 </select>
               </label>
               <label>Equipment
@@ -513,14 +555,14 @@
               </label>
               <label>Workout Duration
                 <select id="programMinutes">
-                  <option value="30">30 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</option>
-                  <option value="45" selected>45 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</option>
-                  <option value="60">60 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</option>
-                  <option value="90">90 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</option>
+                  <option value="30">30 รายละเอียด</option>
+                  <option value="45" selected>45 รายละเอียด</option>
+                  <option value="60">60 รายละเอียด</option>
+                  <option value="90">90 รายละเอียด</option>
                 </select>
               </label>
             </div>
-            <label>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;/&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<textarea id="programInjuries" rows="2" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;, &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;, &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;"></textarea></label>
+            <label>ยังไม่มีข้อมูล/ยังไม่มีข้อมูล<textarea id="programInjuries" rows="2" placeholder="รายละเอียด รายละเอียด, รายละเอียด, รายละเอียด"></textarea></label>
             <button type="submit">Generate Weekly Program</button>
           </form>
           </div>
@@ -534,7 +576,7 @@
             </div>
             <form class="inline-form" id="createProgramForm">
               <div class="form-grid">
-                <label>Program name<input id="newProgramName" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; Upper Lower 4 Days" /></label>
+                <label>Program name<input id="newProgramName" placeholder="รายละเอียด Upper Lower 4 Days" /></label>
                 <label>Goal
                   <select id="newProgramGoal">
                     <option value="hypertrophy">Hypertrophy</option>
@@ -584,7 +626,7 @@
                 <select id="programScheduleWorkout"></select>
               </label>
             </div>
-            <label>Program notes<textarea id="programNotesEditor" rows="3" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;"></textarea></label>
+            <label>Program notes<textarea id="programNotesEditor" rows="3" placeholder="รายละเอียด รายละเอียด รายละเอียด"></textarea></label>
             <div class="program-actions">
               <button class="secondary" id="assignWorkoutToDay" type="button">Assign Selected Workout</button>
               <button class="secondary" id="duplicateProgram" type="button">Duplicate</button>
@@ -596,28 +638,28 @@
           </section>
 
           <section class="chart-card workout-summary-card">
-            <div class="section-title"><h2>Workout Summary</h2><span id="programGeneratedAt">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></div>
-            <p class="safety-warning hidden" id="programSafetyWarning">&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
+            <div class="section-title"><h2>Workout Summary</h2><span id="programGeneratedAt">ยังไม่มีข้อมูล</span></div>
+            <p class="safety-warning hidden" id="programSafetyWarning">รายละเอียด รายละเอียด</p>
             <div class="dashboard-grid workout-summary-grid">
               <article><strong id="programTrainingDays">0</strong><span>Training Days</span></article>
               <article><strong id="programWeeklyVolume">0 sets</strong><span>Weekly Volume</span></article>
-              <article><strong id="programEstimatedTime">0 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</strong><span>Estimated Time</span></article>
+              <article><strong id="programEstimatedTime">0 รายละเอียด</strong><span>Estimated Time</span></article>
             </div>
           </section>
 
           <section class="chart-card overload-card">
-            <div class="section-title"><h2>Training Intelligence</h2><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></div>
+            <div class="section-title"><h2>Training Intelligence</h2><span>ยังไม่มีข้อมูล</span></div>
             <div class="dashboard-grid workout-summary-grid" id="workoutOverloadSummary"></div>
             <div class="overload-list" id="exerciseTrendList"></div>
           </section>
 
           <section class="chart-card workout-calendar-card">
-            <div class="section-title"><h2>Weekly Calendar</h2><span>Rest Days &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span></div>
+            <div class="section-title"><h2>Weekly Calendar</h2><span>Rest Days รายละเอียด</span></div>
             <div class="weekly-calendar" id="programCalendar"></div>
           </section>
 
           <section class="quick-list workout-plan-card">
-            <div class="section-title"><h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2><button class="link-button" id="clearProgram" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button></div>
+            <div class="section-title"><h2>ยังไม่มีข้อมูล</h2><button class="link-button" id="clearProgram" type="button">ยังไม่มีข้อมูล</button></div>
             <div class="program-list" id="programPlanList"></div>
           </section>
 
@@ -626,15 +668,15 @@
           <div class="workout-panel" id="libraryPanel">
           <section class="chart-card exercise-library-card">
             <div class="section-title">
-              <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-              <span id="exerciseLibraryCount">0 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+              <h2>ยังไม่มีข้อมูล</h2>
+              <span id="exerciseLibraryCount">0 รายละเอียด</span>
             </div>
             <div class="exercise-filter-grid">
-              <label>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<input id="exerciseSearch" type="search" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;" /></label>
-              <label>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<select id="exerciseMuscleFilter"><option value="">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option></select></label>
-              <label>Movement<select id="exercisePatternFilter"><option value="">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option></select></label>
-              <label>Equipment<select id="exerciseEquipmentFilter"><option value="">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option></select></label>
-              <label>Difficulty<select id="exerciseDifficultyFilter"><option value="">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option></select></label>
+              <label>ยังไม่มีข้อมูล<input id="exerciseSearch" type="search" placeholder="รายละเอียด" /></label>
+              <label>ยังไม่มีข้อมูล<select id="exerciseMuscleFilter"><option value="">ยังไม่มีข้อมูล</option></select></label>
+              <label>Movement<select id="exercisePatternFilter"><option value="">ยังไม่มีข้อมูล</option></select></label>
+              <label>Equipment<select id="exerciseEquipmentFilter"><option value="">ยังไม่มีข้อมูล</option></select></label>
+              <label>Difficulty<select id="exerciseDifficultyFilter"><option value="">ยังไม่มีข้อมูล</option></select></label>
             </div>
             <button class="secondary" id="clearExerciseFilters" type="button">Clear filters</button>
             <div class="exercise-library-list" id="exerciseLibraryList"></div>
@@ -656,7 +698,7 @@
         </div>
 
         <form class="entry-form" id="entryForm">
-          <label>Exercise<input id="exerciseName" list="exerciseOptions" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; Squat, Run, Push up" required /></label>
+          <label>Exercise<input id="exerciseName" list="exerciseOptions" placeholder="รายละเอียด Squat, Run, Push up" required /></label>
           <datalist id="exerciseOptions">
             <option value="Walking"></option>
             <option value="Running"></option>
@@ -682,7 +724,7 @@
             <button class="secondary" id="calculateExerciseCalories" type="button">Calculate</button>
           </div>
 
-          <label>Notes<textarea id="notes" rows="3" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;, RPE, &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;, &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;"></textarea></label>
+          <label>Notes<textarea id="notes" rows="3" placeholder="รายละเอียด, RPE, รายละเอียด, รายละเอียด"></textarea></label>
           <button type="submit">Save exercise</button>
         </form>
 
@@ -697,6 +739,24 @@
       </section>
 
       <section class="screen" id="nutrition">
+        <section class="zero-nutrition-top" aria-label="Nutrition quick log">
+          <p class="eyebrow">Nutrition</p>
+          <h1>Log a meal in one tap</h1>
+          <div class="zero-meal-grid">
+            <button class="zero-meal-card" data-zero-meal="breakfast" type="button"><span>☀️</span><strong>Breakfast</strong><small id="zeroBreakfastCount">0 items</small></button>
+            <button class="zero-meal-card" data-zero-meal="lunch" type="button"><span>🍱</span><strong>Lunch</strong><small id="zeroLunchCount">0 items</small></button>
+            <button class="zero-meal-card" data-zero-meal="dinner" type="button"><span>🌙</span><strong>Dinner</strong><small id="zeroDinnerCount">0 items</small></button>
+            <button class="zero-meal-card" data-zero-meal="snack" type="button"><span>🍌</span><strong>Snack</strong><small id="zeroSnackCount">0 items</small></button>
+          </div>
+          <section class="zero-add-food-panel">
+            <label>Search<input id="zeroFoodSearch" type="search" placeholder="Search food or tap a shortcut" /></label>
+            <div class="zero-food-sections">
+              <div><h3>Frequent Foods</h3><div class="zero-food-chips" id="zeroFrequentFoods"></div></div>
+              <div><h3>AI Estimate</h3><button class="secondary" id="zeroAiEstimate" type="button">Estimate from search</button></div>
+              <div><h3>Barcode</h3><button class="secondary" id="zeroBarcode" type="button">Barcode ready</button></div>
+            </div>
+          </section>
+        </section>
         <section class="chart-card ai-nutrition-planner-card">
           <div class="section-title"><h2>AI Nutrition Planner</h2><span>Draft only · ไม่ใช่คำแนะนำทางการแพทย์</span></div>
           <form class="entry-form" id="nutritionPlannerForm">
@@ -734,16 +794,16 @@
 
         <section class="chart-card nutrition-coach food-summary-card">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-            <span id="nutritionTargetStatus">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span>
+            <h2>ยังไม่มีข้อมูล</h2>
+            <span id="nutritionTargetStatus">ยังไม่มีข้อมูล</span>
           </div>
           <div class="macro-grid">
-            <article><strong id="targetCalories">0</strong><span>&#3649;&#3588;&#3621;&#3629;&#3619;&#3637; kcal</span></article>
-            <article><strong id="remainingCalories">0</strong><span>kcal &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span></article>
-            <article><strong id="remainingProtein">0g</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="totalCarbs">0g</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="totalFat">0g</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="totalFoodItems">0</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
+            <article><strong id="targetCalories">0</strong><span>แคลอรี kcal</span></article>
+            <article><strong id="remainingCalories">0</strong><span>kcal รายละเอียด</span></article>
+            <article><strong id="remainingProtein">0g</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="totalCarbs">0g</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="totalFat">0g</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="totalFoodItems">0</strong><span>ยังไม่มีข้อมูล</span></article>
           </div>
           <div class="macro-bars">
             <div><span>Calories</span><div class="macro-track"><div id="calorieBar" class="macro-fill"></div></div></div>
@@ -751,42 +811,42 @@
             <div><span>Carbs</span><div class="macro-track"><div id="carbBar" class="macro-fill carbs"></div></div></div>
             <div><span>Fat</span><div class="macro-track"><div id="fatBar" class="macro-fill fat"></div></div></div>
           </div>
-          <p class="ai-coach-text" id="nutritionCoachText">&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
+          <p class="ai-coach-text" id="nutritionCoachText">รายละเอียด รายละเอียด</p>
         </section>
 
         <form class="entry-form food-form-card" id="foodForm">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-            <button class="link-button" id="clearFoodToday" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+            <h2>ยังไม่มีข้อมูล</h2>
+            <button class="link-button" id="clearFoodToday" type="button">ยังไม่มีข้อมูล</button>
           </div>
           <label>
-            &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;
+            รายละเอียด
             <select id="mealType">
-              <option value="breakfast">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-              <option value="lunch">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-              <option value="dinner">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-              <option value="snack">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
+              <option value="breakfast">ยังไม่มีข้อมูล</option>
+              <option value="lunch">ยังไม่มีข้อมูล</option>
+              <option value="dinner">ยังไม่มีข้อมูล</option>
+              <option value="snack">ยังไม่มีข้อมูล</option>
             </select>
           </label>
-          <label>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<input id="foodName" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;" required /></label>
+          <label>ยังไม่มีข้อมูล<input id="foodName" placeholder="รายละเอียด รายละเอียด" required /></label>
           <div class="ai-actions hidden">
-            <button class="secondary ai-button" id="scanFoodPhotosButton" type="button">&#3626;&#3649;&#3585;&#3609;&#3619;&#3641;&#3611;&#3629;&#3634;&#3627;&#3634;&#3619;</button>
+            <button class="secondary ai-button" id="scanFoodPhotosButton" type="button">สแกนรูปอาหาร</button>
             <button class="secondary ai-button" id="estimateFoodButton" type="button">AI estimate text</button>
           </div>
           <div class="ai-result hidden" id="foodEstimateResult"></div>
-          <label class="hidden">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<input id="mealTime" type="time" /></label>
-          <label class="hidden">&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; (&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; 3 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;)<input id="foodPhotos" type="file" accept="image/*" capture="environment" multiple /></label>
+          <label class="hidden">ยังไม่มีข้อมูล<input id="mealTime" type="time" /></label>
+          <label class="hidden">รายละเอียด (รายละเอียด 3 รายละเอียด)<input id="foodPhotos" type="file" accept="image/*" capture="environment" multiple /></label>
           <div class="photo-preview hidden" id="foodPhotoPreview"></div>
           <div class="form-grid">
-            <label>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<input id="foodCalories" type="number" min="0" step="1" value="0" /></label>
-            <label>&#3650;&#3611;&#3619;&#3605;&#3637;&#3609; g<input id="foodProtein" type="number" min="0" step="1" value="0" /></label>
-            <label>&#3650;&#3611;&#3619;&#3605;&#3637;&#3609; g<input id="foodCarbs" type="number" min="0" step="1" value="0" /></label>
-            <label>&#3650;&#3611;&#3619;&#3605;&#3637;&#3609; g<input id="foodFat" type="number" min="0" step="1" value="0" /></label>
-            <label class="hidden">&#3650;&#3611;&#3619;&#3605;&#3637;&#3609; g<input id="foodFiber" type="number" min="0" step="1" value="0" /></label>
+            <label>ยังไม่มีข้อมูล<input id="foodCalories" type="number" min="0" step="1" value="0" /></label>
+            <label>โปรตีน g<input id="foodProtein" type="number" min="0" step="1" value="0" /></label>
+            <label>โปรตีน g<input id="foodCarbs" type="number" min="0" step="1" value="0" /></label>
+            <label>โปรตีน g<input id="foodFat" type="number" min="0" step="1" value="0" /></label>
+            <label class="hidden">โปรตีน g<input id="foodFiber" type="number" min="0" step="1" value="0" /></label>
           </div>
-          <label>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<textarea id="foodNotes" rows="3" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;"></textarea></label>
-          <button id="saveFoodButton" type="submit">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-          <p class="save-feedback hidden" id="foodSaveFeedback">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <label>ยังไม่มีข้อมูล<textarea id="foodNotes" rows="3" placeholder="รายละเอียด"></textarea></label>
+          <button id="saveFoodButton" type="submit">ยังไม่มีข้อมูล</button>
+          <p class="save-feedback hidden" id="foodSaveFeedback">ยังไม่มีข้อมูล</p>
         </form>
 
         <section class="quick-list hidden">
@@ -798,7 +858,7 @@
 
         <section class="quick-list food-log-card">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
+            <h2>ยังไม่มีข้อมูล</h2>
           </div>
           <div class="history-list" id="foodHistoryList"></div>
         </section>
@@ -807,14 +867,14 @@
       <section class="screen" id="weightPage">
         <section class="dashboard-hero weight-hero">
           <p class="eyebrow">Weight Tracking</p>
-          <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-          <p>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
+          <h2>ยังไม่มีข้อมูล</h2>
+          <p>รายละเอียด รายละเอียด รายละเอียด</p>
         </section>
 
         <section class="chart-card weight-latest-card">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-            <span id="weightTrendBadge">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span>
+            <h2>ยังไม่มีข้อมูล</h2>
+            <span id="weightTrendBadge">ยังไม่มีข้อมูล</span>
           </div>
           <div class="weight-latest-grid">
             <article>
@@ -834,27 +894,27 @@
 
         <form class="entry-form weight-form-card" id="weightTrackingForm">
           <div class="section-title">
-            <h2 id="weightFormTitle">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-            <button class="link-button hidden" id="cancelWeightEdit" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+            <h2 id="weightFormTitle">ยังไม่มีข้อมูล</h2>
+            <button class="link-button hidden" id="cancelWeightEdit" type="button">ยังไม่มีข้อมูล</button>
           </div>
           <input id="weightRecordId" type="hidden" />
           <div class="form-grid">
-            <label>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<input id="weightDate" type="date" required /></label>
+            <label>ยังไม่มีข้อมูล<input id="weightDate" type="date" required /></label>
             <label>Weight kg<input id="weightValue" type="number" min="20" max="350" step="0.1" required /></label>
             <label>Body Fat %<input id="weightBodyFat" type="number" min="0" max="80" step="0.1" /></label>
             <label>Waist cm<input id="weightWaist" type="number" min="20" max="250" step="0.1" /></label>
           </div>
           <label>Progress Photo
-            <div class="photo-placeholder" id="weightPhotoPlaceholder">Progress photo placeholder</div>
+            <div class="photo-placeholder" id="weightPhotoPlaceholder">No progress photo selected</div>
           </label>
-          <label>&#3627;&#3617;&#3634;&#3618;&#3648;&#3627;&#3605;&#3640;<textarea id="weightNote" rows="3" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; / &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;"></textarea></label>
-          <button id="saveWeightButton" type="submit">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-          <p class="form-feedback hidden" id="weightSaveFeedback">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <label>หมายเหตุ<textarea id="weightNote" rows="3" placeholder="รายละเอียด รายละเอียด / รายละเอียด"></textarea></label>
+          <button id="saveWeightButton" type="submit">ยังไม่มีข้อมูล</button>
+          <p class="form-feedback hidden" id="weightSaveFeedback">ยังไม่มีข้อมูล</p>
         </form>
 
         <section class="chart-card weight-stats-card">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
+            <h2>ยังไม่มีข้อมูล</h2>
             <span id="weightStatsCount">0 records</span>
           </div>
           <div class="dashboard-grid weight-stats-grid">
@@ -868,15 +928,15 @@
         <section class="chart-card weight-chart-card">
           <div class="section-title">
             <h2>Weekly Trend</h2>
-            <span>7 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <span>7 รายละเอียด</span>
           </div>
           <div class="weight-line-chart" id="weightLineChart"></div>
         </section>
 
         <section class="chart-card weight-history-card">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-            <span id="weightHistoryCount">0 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <h2>ยังไม่มีข้อมูล</h2>
+            <span id="weightHistoryCount">0 รายละเอียด</span>
           </div>
           <div class="history-list" id="weightHistoryList"></div>
         </section>
@@ -885,13 +945,13 @@
       <section class="screen" id="waterPage">
         <section class="dashboard-hero water-hero">
           <p class="eyebrow">Water Tracking</p>
-          <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-          <p>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; streak &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
+          <h2>ยังไม่มีข้อมูล</h2>
+          <p>รายละเอียด รายละเอียด รายละเอียด streak รายละเอียด</p>
         </section>
 
         <section class="chart-card water-today-card">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
+            <h2>ยังไม่มีข้อมูล</h2>
             <span id="waterHydrationStatus">Low</span>
           </div>
           <div class="water-today-layout">
@@ -901,7 +961,7 @@
             <div class="water-today-copy">
               <strong id="waterTodayAmount">0 ml</strong>
               <span id="waterGoalAmount">Goal 3000 ml</span>
-              <p id="waterRemainingAmount">&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; 3000 ml</p>
+              <p id="waterRemainingAmount">รายละเอียด 3000 ml</p>
             </div>
           </div>
           <div class="water-summary-grid">
@@ -914,7 +974,7 @@
         <section class="chart-card water-actions-card">
           <div class="section-title">
             <h2>Quick Add</h2>
-            <span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span>
+            <span>ยังไม่มีข้อมูล</span>
           </div>
           <div class="water-quick-grid">
             <button class="secondary water-add-button" data-water-add="250" type="button">+250 ml</button>
@@ -923,25 +983,25 @@
             <button class="secondary water-add-button" data-water-add="1000" type="button">+1000 ml</button>
           </div>
           <form class="inline-form" id="customWaterForm">
-            <label>Custom Amount ml<input id="customWaterAmount" type="number" min="1" max="5000" step="50" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; 350" /></label>
-            <button type="submit">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+            <label>Custom Amount ml<input id="customWaterAmount" type="number" min="1" max="5000" step="50" placeholder="รายละเอียด 350" /></label>
+            <button type="submit">ยังไม่มีข้อมูล</button>
           </form>
         </section>
 
         <form class="entry-form water-goal-card" id="waterGoalForm">
           <div class="section-title">
             <h2>Daily Goal</h2>
-            <span>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; 3000 ml</span>
+            <span>รายละเอียด 3000 ml</span>
           </div>
-          <label>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; ml<input id="waterGoalInput" type="number" min="500" max="8000" step="100" value="3000" required /></label>
-          <button type="submit">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-          <p class="form-feedback hidden" id="waterSaveFeedback">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <label>รายละเอียด ml<input id="waterGoalInput" type="number" min="500" max="8000" step="100" value="3000" required /></label>
+          <button type="submit">ยังไม่มีข้อมูล</button>
+          <p class="form-feedback hidden" id="waterSaveFeedback">ยังไม่มีข้อมูล</p>
         </form>
 
         <section class="chart-card water-streak-card">
           <div class="section-title">
             <h2>Hydration Streak</h2>
-            <span id="waterStreakStatus">0 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <span id="waterStreakStatus">0 รายละเอียด</span>
           </div>
           <div class="dashboard-grid water-streak-grid">
             <article><strong id="waterCurrentStreak">0</strong><span>Current Streak</span></article>
@@ -951,8 +1011,8 @@
 
         <section class="chart-card water-stats-card">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-            <span>30 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <h2>ยังไม่มีข้อมูล</h2>
+            <span>30 รายละเอียด</span>
           </div>
           <div class="dashboard-grid water-stats-grid">
             <article><strong id="waterAverage">-</strong><span>Average Water</span></article>
@@ -965,15 +1025,15 @@
 
         <section class="chart-card water-history-card">
           <div class="section-title">
-            <h2>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; 30 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</h2>
-            <span id="waterHistoryCount">0 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <h2>รายละเอียด 30 รายละเอียด</h2>
+            <span id="waterHistoryCount">0 รายละเอียด</span>
           </div>
           <form class="inline-form hidden" id="waterEditForm">
             <input id="waterEditDate" type="hidden" />
-            <label>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; ml<input id="waterEditAmount" type="number" min="0" max="10000" step="50" /></label>
+            <label>รายละเอียด ml<input id="waterEditAmount" type="number" min="0" max="10000" step="50" /></label>
             <div class="history-actions">
-              <button type="submit">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-              <button class="secondary" id="cancelWaterEdit" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+              <button type="submit">ยังไม่มีข้อมูล</button>
+              <button class="secondary" id="cancelWaterEdit" type="button">ยังไม่มีข้อมูล</button>
             </div>
           </form>
           <div class="history-list" id="waterHistoryList"></div>
@@ -983,18 +1043,18 @@
       <section class="screen" id="sleepPage">
         <section class="dashboard-hero sleep-hero">
           <p class="eyebrow">Sleep Tracking</p>
-          <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-          <p>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; streak &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
+          <h2>ยังไม่มีข้อมูล</h2>
+          <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด streak รายละเอียด</p>
         </section>
 
         <section class="chart-card sleep-today-card">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-            <span id="sleepTodayStatus">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span>
+            <h2>ยังไม่มีข้อมูล</h2>
+            <span id="sleepTodayStatus">ยังไม่มีข้อมูล</span>
           </div>
           <div class="sleep-summary-grid">
-            <article><strong id="sleepTodayHours">0 &#3594;&#3617;.</strong><span>Today's Sleep</span></article>
-            <article><strong id="sleepGoalView">8 &#3594;&#3617;.</strong><span>Sleep Goal</span></article>
+            <article><strong id="sleepTodayHours">0 ชม.</strong><span>Today's Sleep</span></article>
+            <article><strong id="sleepGoalView">8 ชม.</strong><span>Sleep Goal</span></article>
             <article><strong id="sleepQualityView">-</strong><span>Sleep Quality</span></article>
             <article><strong id="sleepCompletionView">0%</strong><span>Completion</span></article>
           </div>
@@ -1002,8 +1062,8 @@
 
         <form class="entry-form sleep-form-card" id="sleepTrackingForm">
           <div class="section-title">
-            <h2 id="sleepFormTitle">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-            <button class="link-button hidden" id="cancelSleepEdit" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+            <h2 id="sleepFormTitle">ยังไม่มีข้อมูล</h2>
+            <button class="link-button hidden" id="cancelSleepEdit" type="button">ยังไม่มีข้อมูล</button>
           </div>
           <input id="sleepRecordId" type="hidden" />
           <div class="form-grid">
@@ -1023,24 +1083,24 @@
             </div>
           </div>
           <input id="sleepQualityValue" type="hidden" value="3" />
-          <label>&#3627;&#3617;&#3634;&#3618;&#3648;&#3627;&#3605;&#3640;<textarea id="sleepNote" rows="3" placeholder="&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; / &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; / &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;"></textarea></label>
-          <button id="saveSleepButton" type="submit">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
-          <p class="form-feedback hidden" id="sleepSaveFeedback">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <label>หมายเหตุ<textarea id="sleepNote" rows="3" placeholder="รายละเอียด รายละเอียด / รายละเอียด / รายละเอียด"></textarea></label>
+          <button id="saveSleepButton" type="submit">ยังไม่มีข้อมูล</button>
+          <p class="form-feedback hidden" id="sleepSaveFeedback">ยังไม่มีข้อมูล</p>
         </form>
 
         <form class="entry-form sleep-goal-card" id="sleepGoalForm">
           <div class="section-title">
             <h2>Sleep Goal</h2>
-            <span>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; 8 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <span>รายละเอียด 8 รายละเอียด</span>
           </div>
-          <label>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;<input id="sleepGoalInput" type="number" min="4" max="12" step="0.25" value="8" required /></label>
-          <button type="submit">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+          <label>รายละเอียด รายละเอียด<input id="sleepGoalInput" type="number" min="4" max="12" step="0.25" value="8" required /></label>
+          <button type="submit">ยังไม่มีข้อมูล</button>
         </form>
 
         <section class="chart-card sleep-summary-card">
           <div class="section-title">
             <h2>Sleep Summary</h2>
-            <span>30 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <span>30 รายละเอียด</span>
           </div>
           <div class="dashboard-grid sleep-stats-grid">
             <article><strong id="sleepWeeklyAverage">-</strong><span>Weekly Average</span></article>
@@ -1066,7 +1126,7 @@
         <section class="chart-card sleep-history-card">
           <div class="section-title">
             <h2>Sleep History</h2>
-            <span id="sleepHistoryCount">0 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <span id="sleepHistoryCount">0 รายละเอียด</span>
           </div>
           <div class="history-list" id="sleepHistoryList"></div>
         </section>
@@ -1074,23 +1134,23 @@
 
       <section class="screen" id="health">
         <section class="dashboard-hero checkin-hero">
-          <p class="eyebrow">&#3648;&#3594;&#3655;&#3585;&#3629;&#3636;&#3609;&#3605;&#3629;&#3609;&#3648;&#3594;&#3657;&#3634;</p>
-          <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-          <p id="checkinCompletionText">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <p class="eyebrow">เช็กอินตอนเช้า</p>
+          <h2>ยังไม่มีข้อมูล</h2>
+          <p id="checkinCompletionText">ยังไม่มีข้อมูล</p>
         </section>
 
         <form class="entry-form checkin-card" id="dailyCheckinForm">
           <div class="section-title">
-            <h2>&#3648;&#3594;&#3655;&#3585;&#3629;&#3636;&#3609;&#3611;&#3619;&#3632;&#3592;&#3635;&#3623;&#3633;&#3609;</h2>
-            <span id="checkinStreakLabel">&#3605;&#3656;&#3629;&#3648;&#3609;&#3639;&#3656;&#3629;&#3591;&#32;&#48;&#32;&#3623;&#3633;&#3609;</span>
+            <h2>เช็กอินประจำวัน</h2>
+            <span id="checkinStreakLabel">ต่อเนื่อง 0 วัน</span>
           </div>
 
-          <label>&#3609;&#3657;&#3635;&#3627;&#3609;&#3633;&#3585; (&#3585;&#3585;.) (&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;)<input id="checkinWeight" type="number" min="20" max="350" step="0.1" /></label>
-          <label>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<input id="checkinSleepHours" type="number" min="0" max="24" step="0.25" value="7" /></label>
+          <label>น้ำหนัก (กก.) (รายละเอียด)<input id="checkinWeight" type="number" min="20" max="350" step="0.1" /></label>
+          <label>ยังไม่มีข้อมูล<input id="checkinSleepHours" type="number" min="0" max="24" step="0.25" value="7" /></label>
 
           <div class="checkin-field">
-            <strong>&#3629;&#3634;&#3619;&#3617;&#3603;&#3660;</strong>
-            <div class="mood-grid checkin-mood-grid" id="checkin&#3629;&#3634;&#3619;&#3617;&#3603;&#3660;Grid">
+            <strong>อารมณ์</strong>
+            <div class="mood-grid checkin-mood-grid" id="checkinอารมณ์Grid">
               <button type="button" data-mood="neutral"></button>
               <button type="button" data-mood="neutral"></button>
               <button type="button" data-mood="neutral"></button>
@@ -1099,7 +1159,7 @@
             </div>
           </div>
 
-          <label>&#3619;&#3632;&#3604;&#3633;&#3610;&#3614;&#3621;&#3633;&#3591;&#3591;&#3634;&#3609; <span id="energyValue">5/10</span><input id="energyLevel" type="range" min="1" max="10" step="1" value="5" /></label>
+          <label>ระดับพลังงาน <span id="energyValue">5/10</span><input id="energyLevel" type="range" min="1" max="10" step="1" value="5" /></label>
           <label>Water Goal
             <select id="checkinWaterGoal">
               <option value="2000">2 L</option>
@@ -1116,13 +1176,13 @@
               <option value="stay_healthy">Stay Healthy</option>
             </select>
           </label>
-          <button type="submit">&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; Check-in</button>
-          <p class="save-feedback hidden" id="checkinSaveFeedback">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <button type="submit">รายละเอียด Check-in</button>
+          <p class="save-feedback hidden" id="checkinSaveFeedback">ยังไม่มีข้อมูล</p>
         </form>
 
         <section class="quick-list checkin-history-card">
           <div class="section-title">
-            <h2>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; 7 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</h2>
+            <h2>รายละเอียด 7 รายละเอียด</h2>
             <span id="checkinHistoryCount">0/7</span>
           </div>
           <div class="history-list" id="checkinHistoryList"></div>
@@ -1133,12 +1193,12 @@
             <h2>Hydration Status</h2>
             <span id="checkinHydrationStatus">Low</span>
           </div>
-          <p id="checkinHydrationText">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <p id="checkinHydrationText">ยังไม่มีข้อมูล</p>
         </section>
 
         <section class="chart-card health-card hidden">
           <div class="section-title">
-            <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
+            <h2>ยังไม่มีข้อมูล</h2>
             <span id="waterTotal">0 / 3L</span>
           </div>
           <div class="macro-track"><div id="waterBar" class="macro-fill"></div></div>
@@ -1150,37 +1210,37 @@
         </section>
 
         <form class="entry-form hidden" id="weightForm">
-          <div class="section-title"><h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2></div>
+          <div class="section-title"><h2>ยังไม่มีข้อมูล</h2></div>
           <div class="form-grid">
-            <label>&#3609;&#3657;&#3635;&#3627;&#3609;&#3633;&#3585; (&#3585;&#3585;.)<input id="dailyWeight" type="number" min="20" max="350" step="0.1" /></label>
+            <label>น้ำหนัก (กก.)<input id="dailyWeight" type="number" min="20" max="350" step="0.1" /></label>
             <label>Body fat %<input id="bodyFat" type="number" min="0" max="80" step="0.1" /></label>
-            <label>&#3626;&#3656;&#3623;&#3609;&#3626;&#3641;&#3591; (&#3595;&#3617;.)<input id="waist" type="number" min="20" max="250" step="0.1" /></label>
-            <label>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; progress<input id="progressPhoto" type="file" accept="image/*" capture="environment" /></label>
+            <label>ส่วนสูง (ซม.)<input id="waist" type="number" min="20" max="250" step="0.1" /></label>
+            <label>รายละเอียด progress<input id="progressPhoto" type="file" accept="image/*" capture="environment" /></label>
           </div>
           <div class="photo-preview" id="progressPhotoPreview"></div>
-          <button type="submit">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+          <button type="submit">ยังไม่มีข้อมูล</button>
         </form>
 
         <form class="entry-form hidden" id="sleepForm">
-          <div class="section-title"><h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2><span id="sleepDuration">0 &#3594;&#3617;.</span></div>
+          <div class="section-title"><h2>ยังไม่มีข้อมูล</h2><span id="sleepDuration">0 ชม.</span></div>
           <div class="form-grid">
-            <label>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<input id="sleepTime" type="time" /></label>
-            <label>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;<input id="wakeTime" type="time" /></label>
+            <label>ยังไม่มีข้อมูล<input id="sleepTime" type="time" /></label>
+            <label>ยังไม่มีข้อมูล<input id="wakeTime" type="time" /></label>
           </div>
-          <label>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;
+          <label>รายละเอียด
             <select id="sleepQuality">
-              <option value="5">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-              <option value="4">&#3604;&#3637;</option>
-              <option value="3">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-              <option value="2">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-              <option value="1">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
+              <option value="5">ยังไม่มีข้อมูล</option>
+              <option value="4">ดี</option>
+              <option value="3">ยังไม่มีข้อมูล</option>
+              <option value="2">ยังไม่มีข้อมูล</option>
+              <option value="1">ยังไม่มีข้อมูล</option>
             </select>
           </label>
-          <button type="submit">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+          <button type="submit">ยังไม่มีข้อมูล</button>
         </form>
 
         <section class="quick-list hidden">
-          <div class="section-title"><h2>&#3629;&#3634;&#3619;&#3617;&#3603;&#3660; check</h2><span id="moodToday">-</span></div>
+          <div class="section-title"><h2>อารมณ์ check</h2><span id="moodToday">-</span></div>
           <div class="mood-grid" id="moodGrid">
             <button type="button" data-mood="neutral"></button>
             <button type="button" data-mood="neutral"></button>
@@ -1197,7 +1257,7 @@
           <button class="link-button" id="exportData" type="button">Export</button>
         </div>
         <section class="chart-card overload-card">
-          <div class="section-title"><h2>Previous Performance</h2><span id="previousPerformanceCount">0 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span></div>
+          <div class="section-title"><h2>Previous Performance</h2><span id="previousPerformanceCount">0 รายละเอียด</span></div>
           <div class="overload-list" id="previousPerformanceList"></div>
         </section>
         <section class="chart-card overload-card">
@@ -1205,11 +1265,11 @@
           <div class="overload-list" id="personalRecordList"></div>
         </section>
         <section class="chart-card overload-card">
-          <div class="section-title"><h2>Weekly Statistics</h2><span>7 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span></div>
+          <div class="section-title"><h2>Weekly Statistics</h2><span>7 รายละเอียด</span></div>
           <div class="dashboard-grid workout-summary-grid" id="weeklyWorkoutStats"></div>
         </section>
         <section class="chart-card overload-card">
-          <div class="section-title"><h2>Monthly Statistics</h2><span>30 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span></div>
+          <div class="section-title"><h2>Monthly Statistics</h2><span>30 รายละเอียด</span></div>
           <div class="dashboard-grid workout-summary-grid" id="monthlyWorkoutStats"></div>
         </section>
         <div class="history-list" id="historyList"></div>
@@ -1219,16 +1279,16 @@
         <section class="score-card premium-preview" id="coachPremiumGate">
           <p class="eyebrow">Khayubdi Pro</p>
           <h2>AI Coach MVP</h2>
-          <p>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; daily feedback &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; weekly review &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; workout</p>
-          <button id="upgradeCoachButton" type="button">&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; Pro</button>
+          <p>รายละเอียด daily feedback รายละเอียด weekly review รายละเอียด รายละเอียด รายละเอียด รายละเอียด รายละเอียด workout</p>
+          <button id="upgradeCoachButton" type="button">รายละเอียด Pro</button>
         </section>
         <section class="pro-content hidden" id="coachProContent">
           <section class="coach-card">
-            <div class="section-title"><h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2><span class="ai-badge">AI MVP</span></div>
+            <div class="section-title"><h2>ยังไม่มีข้อมูล</h2><span class="ai-badge">AI MVP</span></div>
             <p id="dailyCoachText"></p>
           </section>
           <section class="coach-card">
-            <div class="section-title"><h2>Weekly review</h2><button class="link-button" id="refreshCoach" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button></div>
+            <div class="section-title"><h2>Weekly review</h2><button class="link-button" id="refreshCoach" type="button">ยังไม่มีข้อมูล</button></div>
             <div id="weeklyCoachText"></div>
           </section>
         </section>
@@ -1237,31 +1297,31 @@
       <section class="screen" id="progress">
         <section class="dashboard-hero progress-hero">
           <p class="eyebrow">Progress Dashboard</p>
-          <h2>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</h2>
-          <p>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;: &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
+          <h2>ยังไม่มีข้อมูล</h2>
+          <p>รายละเอียด: รายละเอียด รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
         </section>
 
         <section class="chart-card progress-empty-card hidden" id="progressEmptyState">
-          <p>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</p>
+          <p>ยังไม่มีข้อมูล</p>
         </section>
 
         <section class="chart-card progress-overall-card">
           <div class="section-title">
             <h2>Overall Progress</h2>
-            <span id="progressDataDays">0 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <span id="progressDataDays">0 รายละเอียด</span>
           </div>
           <div class="dashboard-grid progress-overall-grid">
-            <article><strong id="progressTodayScore">0</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
-            <article><strong id="progressSevenAverage">0</strong><span>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; 7 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span></article>
-            <article><strong id="progressThirtyAverage">0</strong><span>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; 30 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span></article>
-            <article><strong id="progressTrend">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</strong><span>&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span></article>
+            <article><strong id="progressTodayScore">0</strong><span>ยังไม่มีข้อมูล</span></article>
+            <article><strong id="progressSevenAverage">0</strong><span>รายละเอียด 7 รายละเอียด</span></article>
+            <article><strong id="progressThirtyAverage">0</strong><span>รายละเอียด 30 รายละเอียด</span></article>
+            <article><strong id="progressTrend">ยังไม่มีข้อมูล</strong><span>ยังไม่มีข้อมูล</span></article>
           </div>
         </section>
 
         <section class="chart-card progress-score-card">
           <div class="section-title">
             <h2>Health Score Trend</h2>
-            <span id="progressScoreRange">30 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <span id="progressScoreRange">30 รายละเอียด</span>
           </div>
           <div class="progress-chart" id="healthScoreChart"></div>
           <div class="dashboard-grid progress-score-grid">
@@ -1273,7 +1333,7 @@
         <section class="chart-card progress-weight-card">
           <div class="section-title">
             <h2>Body Progress</h2>
-            <span id="progressWeightStatus">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</span>
+            <span id="progressWeightStatus">ยังไม่มีข้อมูล</span>
           </div>
           <div class="progress-line-chart" id="weightProgressChart"></div>
           <div class="dashboard-grid progress-weight-grid">
@@ -1291,7 +1351,7 @@
         <section class="chart-card progress-nutrition-card">
           <div class="section-title">
             <h2>Nutrition Progress</h2>
-            <span id="progressNutritionDays">0 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <span id="progressNutritionDays">0 รายละเอียด</span>
           </div>
           <div class="dashboard-grid progress-nutrition-grid">
             <article><strong id="progressAverageCalories">0</strong><span>Average Calories</span></article>
@@ -1329,7 +1389,7 @@
           </div>
           <div class="progress-chart" id="sleepProgressChart"></div>
           <div class="dashboard-grid progress-sleep-grid">
-            <article><strong id="progressSleepAverageHours">0 &#3594;&#3617;.</strong><span>Average Hours</span></article>
+            <article><strong id="progressSleepAverageHours">0 ชม.</strong><span>Average Hours</span></article>
             <article><strong id="progressSleepAverageQuality">0/5</strong><span>Average Quality</span></article>
             <article><strong id="progressSleepCurrentStreak">0</strong><span>Current Streak</span></article>
             <article><strong id="progressSleepBestStreak">0</strong><span>Best Streak</span></article>
@@ -1339,7 +1399,7 @@
         <section class="chart-card progress-summary-card">
           <div class="section-title">
             <h2>Weekly Summary</h2>
-            <span>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; AI</span>
+            <span>รายละเอียด AI</span>
           </div>
           <div class="summary-grid" id="weeklySummaryGrid"></div>
         </section>
@@ -1347,7 +1407,7 @@
         <section class="chart-card progress-summary-card">
           <div class="section-title">
             <h2>Monthly Summary</h2>
-            <span>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; 30 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span>
+            <span>รายละเอียด 30 รายละเอียด</span>
           </div>
           <div class="summary-grid" id="monthlySummaryGrid"></div>
         </section>
@@ -1365,7 +1425,7 @@
         <section class="dashboard-hero analytics-hero">
           <p class="eyebrow">Training Intelligence</p>
           <h2>Advanced Training Analytics</h2>
-          <p>&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; volume, balance, recovery, fatigue &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; weak points &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; workout history &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
+          <p>รายละเอียด volume, balance, recovery, fatigue รายละเอียด weak points รายละเอียด workout history รายละเอียด</p>
         </section>
 
         <section class="chart-card analytics-overview-card">
@@ -1376,7 +1436,7 @@
             <article><strong id="analyticsWeeklySets">0</strong><span>Weekly Sets</span></article>
             <article><strong id="analyticsDensity">0</strong><span>Sets / Minute</span></article>
           </div>
-          <p class="analytics-recommendation" id="analyticsRecommendation">&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; workout &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
+          <p class="analytics-recommendation" id="analyticsRecommendation">รายละเอียด workout รายละเอียด</p>
         </section>
 
         <section class="chart-card analytics-volume-card">
@@ -1385,7 +1445,7 @@
         </section>
 
         <section class="chart-card analytics-volume-card">
-          <div class="section-title"><h2>Monthly Volume</h2><span>30 &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</span></div>
+          <div class="section-title"><h2>Monthly Volume</h2><span>30 รายละเอียด</span></div>
           <div class="analytics-volume-list" id="monthlyMuscleVolumeList"></div>
         </section>
 
@@ -1425,7 +1485,7 @@
         <section class="dashboard-hero coach-chat-hero">
           <p class="eyebrow">Conversational AI Coach</p>
           <h2>คุยกับโค้ชขยับดิ</h2>
-          <p>ถามเรื่อง workout, recovery, fatigue, nutrition, progress หรือแรงใจ โดยใช้&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;จริงในแอปนี้เท่านั้น</p>
+          <p>ถามเรื่อง workout, recovery, fatigue, nutrition, progress หรือแรงใจ โดยใช้รายละเอียดจริงในแอปนี้เท่านั้น</p>
         </section>
 
         <section class="chart-card coach-chat-card">
@@ -1453,7 +1513,7 @@
         <section class="dashboard-hero trainer-hero">
           <p class="eyebrow">Trainer Portal</p>
           <h2>ศูนย์โค้ชและลูกค้า</h2>
-          <p>Trainer mode ใช้&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;ในเครื่องนี้เท่านั้น และสร้างได้เฉพาะ notes หรือ recommendation drafts</p>
+          <p>Trainer mode ใช้รายละเอียดในเครื่องนี้เท่านั้น และสร้างได้เฉพาะ notes หรือ recommendation drafts</p>
         </section>
 
         <section class="trainer-dashboard-grid">
@@ -1510,7 +1570,7 @@
             </label>
             <label>Client<input id="trainerNoteClient" readonly /></label>
           </div>
-          <label>&#3627;&#3617;&#3634;&#3618;&#3648;&#3627;&#3605;&#3640;<textarea id="trainerNoteText" rows="3" required></textarea></label>
+          <label>หมายเหตุ<textarea id="trainerNoteText" rows="3" required></textarea></label>
           <button type="submit">Save note</button>
         </form>
 
@@ -1541,13 +1601,25 @@
 
       <section class="screen" id="profile">
         <section class="ux-profile-overview" aria-label="Profile overview">
-          <div><p class="eyebrow">Profile</p><h1 id="uxProfileName">Khayubdi</h1></div>
+          <div class="ux-profile-hero-row">
+            <div class="ux-avatar" id="uxProfileAvatar" aria-hidden="true">K</div>
+            <div><p class="eyebrow">Fitness Profile</p><h1 id="uxProfileName">Khayubdi</h1><p id="uxProfileGoal">Goal Progress</p></div>
+          </div>
+          <div class="ux-profile-stats">
+            <article><strong id="uxProfileStreak">0</strong><span>Current Streak</span></article>
+            <article><strong id="uxProfileWorkoutCount">0</strong><span>Workout Count</span></article>
+            <article><strong id="uxProfileHours">0h</strong><span>Hours Trained</span></article>
+          </div>
+          <div class="ux-achievement-preview">
+            <span>🏆</span>
+            <div><strong id="uxProfileAchievement">Achievement Preview</strong><small id="uxProfileGoalProgress">Keep building momentum.</small></div>
+          </div>
           <div class="ux-profile-grid">
-            <article><span>&#128100;</span><strong>Profile</strong><small>&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;&#3612;&#3641;&#3657;&#3651;&#3594;&#3657;</small></article>
-            <article><span>&#127919;</span><strong>Goals</strong><small>&#3648;&#3611;&#3657;&#3634;&#3627;&#3617;&#3634;&#3618;&#3586;&#3629;&#3591;&#3588;&#3640;&#3603;</small></article>
-            <article><span>&#9878;&#65039;</span><strong>Body Stats</strong><small>&#3609;&#3657;&#3635;&#3627;&#3609;&#3633;&#3585;&#3649;&#3621;&#3632;&#3626;&#3656;&#3623;&#3609;&#3626;&#3641;&#3591;</small></article>
-            <article><span>&#128338;</span><strong>History</strong><small>&#3611;&#3619;&#3632;&#3623;&#3633;&#3605;&#3636;&#3585;&#3634;&#3619;&#3651;&#3594;&#3657;&#3591;&#3634;&#3609;</small></article>
-            <article><span>&#9881;&#65039;</span><strong>Settings</strong><small>&#3605;&#3633;&#3657;&#3591;&#3588;&#3656;&#3634;&#3649;&#3629;&#3611;</small></article>
+            <article><span>👤</span><strong>Profile</strong><small>ข้อมูลผู้ใช้</small></article>
+            <article><span>🎯</span><strong>Goals</strong><small>เป้าหมายของคุณ</small></article>
+            <article><span>⚖️</span><strong>Body Stats</strong><small>น้ำหนักและส่วนสูง</small></article>
+            <article><span>🕒</span><strong>History</strong><small>ประวัติการใช้งาน</small></article>
+            <article><span>⚙️</span><strong>Settings</strong><small>ตั้งค่าแอป</small></article>
           </div>
         </section>
 
@@ -1588,10 +1660,10 @@
           <label>
             Goal
             <select id="goal">
-              <option value="fat_loss">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-              <option value="muscle_gain">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-              <option value="endurance">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
-              <option value="health">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</option>
+              <option value="fat_loss">ยังไม่มีข้อมูล</option>
+              <option value="muscle_gain">ยังไม่มีข้อมูล</option>
+              <option value="endurance">ยังไม่มีข้อมูล</option>
+              <option value="health">ยังไม่มีข้อมูล</option>
             </select>
           </label>
           <div class="form-grid">
@@ -1612,18 +1684,20 @@
 
         <div class="store-card">
           <h2>Store-ready base</h2>
-          <p>Mobile-first PWA &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; config &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; iOS/Android &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; Capacitor</p>
+          <p>Mobile-first PWA รายละเอียด config รายละเอียด iOS/Android รายละเอียด Capacitor</p>
         </div>
         <section class="chart-card beta-settings-card">
           <div class="section-title">
             <h2>Closed Beta</h2>
-            <span>Version 1.0.0-rc3 · Build 53</span>
+            <span>Version 1.0.0 RC ? Build 59</span>
           </div>
-          <div class="beta-status-pill">Closed Beta · Release Candidate</div>
+          <div class="beta-status-pill">Closed Beta ? Release Candidate</div>
           <div class="quick-action-grid">
-            <button class="secondary quick-action" data-tab-target="about" type="button">About</button>
-            <button class="secondary quick-action" data-tab-target="feedback" type="button">Feedback</button>
+            <button class="secondary quick-action" data-tab-target="about" type="button">About Khayubdi</button>
+            <button class="secondary quick-action" data-tab-target="feedback" type="button">Send Feedback</button>
             <button class="secondary quick-action" data-tab-target="diagnostics" type="button">Diagnostics</button>
+            <button class="secondary quick-action" data-tab-target="offline" type="button">Offline Status</button>
+            <button class="secondary quick-action" data-tab-target="releaseChecklist" type="button">Release Checklist</button>
             <button class="secondary quick-action" data-tab-target="privacy" type="button">Privacy / Terms</button>
           </div>
         </section>
@@ -1632,56 +1706,58 @@
       <section class="screen" id="about">
         <section class="dashboard-hero">
           <p class="eyebrow">Closed Beta</p>
-          <h2>Khayubdi AI Fitness</h2>
-          <p>Release Candidate v1.0.0-rc3 · Build 53</p>
+          <h2>About Khayubdi</h2>
+          <p>Production readiness build for Closed Beta testers.</p>
         </section>
         <section class="chart-card beta-info-card">
-          <div class="section-title"><h2>About</h2><span id="aboutReleaseBadge">Closed Beta</span></div>
+          <div class="section-title"><h2>App Information</h2><span id="aboutReleaseBadge">Closed Beta</span></div>
           <div class="dashboard-grid compact-dashboard-grid" id="aboutInfoGrid">
-            <article><strong>Khayubdi AI Fitness</strong><span>App Name</span></article>
-            <article><strong>1.0.0-rc3</strong><span>Version</span></article>
-            <article><strong>53</strong><span>Build Number</span></article>
+            <article><strong>Khayubdi OS</strong><span>App Name</span></article>
+            <article><strong>1.0.0 RC</strong><span>Version</span></article>
+            <article><strong>59</strong><span>Build Number</span></article>
             <article><strong>Closed Beta</strong><span>Environment</span></article>
             <article><strong>Release Candidate</strong><span>Release Channel</span></article>
-            <article><strong>Khayubdi</strong><span>Developer</span></article>
-            <article><strong>Coming soon</strong><span>Website</span></article>
-            <article><strong>Placeholder</strong><span>License</span></article>
+            <article><strong>Sirasit Vichitpap</strong><span>Developer</span></article>
+            <article><strong>khayubdi.pages.dev</strong><span>Website</span></article>
+            <article><strong>Closed Beta Evaluation</strong><span>License</span></article>
+            <article><strong>khayubdi-exercise-v60</strong><span>Service Worker Version</span></article>
           </div>
-          <p class="trend-line">Copyright © 2026 Khayubdi. Closed Beta software.</p>
+          <p class="trend-line">Copyright ? 2026 Sirasit Vichitpap. Closed Beta software for fitness guidance and testing.</p>
           <div class="quick-action-grid">
             <a class="secondary quick-action" href="/privacy.html">Privacy Policy</a>
             <a class="secondary quick-action" href="/terms.html">Terms</a>
           </div>
         </section>
+        <section class="chart-card changelog-card">
+          <div class="section-title"><h2>Version History</h2><span>Current Build 59</span></div>
+          <div class="changelog-list" id="changelogList"></div>
+        </section>
       </section>
 
       <section class="screen" id="feedback">
         <section class="dashboard-hero">
-          <p class="eyebrow">Beta Feedback</p>
-          <h2>Help shape Khayubdi</h2>
-          <p>Report bugs, suggestions, and experience notes. This beta form is local-only for now.</p>
+          <p class="eyebrow">Send Feedback</p>
+          <h2>Help improve Khayubdi</h2>
+          <p>Reports are saved locally during Closed Beta and are structured for a future feedback API.</p>
         </section>
         <form class="entry-form beta-feedback-form" id="feedbackForm">
-          <div class="section-title"><h2>Feedback Center</h2><span>Placeholder submit</span></div>
-          <label>Feedback type
+          <div class="section-title"><h2>Feedback Center</h2><span>Local beta queue</span></div>
+          <label>Category
             <select id="feedbackType">
-              <option value="bug">Report Bug</option>
-              <option value="feature">Suggest Feature</option>
-              <option value="general">General Feedback</option>
+              <option value="bug">Bug</option>
+              <option value="feature">Feature</option>
+              <option value="workout">Workout</option>
+              <option value="nutrition">Nutrition</option>
+              <option value="ai">AI</option>
+              <option value="ui">UI</option>
+              <option value="other">Other</option>
             </select>
           </label>
-          <label>Rate experience
-            <select id="feedbackRating">
-              <option value="5">5 - Excellent</option>
-              <option value="4">4 - Good</option>
-              <option value="3">3 - Okay</option>
-              <option value="2">2 - Needs work</option>
-              <option value="1">1 - Blocked</option>
-            </select>
-          </label>
-          <label>Message<textarea id="feedbackMessage" rows="5" placeholder="What happened? What would make this better?" required></textarea></label>
-          <button type="submit">Submit Feedback</button>
-          <p class="save-feedback hidden" id="feedbackThanks">Thank you — feedback captured locally for beta review. No backend was contacted.</p>
+          <label>Message<textarea id="feedbackMessage" rows="5" placeholder="Tell us what happened, what felt confusing, or what could be better." required></textarea></label>
+          <label>Optional Email<input id="feedbackEmail" type="email" autocomplete="email" placeholder="name@example.com" /></label>
+          <label>Optional Screenshot<input id="feedbackScreenshot" type="file" accept="image/*" /></label>
+          <button type="submit">Save Feedback</button>
+          <p class="save-feedback hidden" id="feedbackThanks">Thank you - feedback was saved locally for beta review.</p>
         </form>
       </section>
 
@@ -1696,6 +1772,36 @@
           <div class="dashboard-grid compact-dashboard-grid" id="diagnosticsGrid"></div>
           <button class="secondary" id="refreshDiagnostics" type="button">Refresh Diagnostics</button>
           <button id="exportDiagnostics" type="button">Export Diagnostics JSON</button>
+        </section>
+      </section>
+
+      <section class="screen" id="offline">
+        <section class="dashboard-hero">
+          <p class="eyebrow">Offline Ready</p>
+          <h2>Cached mode is available</h2>
+          <p id="offlineStatusText">Online. Latest cached assets are ready.</p>
+        </section>
+        <section class="chart-card offline-status-card">
+          <div class="section-title"><h2>Offline Experience</h2><span>Local-first</span></div>
+          <div class="dashboard-grid compact-dashboard-grid">
+            <article><strong>Cached App Shell</strong><span>Home, workout, AI, profile, and settings can reopen offline.</span></article>
+            <article><strong>Local Data</strong><span>Device-stored logs remain available without network.</span></article>
+            <article><strong>Feedback Queue</strong><span>Feedback can be saved locally when offline.</span></article>
+            <article><strong>Reconnect</strong><span>Use the button below after network returns.</span></article>
+          </div>
+          <button id="reconnectPageButton" type="button">Reconnect</button>
+        </section>
+      </section>
+
+      <section class="screen" id="releaseChecklist">
+        <section class="dashboard-hero">
+          <p class="eyebrow">Release Checklist</p>
+          <h2>Closed Beta readiness</h2>
+          <p>Final production-readiness checklist for build 59.</p>
+        </section>
+        <section class="chart-card release-checklist-card">
+          <div class="section-title"><h2>Launch Checks</h2><span>RC-01</span></div>
+          <div class="release-checklist-grid" id="releaseChecklistGrid"></div>
         </section>
       </section>
 
@@ -1719,11 +1825,11 @@
         </div>
       </section>
       <nav class="bottom-nav" aria-label="Primary">
-        <button class="tab active" data-tab="dashboard" type="button"><span>&#8962;</span><small>Home</small></button>
-        <button class="tab" data-tab="track" type="button"><span>&#127947;&#65039;</span><small>Workout</small></button>
-        <button class="tab nav-plus" data-tab="track" type="button"><span>+</span><small>&#3648;&#3619;&#3636;&#3656;&#3617;</small></button>
-        <button class="tab" data-tab="coachChat" type="button"><span>&#129302;</span><small>AI</small></button>
-        <button class="tab" data-tab="profile" type="button"><span>&#128100;</span><small>Profile</small></button>
+        <button class="tab active" data-tab="dashboard" type="button"><span>⌂</span><small>Home</small></button>
+        <button class="tab" data-tab="track" type="button"><span>🏋️</span><small>Workout</small></button>
+        <button class="tab nav-plus" data-tab="track" type="button"><span>+</span><small>เริ่ม</small></button>
+        <button class="tab" data-tab="coachChat" type="button"><span>🤖</span><small>AI</small></button>
+        <button class="tab" data-tab="profile" type="button"><span>👤</span><small>Profile</small></button>
       </nav>
     </main>
 
@@ -1736,7 +1842,7 @@
     <aside class="ux-checkin-sheet hidden" id="uxCheckinSheet" aria-label="Morning check-in">
       <div class="ux-sheet-handle"></div>
       <div class="ux-sheet-head">
-        <div><p class="eyebrow">Morning Check-in</p><h2>&#3648;&#3594;&#3655;&#3585;&#3629;&#3636;&#3609;&#3605;&#3629;&#3609;&#3648;&#3594;&#3657;&#3634;</h2></div>
+        <div><p class="eyebrow">Morning Check-in</p><h2>เช็กอินตอนเช้า</h2></div>
         <span id="uxCheckinProgress">1 / 4</span>
       </div>
       <div class="ux-checkin-steps">
@@ -1746,18 +1852,22 @@
         <article><span>4</span><strong>Stress</strong></article>
       </div>
       <div class="ux-sheet-actions">
-        <button class="secondary" id="uxDismissCheckin" type="button">&#3611;&#3636;&#3604;</button>
+        <button class="secondary" id="uxDismissCheckin" type="button">ปิด</button>
         <button class="quick-action" data-tab-target="health" type="button">Daily Check-in</button>
       </div>
     </aside>
+    <div class="offline-banner hidden" id="offlineBanner" role="status" aria-live="polite">
+      <span>Offline mode is active. Cached app and local data are available.</span>
+      <button class="secondary" id="reconnectButton" type="button">Reconnect</button>
+    </div>
     <div class="toast hidden" id="appToast" role="status" aria-live="polite"></div>
 
     <div class="modal-backdrop hidden" id="comingSoonModal" role="dialog" aria-modal="true" aria-labelledby="comingSoonTitle">
       <div class="modal-card">
-        <p class="eyebrow">Khayubdi v2</p>
-        <h2 id="comingSoonTitle">Coming soon</h2>
-        <p id="comingSoonText">&#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604; Sprint &#3619;&#3634;&#3618;&#3621;&#3632;&#3648;&#3629;&#3637;&#3618;&#3604;</p>
-        <button id="closeComingSoon" type="button">&#3618;&#3633;&#3591;&#3652;&#3617;&#3656;&#3617;&#3637;&#3586;&#3657;&#3629;&#3617;&#3641;&#3621;</button>
+        <p class="eyebrow">Closed Beta</p>
+        <h2 id="comingSoonTitle">Not available in this beta</h2>
+        <p id="comingSoonText">This area is intentionally disabled for the Closed Beta readiness build.</p>
+        <button id="closeComingSoon" type="button">Close</button>
       </div>
     </div>
 
@@ -1777,13 +1887,17 @@
         <p id="appErrorText">Please retry, or go back to the Dashboard.</p>
         <div class="hero-actions">
           <button id="appErrorRetry" type="button">Retry</button>
+          <button class="secondary quick-action" data-tab-target="feedback" id="appErrorReport" type="button">Report Issue</button>
           <button class="secondary quick-action" data-tab-target="dashboard" id="appErrorBack" type="button">Back to Dashboard</button>
         </div>
       </div>
     </div>
 
-  <script src="/exercise.js?v=57"></script>
+  <script src="/exercise.js?v=60"></script>
   </body>
 </html>
+
+
+
 
 

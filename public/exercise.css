@@ -4365,3 +4365,705 @@ input[type="range"] {
     transition-duration: .001ms !important;
   }
 }
+
+/* UX-03 Premium Polish & Motion */
+:root {
+  --motion-fast: 150ms cubic-bezier(.2, .8, .2, 1);
+  --motion-natural: 200ms cubic-bezier(.2, .8, .2, 1);
+  --motion-spring: 220ms cubic-bezier(.18, .89, .32, 1.18);
+}
+
+.ux-home-shell {
+  position: relative;
+  overflow: hidden;
+  gap: var(--ds-space-16);
+}
+
+.ux-home-shell::after {
+  content: "";
+  position: absolute;
+  inset: auto -18% -28% 22%;
+  height: 220px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(184,255,61,.13), transparent 64%);
+  pointer-events: none;
+}
+
+.ux-home-hero,
+.ux-home-block,
+.ux-profile-overview > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ux-home-greeting {
+  display: inline-flex;
+  width: fit-content;
+  padding: var(--ds-space-8) var(--ds-space-12);
+  border-radius: var(--ds-radius-pill);
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--ds-border);
+}
+
+#uxHeroMotivation {
+  max-width: 12ch;
+}
+
+.ux-summary-grid {
+  align-items: stretch;
+}
+
+.ux-progress-card,
+.ux-ring-card {
+  position: relative;
+  overflow: hidden;
+  transform-origin: center bottom;
+}
+
+.ux-progress-card::before,
+.ux-ring-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.08), transparent 48%);
+  opacity: .72;
+  pointer-events: none;
+}
+
+.ux-mini-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ux-mini-bar {
+  width: 100%;
+  height: 7px;
+  margin-top: var(--ds-space-4);
+  overflow: hidden;
+  border-radius: var(--ds-radius-pill);
+  background: rgba(255,255,255,.08);
+}
+
+.ux-mini-bar i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ds-accent-green), rgba(184,255,61,.55));
+  transition: width var(--motion-spring);
+}
+
+.ux-mini-ring {
+  --ux-ring: 0%;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  margin-top: var(--ds-space-4);
+  border-radius: 50%;
+  background: conic-gradient(var(--ds-accent-green) var(--ux-ring), rgba(255,255,255,.09) 0);
+  transition: background var(--motion-spring), transform var(--motion-natural);
+}
+
+.ux-mini-ring b {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ds-surface);
+}
+
+.ux-profile-overview {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 16% 0, rgba(184,255,61,.14), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.026)),
+    var(--ds-surface);
+}
+
+.ux-profile-hero-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ds-space-16);
+  align-items: center;
+}
+
+.ux-avatar {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 30% 20%, #fff, transparent 18%),
+    linear-gradient(145deg, var(--ds-accent-green), #5FD829);
+  color: #071006;
+  font-size: 30px;
+  font-weight: 950;
+  box-shadow: 0 18px 40px rgba(184,255,61,.18);
+}
+
+.ux-profile-hero-row p:last-child {
+  margin: var(--ds-space-4) 0 0;
+  color: var(--ds-text-secondary);
+}
+
+.ux-profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-8);
+}
+
+.ux-profile-stats article,
+.ux-achievement-preview {
+  border-radius: var(--ds-radius-md);
+  border: 1px solid var(--ds-border);
+  background: rgba(255,255,255,.045);
+  padding: var(--ds-space-12);
+}
+
+.ux-profile-stats strong {
+  display: block;
+  color: var(--ds-text-primary);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.ux-profile-stats span,
+.ux-achievement-preview small {
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-caption);
+}
+
+.ux-achievement-preview {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ds-space-12);
+  align-items: center;
+}
+
+.ux-achievement-preview > span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 16px;
+  background: rgba(251,191,36,.12);
+  color: var(--ds-warning);
+  font-size: 24px;
+}
+
+.ux-achievement-preview strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.empty,
+.food-empty,
+.chart-empty,
+.adaptive-empty,
+.chat-empty-state,
+.progress-empty-card {
+  text-align: left;
+  isolation: isolate;
+}
+
+.empty::after,
+.food-empty::after,
+.chart-empty::after,
+.adaptive-empty::after,
+.chat-empty-state::after,
+.progress-empty-card::after {
+  content: "เริ่มก้าวแรกของคุณได้เลย";
+  display: inline-flex;
+  width: fit-content;
+  min-height: 40px;
+  align-items: center;
+  margin-top: var(--ds-space-4);
+  padding: 0 var(--ds-space-16);
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-accent-green);
+  color: #071006;
+  font-size: var(--ds-font-caption);
+  font-weight: 900;
+}
+
+button,
+.chart-card,
+.entry-form,
+.store-card,
+.ux-mini-card,
+.ux-activity-row,
+.ux-profile-grid article,
+.ux-profile-stats article,
+.ux-achievement-preview {
+  will-change: transform;
+}
+
+.bottom-nav .tab::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: var(--ds-radius-md);
+  background: rgba(184,255,61,.12);
+  opacity: 0;
+  transform: scale(.86);
+  transition: opacity var(--motion-natural), transform var(--motion-spring);
+  pointer-events: none;
+}
+
+.bottom-nav .tab {
+  position: relative;
+  overflow: hidden;
+}
+
+.bottom-nav .tab.active::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bottom-nav .tab > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ux-checkin-sheet {
+  animation: uxSpringSheet var(--motion-spring) both;
+}
+
+.screen.active {
+  animation: uxPageSlide var(--motion-natural) both;
+}
+
+.skeleton,
+.skeleton-card,
+.loading,
+.loading-placeholder,
+.chart-skeleton {
+  min-height: 44px;
+  animation: uxShimmer 1.15s ease-in-out infinite;
+}
+
+@keyframes uxSpringSheet {
+  from { opacity: 0; transform: translateY(22px) scale(.96); }
+  70% { opacity: 1; transform: translateY(-2px) scale(1.01); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes uxPageSlide {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes uxShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (max-width: 360px) {
+  #uxHeroMotivation {
+    max-width: 13ch;
+  }
+  .ux-profile-stats {
+    grid-template-columns: 1fr;
+  }
+  .ux-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    font-size: 26px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .ux-profile-stats,
+  .ux-summary-grid {
+    grid-template-columns: repeat(3, minmax(110px, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ux-mini-bar i,
+  .ux-mini-ring,
+  .bottom-nav .tab::before {
+    transition: none !important;
+  }
+}
+
+/* RC-01 Launch Readiness */
+.offline-banner {
+  position: fixed;
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: calc(156px + env(safe-area-inset-bottom));
+  z-index: 82;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-12);
+  max-width: 560px;
+  margin: 0 auto;
+  padding: var(--ds-space-12);
+  border: 1px solid rgba(251, 191, 36, .34);
+  border-radius: var(--ds-radius-lg);
+  background: rgba(38, 28, 10, .94);
+  color: var(--ds-text-primary);
+  box-shadow: var(--ds-shadow-lg);
+  backdrop-filter: blur(18px);
+  animation: uxSpringSheet var(--motion-spring) both;
+}
+
+.offline-banner span {
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-caption);
+}
+
+.offline-banner button {
+  min-height: 40px;
+  white-space: nowrap;
+}
+
+.release-checklist-grid,
+.changelog-list {
+  display: grid;
+  gap: var(--ds-space-12);
+}
+
+.release-check-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--ds-space-12);
+  min-height: 56px;
+  padding: var(--ds-space-12);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  background: rgba(255,255,255,.045);
+}
+
+.release-check-item > span {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(52,245,119,.14);
+  color: var(--ds-success);
+  font-weight: 950;
+}
+
+.release-check-item small {
+  color: var(--ds-text-secondary);
+  text-align: right;
+}
+
+.changelog-item {
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  background: rgba(255,255,255,.045);
+  overflow: hidden;
+}
+
+.changelog-item summary {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--ds-space-16);
+  color: var(--ds-text-primary);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.changelog-item p {
+  margin: 0;
+  padding: 0 var(--ds-space-16) var(--ds-space-16);
+  color: var(--ds-text-secondary);
+}
+
+.beta-feedback-form input[type="file"] {
+  padding-top: 12px;
+}
+
+.app-error-card {
+  text-align: left;
+}
+
+.app-error-card .hero-actions {
+  grid-template-columns: 1fr;
+}
+
+.offline-status-card .dashboard-grid article,
+.release-checklist-card,
+.changelog-card {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 520px) {
+  .app-error-card .hero-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 360px) {
+  .offline-banner {
+    align-items: stretch;
+    flex-direction: column;
+    bottom: calc(148px + env(safe-area-inset-bottom));
+  }
+  .release-check-item {
+    grid-template-columns: auto 1fr;
+  }
+  .release-check-item small {
+    grid-column: 2;
+    text-align: left;
+  }
+}
+
+/* UX-04 Zero Friction Experience */
+.empty::after,
+.food-empty::after,
+.chart-empty::after,
+.adaptive-empty::after,
+.chat-empty-state::after,
+.progress-empty-card::after {
+  content: "เริ่มก้าวแรกของคุณได้เลย";
+}
+
+#dashboard .ux-home-shell .ux-home-block:last-child {
+  opacity: .82;
+}
+
+.ux-floating-actions {
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  justify-content: center;
+}
+
+.ux-floating-actions button {
+  flex: 1;
+  min-height: 48px;
+  font-size: 13px;
+}
+
+.zero-workout-card,
+.zero-active-workout,
+.zero-finish-card,
+.zero-nutrition-top,
+.zero-add-food-panel {
+  display: grid;
+  gap: var(--ds-space-16);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)),
+    rgba(255,255,255,.035);
+  padding: var(--ds-space-16);
+  box-shadow: var(--ds-shadow-sm);
+}
+
+.zero-workout-card {
+  grid-template-columns: 1fr;
+  background:
+    radial-gradient(circle at 0 0, rgba(184,255,61,.16), transparent 38%),
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
+    rgba(255,255,255,.04);
+}
+
+.zero-workout-card h2,
+.zero-active-workout h2,
+.zero-nutrition-top h1,
+.zero-finish-card h2 {
+  margin: 0;
+  color: var(--ds-text-primary);
+  letter-spacing: -.03em;
+}
+
+.zero-workout-card p,
+.zero-active-workout p,
+.zero-finish-card p {
+  margin: 0;
+  color: var(--ds-text-secondary);
+}
+
+.zero-workout-card .ux-primary-cta,
+#uxStartWorkout {
+  min-height: 60px;
+  font-size: 17px;
+}
+
+.zero-exercise-card {
+  display: grid;
+  gap: var(--ds-space-16);
+}
+
+.zero-set-grid,
+.zero-finish-grid,
+.zero-meal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-8);
+}
+
+.zero-set-grid label,
+.zero-finish-grid article {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: var(--ds-space-12);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  background: rgba(0,0,0,.18);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-caption);
+}
+
+.zero-set-grid input {
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ds-text-primary);
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.zero-workout-actions {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  gap: var(--ds-space-8);
+}
+
+.zero-workout-actions button {
+  min-height: 56px;
+}
+
+.zero-finish-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.zero-finish-grid strong {
+  display: block;
+  color: var(--ds-text-primary);
+  font-size: 22px;
+}
+
+.zero-finish-grid span {
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-caption);
+}
+
+#nutrition > .ai-nutrition-planner-card {
+  display: none;
+}
+
+.zero-nutrition-top {
+  margin-bottom: var(--ds-space-16);
+  background:
+    radial-gradient(circle at 12% 0, rgba(184,255,61,.12), transparent 34%),
+    var(--ds-surface);
+}
+
+.zero-meal-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.zero-meal-card {
+  display: grid;
+  justify-items: start;
+  gap: var(--ds-space-8);
+  min-height: 124px;
+  padding: var(--ds-space-16);
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid var(--ds-border);
+  background: rgba(255,255,255,.045);
+  color: var(--ds-text-primary);
+  box-shadow: none;
+  text-align: left;
+}
+
+.zero-meal-card span {
+  font-size: 28px;
+}
+
+.zero-meal-card strong {
+  font-size: 18px;
+}
+
+.zero-meal-card small {
+  color: var(--ds-text-secondary);
+}
+
+.zero-add-food-panel label {
+  gap: var(--ds-space-8);
+}
+
+#zeroFoodSearch {
+  min-height: 56px;
+  font-size: 17px;
+}
+
+.zero-food-sections {
+  display: grid;
+  gap: var(--ds-space-12);
+}
+
+.zero-food-sections h3 {
+  margin: 0 0 var(--ds-space-8);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-caption);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.zero-food-chips,
+#quickFood {
+  display: flex;
+  gap: var(--ds-space-8);
+  overflow-x: auto;
+  padding-bottom: var(--ds-space-4);
+  scrollbar-width: none;
+}
+
+.zero-food-chips button,
+#quickFood button {
+  flex: 0 0 auto;
+  min-height: 48px;
+  padding: 0 var(--ds-space-16);
+  background: rgba(255,255,255,.07);
+  color: var(--ds-text-primary);
+  border-color: var(--ds-border);
+  box-shadow: none;
+}
+
+.food-form-card {
+  scroll-margin-top: 96px;
+}
+
+#coachChatInput:focus,
+#zeroFoodSearch:focus,
+#exerciseName:focus {
+  box-shadow: 0 0 0 4px rgba(184,255,61,.12), 0 0 34px rgba(184,255,61,.09);
+}
+
+@media (min-width: 680px) {
+  .zero-workout-card {
+    grid-template-columns: 1fr minmax(220px, .55fr);
+    align-items: center;
+  }
+  .zero-meal-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .zero-finish-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 360px) {
+  .zero-set-grid,
+  .zero-workout-actions {
+    grid-template-columns: 1fr;
+  }
+  .zero-meal-card {
+    min-height: 104px;
+  }
+}

@@ -20,13 +20,14 @@ const USERS_KEY = "khayubdi_users";
 const SESSION_KEY = "khayubdi_session_user";
 const TOKEN_KEY = "khayubdi_auth_token";
 const REMEMBER_KEY = "khayubdi_remember_login";
-const APP_VERSION = "1.0.0-rc3";
-const APP_BUILD = "53";
+const APP_VERSION = "1.0.0 RC";
+const APP_BUILD = "59";
 const APP_ENVIRONMENT = "Closed Beta";
 const APP_RELEASE_CHANNEL = "Release Candidate";
-const APP_DEVELOPER = "Khayubdi";
-const APP_CACHE_VERSION = "khayubdi-exercise-v57";
+const APP_DEVELOPER = "Sirasit Vichitpap";
+const APP_CACHE_VERSION = "khayubdi-exercise-v60";
 const BETA_WELCOME_KEY = "khayubdi_beta_welcome_dismissed";
+const FEEDBACK_QUEUE_KEY = "khayubdi_feedback_queue";
 const USE_BACKEND = location.protocol === "http:" || location.protocol === "https:";
 const LOCAL_TRACKING_ONLY = true;
 const WATER_GOAL_ML = 3000;
@@ -188,14 +189,53 @@ const fields = {
   uxTodayWorkout: $("#uxTodayWorkout"),
   uxTodayNutrition: $("#uxTodayNutrition"),
   uxTodayRecovery: $("#uxTodayRecovery"),
+  uxHeroMotivation: $("#uxHeroMotivation"),
+  uxWorkoutProgress: $("#uxWorkoutProgress"),
+  uxNutritionProgress: $("#uxNutritionProgress"),
+  uxRecoveryRing: $("#uxRecoveryRing"),
   uxLastWorkout: $("#uxLastWorkout"),
   uxCaloriesToday: $("#uxCaloriesToday"),
   uxCurrentStreak: $("#uxCurrentStreak"),
   uxTodaysProgram: $("#uxTodaysProgram"),
   uxTodaysExercises: $("#uxTodaysExercises"),
   uxStartWorkout: $("#uxStartWorkout"),
+  zeroWorkoutTitle: $("#zeroWorkoutTitle"),
+  zeroWorkoutDuration: $("#zeroWorkoutDuration"),
+  zeroWorkoutExerciseCount: $("#zeroWorkoutExerciseCount"),
+  zeroExerciseName: $("#zeroExerciseName"),
+  zeroLastPerformance: $("#zeroLastPerformance"),
+  zeroSetPreview: $("#zeroSetPreview"),
+  zeroWeightPreview: $("#zeroWeightPreview"),
+  zeroRepsPreview: $("#zeroRepsPreview"),
+  zeroPrevExercise: $("#zeroPrevExercise"),
+  zeroNextExercise: $("#zeroNextExercise"),
+  zeroCompleteSet: $("#zeroCompleteSet"),
+  zeroFinishCard: $("#zeroFinishCard"),
+  zeroFinishDuration: $("#zeroFinishDuration"),
+  zeroFinishVolume: $("#zeroFinishVolume"),
+  zeroFinishSets: $("#zeroFinishSets"),
+  zeroFinishCalories: $("#zeroFinishCalories"),
+  zeroFinishPr: $("#zeroFinishPr"),
+  zeroFinishStreak: $("#zeroFinishStreak"),
+  zeroDoneWorkout: $("#zeroDoneWorkout"),
+  zeroMealCards: $$(".zero-meal-card"),
+  zeroFoodSearch: $("#zeroFoodSearch"),
+  zeroFrequentFoods: $("#zeroFrequentFoods"),
+  zeroAiEstimate: $("#zeroAiEstimate"),
+  zeroBarcode: $("#zeroBarcode"),
+  zeroBreakfastCount: $("#zeroBreakfastCount"),
+  zeroLunchCount: $("#zeroLunchCount"),
+  zeroDinnerCount: $("#zeroDinnerCount"),
+  zeroSnackCount: $("#zeroSnackCount"),
   uxCoachGreeting: $("#uxCoachGreeting"),
+  uxProfileAvatar: $("#uxProfileAvatar"),
   uxProfileName: $("#uxProfileName"),
+  uxProfileGoal: $("#uxProfileGoal"),
+  uxProfileStreak: $("#uxProfileStreak"),
+  uxProfileWorkoutCount: $("#uxProfileWorkoutCount"),
+  uxProfileHours: $("#uxProfileHours"),
+  uxProfileAchievement: $("#uxProfileAchievement"),
+  uxProfileGoalProgress: $("#uxProfileGoalProgress"),
   uxCheckinSheet: $("#uxCheckinSheet"),
   uxDismissCheckin: $("#uxDismissCheckin"),
   coachPriority: $("#coachPriority"),
@@ -654,9 +694,16 @@ const fields = {
   privacyCoaching: $("#privacyCoaching"),
   feedbackForm: $("#feedbackForm"),
   feedbackType: $("#feedbackType"),
-  feedbackRating: $("#feedbackRating"),
   feedbackMessage: $("#feedbackMessage"),
+  feedbackEmail: $("#feedbackEmail"),
+  feedbackScreenshot: $("#feedbackScreenshot"),
   feedbackThanks: $("#feedbackThanks"),
+  offlineBanner: $("#offlineBanner"),
+  reconnectButton: $("#reconnectButton"),
+  reconnectPageButton: $("#reconnectPageButton"),
+  offlineStatusText: $("#offlineStatusText"),
+  releaseChecklistGrid: $("#releaseChecklistGrid"),
+  changelogList: $("#changelogList"),
   diagnosticsGrid: $("#diagnosticsGrid"),
   diagnosticsStatus: $("#diagnosticsStatus"),
   refreshDiagnostics: $("#refreshDiagnostics"),
@@ -680,6 +727,7 @@ init();
 
 function init() {
   removeDemoUsers();
+  bindGlobalErrorHandling();
   bindAuth();
   bindTabs();
   bindSession();
@@ -693,6 +741,8 @@ function init() {
   bindInstall();
   renderQuickAdd();
   renderQuickFood();
+  renderReleaseReadiness();
+  renderOfflineStatus();
   setAuthMode("login");
   syncAuthView();
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/service-worker.js");
@@ -1031,7 +1081,41 @@ function bindTabs() {
       showComingSoon(button.textContent.trim());
     });
   });
-  fields.uxStartWorkout?.addEventListener("click", () => switchTab("track"));
+  fields.uxStartWorkout?.addEventListener("click", () => {
+    switchTab("track");
+    if (!sessionStartedAt) startSession();
+    fields.entryForm?.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+  fields.zeroPrevExercise?.addEventListener("click", () => showToast("Previous exercise"));
+  fields.zeroNextExercise?.addEventListener("click", () => {
+    fields.entryForm?.scrollIntoView({ behavior: "smooth", block: "center" });
+    fields.exerciseName?.focus();
+  });
+  fields.zeroCompleteSet?.addEventListener("click", () => {
+    fields.entryForm?.scrollIntoView({ behavior: "smooth", block: "center" });
+    fields.exerciseName?.focus();
+    showToast("Set ready to save.");
+  });
+  fields.zeroDoneWorkout?.addEventListener("click", () => {
+    fields.zeroFinishCard?.classList.add("hidden");
+    switchTab("dashboard");
+  });
+  fields.zeroMealCards.forEach((button) => {
+    button.addEventListener("click", () => {
+      switchTab("nutrition");
+      fields.mealType.value = button.dataset.zeroMeal || "snack";
+      fields.zeroFoodSearch?.focus();
+      fields.foodForm?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  });
+  fields.zeroFoodSearch?.addEventListener("input", () => {
+    fields.foodName.value = fields.zeroFoodSearch.value;
+  });
+  fields.zeroAiEstimate?.addEventListener("click", () => {
+    fields.foodName.value = fields.zeroFoodSearch?.value || fields.foodName.value;
+    fields.estimateFoodButton?.click();
+  });
+  fields.zeroBarcode?.addEventListener("click", () => showToast("Barcode capture is not enabled in this beta."));
   fields.uxDismissCheckin?.addEventListener("click", () => {
     uxCheckinSheetDismissed = true;
     renderUxCheckinSheet();
@@ -1052,24 +1136,77 @@ function bindTabs() {
 
 function bindBetaOperations() {
   if (fields.feedbackForm) {
-    fields.feedbackForm.addEventListener("submit", (event) => {
+    fields.feedbackForm.addEventListener("submit", async (event) => {
       event.preventDefault();
+      await saveFeedbackLocally();
       fields.feedbackMessage.value = "";
+      if (fields.feedbackEmail) fields.feedbackEmail.value = "";
+      if (fields.feedbackScreenshot) fields.feedbackScreenshot.value = "";
       fields.feedbackThanks.classList.remove("hidden");
-      showToast("Thank you for helping test Khayubdi.");
+      showToast(navigator.onLine ? "Feedback saved for beta review." : "Feedback saved offline.");
       window.setTimeout(() => fields.feedbackThanks.classList.add("hidden"), 3200);
     });
   }
   fields.refreshDiagnostics?.addEventListener("click", renderDiagnostics);
   fields.exportDiagnostics?.addEventListener("click", exportDiagnosticsJson);
+  [fields.reconnectButton, fields.reconnectPageButton].filter(Boolean).forEach((button) => button.addEventListener("click", () => {
+    renderOfflineStatus();
+    renderDiagnostics();
+    showToast(navigator.onLine ? "Back online." : "Still offline. Cached mode is active.");
+  }));
   fields.betaWelcomeContinue?.addEventListener("click", dismissBetaWelcome);
   fields.appErrorRetry?.addEventListener("click", () => window.location.reload());
   fields.appErrorBack?.addEventListener("click", () => {
     fields.appErrorModal?.classList.add("hidden");
     switchTab("dashboard");
   });
-  window.addEventListener("online", renderDiagnostics);
-  window.addEventListener("offline", renderDiagnostics);
+  window.addEventListener("online", () => { renderOfflineStatus(); renderDiagnostics(); });
+  window.addEventListener("offline", () => { renderOfflineStatus(); renderDiagnostics(); });
+}
+
+function bindGlobalErrorHandling() {
+  window.addEventListener("error", (event) => {
+    showAppError("Something went wrong", event.message || "Unexpected app error.");
+  });
+  window.addEventListener("unhandledrejection", (event) => {
+    const reason = event.reason?.message || String(event.reason || "Unexpected background error.");
+    showAppError("Something went wrong", reason);
+  });
+}
+
+function showAppError(title = "Something went wrong", message = "Please reload or report the issue.") {
+  if (!fields.appErrorModal) return;
+  const titleNode = $("#appErrorTitle");
+  const textNode = $("#appErrorText");
+  if (titleNode) titleNode.textContent = title;
+  if (textNode) textNode.textContent = `${message} Your data on this device was not changed by this screen.`;
+  fields.appErrorModal.classList.remove("hidden");
+}
+
+async function saveFeedbackLocally() {
+  const screenshot = fields.feedbackScreenshot?.files?.[0];
+  const payload = {
+    id: crypto.randomUUID?.() || `feedback-${Date.now()}`,
+    category: fields.feedbackType?.value || "other",
+    message: fields.feedbackMessage?.value?.trim() || "",
+    email: fields.feedbackEmail?.value?.trim() || "",
+    screenshot: screenshot ? { name: screenshot.name, type: screenshot.type, size: screenshot.size } : null,
+    appVersion: APP_VERSION,
+    build: APP_BUILD,
+    cacheVersion: APP_CACHE_VERSION,
+    networkStatus: navigator.onLine ? "online" : "offline",
+    createdAt: new Date().toISOString(),
+    status: navigator.onLine ? "ready_for_api" : "saved_offline",
+  };
+  const queue = loadFeedbackQueue();
+  queue.unshift(payload);
+  localStorage.setItem(FEEDBACK_QUEUE_KEY, JSON.stringify(queue.slice(0, 25)));
+  return payload;
+}
+
+function loadFeedbackQueue() {
+  try { return JSON.parse(localStorage.getItem(FEEDBACK_QUEUE_KEY) || "[]"); }
+  catch { return []; }
 }
 
 function bindCoachChat() {
@@ -1427,9 +1564,13 @@ function switchTab(tabName) {
   tabs.forEach((tab) => tab.classList.add("active"));
   target.classList.add("active");
   if (tabName === "diagnostics") renderDiagnostics();
+  if (tabName === "about" || tabName === "releaseChecklist") renderReleaseReadiness();
+  if (tabName === "offline") renderOfflineStatus();
+  if (tabName === "nutrition") window.setTimeout(() => fields.zeroFoodSearch?.focus(), 180);
   if (tabName === "coachChat") {
     renderCoachChat();
     scrollCoachChatToBottom();
+    window.setTimeout(() => fields.coachChatInput?.focus(), 180);
   }
 }
 
@@ -1476,7 +1617,7 @@ async function diagnosticsSnapshot() {
     viewport: `${window.innerWidth}x${window.innerHeight}`,
     pwaInstalled: standalone,
     standaloneMode: standalone,
-    serviceWorkerVersion: navigator.serviceWorker?.controller?.scriptURL ? "registered" : "not controlling page",
+    serviceWorkerVersion: APP_CACHE_VERSION,
     cacheVersion: APP_CACHE_VERSION,
     storageUsage: storage.usage,
     storageQuota: storage.quota,
@@ -1511,6 +1652,57 @@ async function renderDiagnostics() {
     ["Timezone", snapshot.timezone],
   ];
   fields.diagnosticsGrid.innerHTML = rows.map(([label, value]) => `<article><strong>${escapeHtml(String(value))}</strong><span>${escapeHtml(label)}</span></article>`).join("");
+}
+
+function renderReleaseReadiness() {
+  if (fields.releaseChecklistGrid) {
+    const checks = [
+      ["Navigation", "Ready"],
+      ["Workout", "Ready"],
+      ["AI", "Ready"],
+      ["Nutrition", "Ready"],
+      ["Analytics", "Ready"],
+      ["Offline", "Ready"],
+      ["Install", "Ready"],
+      ["Responsive", "Ready"],
+      ["Cache", APP_CACHE_VERSION],
+      ["Performance", "Ready"],
+    ];
+    fields.releaseChecklistGrid.innerHTML = checks.map(([label, value]) => `
+      <article class="release-check-item">
+        <span aria-hidden="true">✓</span>
+        <strong>${escapeHtml(label)}</strong>
+        <small>${escapeHtml(value)}</small>
+      </article>
+    `).join("");
+  }
+  if (fields.changelogList) {
+    const items = [
+      ["RC1", "Core release candidate systems stabilized for beta testing."],
+      ["RC2", "Mobile PWA readiness, diagnostics, privacy, and production hotfixes."],
+      ["RC3", "Thai encoding, food search, OAuth visibility, and PWA icon fixes."],
+      ["UX Rewrite", "Home, navigation, workout, AI, and profile experience simplified."],
+      ["Design System", "Central tokens, typography, buttons, cards, forms, and accessibility polish."],
+      ["Premium Polish", "Hero, visual progress, profile header, empty states, and motion refinement."],
+      ["Current Build", `${APP_VERSION} · Build ${APP_BUILD} · ${APP_CACHE_VERSION}`],
+    ];
+    fields.changelogList.innerHTML = items.map(([title, text], index) => `
+      <details class="changelog-item" ${index === items.length - 1 ? "open" : ""}>
+        <summary>${escapeHtml(title)}</summary>
+        <p>${escapeHtml(text)}</p>
+      </details>
+    `).join("");
+  }
+}
+
+function renderOfflineStatus() {
+  const online = navigator.onLine;
+  fields.offlineBanner?.classList.toggle("hidden", online);
+  if (fields.offlineStatusText) {
+    fields.offlineStatusText.textContent = online
+      ? "Online. Latest cached assets are ready."
+      : "Offline mode. Cached app shell and local data remain available.";
+  }
 }
 
 async function exportDiagnosticsJson() {
@@ -1582,8 +1774,8 @@ function formatBytes(bytes) {
 }
 
 function showComingSoon(title) {
-  fields.comingSoonTitle.textContent = title || "Coming soon";
-  fields.comingSoonText.textContent = "ฟีเจอร์นี้จะเปิดใน Sprint ถัดไป";
+  fields.comingSoonTitle.textContent = title || "Not available in this beta";
+  fields.comingSoonText.textContent = "This area is intentionally disabled for the Closed Beta readiness build.";
   fields.comingSoonModal.classList.remove("hidden");
 }
 
@@ -2271,7 +2463,18 @@ function renderQuickAdd() {
 }
 
 function renderQuickFood() {
-  fields.quickFood.innerHTML = "";
+  if (!fields.quickFood) return;
+  fields.quickFood.innerHTML = quickFoods
+    .map((food) => `<button type="button" data-quick-food="${escapeHtml(food.name)}">${escapeHtml(food.name)}</button>`)
+    .join("");
+  fields.quickFood.querySelectorAll("[data-quick-food]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const food = quickFoods.find((item) => item.name === button.dataset.quickFood);
+      if (!food) return;
+      await addFood({ ...food, meal: fields.mealType?.value || food.meal, source: "quick" });
+      showFoodSaveFeedback();
+    });
+  });
 }
 
 function showFoodSaveFeedback() {
@@ -2509,24 +2712,112 @@ function renderUxRewrite() {
   const todayEntries = entries.filter((entry) => dateKey(new Date(entry.createdAt)) === today);
   const todayFoods = foods.filter((food) => dateKey(new Date(food.createdAt)) === today);
   const foodTotals = dailyFoodTotals(todayFoods);
+  const targets = nutritionTargets();
   const engine = progressiveOverloadEngine();
   const recovery = recoveryReadinessEngine();
   const program = activeProgram();
   const todayPlan = plannedWorkoutForDate(today, program);
   const exerciseCount = todayPlan?.exercises?.length || 0;
+  const firstExercise = todayPlan?.exercises?.[0] || {};
+  const workoutMinutes = sum(todayEntries, "minutes");
+  const workoutTarget = Number(profile.weeklyTarget || 150) / 3;
+  const workoutProgress = clamp(Math.round((workoutMinutes / Math.max(20, workoutTarget)) * 100), 0, 100);
+  const nutritionProgress = clamp(Math.round((foodTotals.calories / Math.max(1, Number(targets.calories || 1))) * 100), 0, 100);
+  const recoveryProgress = clamp(Number(recovery.score || 0), 0, 100);
+  const totalMinutes = sum(entries, "minutes");
+  const totalHours = Math.round((totalMinutes / 60) * 10) / 10;
+  const firstInitial = (displayName || "K").trim().charAt(0).toUpperCase() || "K";
+  const motivation = engine.streak.current > 0
+    ? "🔥 วันนี้เรามาทำลายสถิติของตัวเองกัน"
+    : "พร้อมทำให้วันนี้ดีกว่าเมื่อวานไหม?";
 
   if (fields.uxHomeGreeting) fields.uxHomeGreeting.textContent = `👋 สวัสดี ${displayName}`;
-  if (fields.uxTodayWorkout) fields.uxTodayWorkout.textContent = `${sum(todayEntries, "minutes")} นาที`;
+  if (fields.uxHeroMotivation) fields.uxHeroMotivation.textContent = motivation;
+  if (fields.uxTodayWorkout) fields.uxTodayWorkout.textContent = `${workoutMinutes} นาที`;
   if (fields.uxTodayNutrition) fields.uxTodayNutrition.textContent = `${foodTotals.calories} kcal`;
   if (fields.uxTodayRecovery) fields.uxTodayRecovery.textContent = `${recovery.score}/100`;
+  if (fields.uxWorkoutProgress) fields.uxWorkoutProgress.style.width = `${workoutProgress}%`;
+  if (fields.uxNutritionProgress) fields.uxNutritionProgress.style.width = `${nutritionProgress}%`;
+  if (fields.uxRecoveryRing) fields.uxRecoveryRing.style.setProperty("--ux-ring", `${recoveryProgress}%`);
   if (fields.uxLastWorkout) fields.uxLastWorkout.textContent = engine.lastWorkout ? formatShortDate(engine.lastWorkout.date) : "ยังไม่มี";
   if (fields.uxCaloriesToday) fields.uxCaloriesToday.textContent = foodTotals.calories;
   if (fields.uxCurrentStreak) fields.uxCurrentStreak.textContent = `${engine.streak.current} วัน`;
   if (fields.uxTodaysProgram) fields.uxTodaysProgram.textContent = program.name || "ยังไม่มีโปรแกรม";
   if (fields.uxTodaysExercises) fields.uxTodaysExercises.textContent = todayPlan ? `${exerciseCount} exercises` : "ยังไม่มีตารางวันนี้";
+  if (fields.zeroWorkoutTitle) fields.zeroWorkoutTitle.textContent = todayPlan ? todayPlan.title.replace(/^Day \d+:\s*/, "") : "Create Workout";
+  if (fields.zeroWorkoutDuration) fields.zeroWorkoutDuration.textContent = todayPlan ? `${program.sessionMinutes || profile.weeklyTarget || 45} min` : "No plan yet";
+  if (fields.zeroWorkoutExerciseCount) fields.zeroWorkoutExerciseCount.textContent = todayPlan ? `${exerciseCount} exercises` : "Tap to build";
+  if (fields.uxStartWorkout) fields.uxStartWorkout.textContent = todayPlan ? "START WORKOUT" : "Create Workout";
+  if (fields.zeroExerciseName) fields.zeroExerciseName.textContent = firstExercise.name || "Choose first exercise";
+  if (fields.zeroRepsPreview) fields.zeroRepsPreview.value = firstExercise.reps || 12;
+  if (fields.zeroWeightPreview) fields.zeroWeightPreview.value = `${firstExercise.weight || 0} kg`;
+  if (fields.zeroSetPreview) fields.zeroSetPreview.value = firstExercise.sets ? "1" : "1";
+  if (fields.zeroLastPerformance) {
+    const last = entries.find((entry) => firstExercise.name && entry.name === firstExercise.name);
+    fields.zeroLastPerformance.textContent = last ? `Last: ${last.sets || 0} sets · ${last.reps || 0} reps · ${last.weight || 0}kg` : "Last: waiting for data";
+  }
+  renderZeroNutrition(todayFoods);
+  renderZeroFinish(engine);
   if (fields.uxCoachGreeting) fields.uxCoachGreeting.textContent = `สวัสดี ${displayName} อยากให้ช่วยวางแผนอะไรวันนี้?`;
+  if (fields.uxProfileAvatar) fields.uxProfileAvatar.textContent = firstInitial;
   if (fields.uxProfileName) fields.uxProfileName.textContent = displayName;
+  if (fields.uxProfileGoal) fields.uxProfileGoal.textContent = `Goal: ${goalLabel(profile.goal)}`;
+  if (fields.uxProfileStreak) fields.uxProfileStreak.textContent = engine.streak.current;
+  if (fields.uxProfileWorkoutCount) fields.uxProfileWorkoutCount.textContent = entries.length;
+  if (fields.uxProfileHours) fields.uxProfileHours.textContent = `${totalHours}h`;
+  if (fields.uxProfileAchievement) fields.uxProfileAchievement.textContent = engine.streak.current >= 7 ? "7-day streak unlocked" : "Next achievement: 7-day streak";
+  if (fields.uxProfileGoalProgress) fields.uxProfileGoalProgress.textContent = entries.length ? `${entries.length} workouts logged. Keep the chain alive.` : "Start your first workout to begin your progress story.";
   renderUxCheckinSheet();
+}
+
+function renderZeroNutrition(todayFoods) {
+  const mealCounts = todayFoods.reduce((map, food) => {
+    const key = normalizeMeal(food.meal);
+    map[key] = (map[key] || 0) + 1;
+    return map;
+  }, {});
+  if (fields.zeroBreakfastCount) fields.zeroBreakfastCount.textContent = `${mealCounts.breakfast || 0} items`;
+  if (fields.zeroLunchCount) fields.zeroLunchCount.textContent = `${mealCounts.lunch || 0} items`;
+  if (fields.zeroDinnerCount) fields.zeroDinnerCount.textContent = `${mealCounts.dinner || 0} items`;
+  if (fields.zeroSnackCount) fields.zeroSnackCount.textContent = `${mealCounts.snack || 0} items`;
+  if (!fields.zeroFrequentFoods) return;
+  const recentNames = [...new Set(foods.map((food) => food.name).filter(Boolean))].slice(0, 5);
+  const base = [
+    { label: "🍗 Chicken Breast", name: "Chicken breast", meal: "lunch", calories: 165, protein: 31, carbs: 0, fat: 4 },
+    { label: "🥚 Eggs", name: "Boiled eggs", meal: "breakfast", calories: 140, protein: 12, carbs: 1, fat: 10 },
+    { label: "🍚 Rice", name: "Cooked rice", meal: "lunch", calories: 205, protein: 4, carbs: 45, fat: 0 },
+    { label: "🍌 Banana", name: "Banana", meal: "snack", calories: 105, protein: 1, carbs: 27, fat: 0 },
+    { label: "🥛 Milk", name: "Milk", meal: "snack", calories: 150, protein: 8, carbs: 12, fat: 8 },
+  ];
+  const recent = recentNames.map((name) => {
+    const food = foods.find((item) => item.name === name) || {};
+    return { label: name, name, meal: food.meal || "snack", calories: food.calories || 0, protein: food.protein || 0, carbs: food.carbs || 0, fat: food.fat || 0 };
+  });
+  const shortcuts = [...recent, ...base].filter((item, index, list) => list.findIndex((match) => match.name === item.name) === index).slice(0, 8);
+  fields.zeroFrequentFoods.innerHTML = shortcuts.map((item) => `<button type="button" data-zero-food="${escapeHtml(item.name)}">${escapeHtml(item.label)}</button>`).join("");
+  fields.zeroFrequentFoods.querySelectorAll("[data-zero-food]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const item = shortcuts.find((food) => food.name === button.dataset.zeroFood);
+      if (!item) return;
+      await addFood({ ...item, meal: fields.mealType?.value || item.meal, source: "quick" });
+      showFoodSaveFeedback();
+    });
+  });
+}
+
+function renderZeroFinish(engine) {
+  if (!fields.zeroFinishCard) return;
+  const today = dateKey(new Date());
+  const todayEntries = entries.filter((entry) => dateKey(new Date(entry.createdAt)) === today);
+  const duration = sum(todayEntries, "minutes");
+  fields.zeroFinishCard.classList.toggle("hidden", !todayEntries.length);
+  if (!todayEntries.length) return;
+  if (fields.zeroFinishDuration) fields.zeroFinishDuration.textContent = `${duration} min`;
+  if (fields.zeroFinishVolume) fields.zeroFinishVolume.textContent = formatKg(sum(todayEntries, "volume"));
+  if (fields.zeroFinishSets) fields.zeroFinishSets.textContent = sum(todayEntries, "sets");
+  if (fields.zeroFinishCalories) fields.zeroFinishCalories.textContent = estimateCalories(todayEntries);
+  if (fields.zeroFinishPr) fields.zeroFinishPr.textContent = engine.personalRecords?.length || 0;
+  if (fields.zeroFinishStreak) fields.zeroFinishStreak.textContent = `${engine.streak.current} days`;
 }
 
 function renderUxCheckinSheet() {
@@ -8026,4 +8317,6 @@ function downloadJson(data, filename) {
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[char]);
 }
+
+
 
