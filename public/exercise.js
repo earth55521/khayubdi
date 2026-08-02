@@ -21,11 +21,11 @@ const SESSION_KEY = "khayubdi_session_user";
 const TOKEN_KEY = "khayubdi_auth_token";
 const REMEMBER_KEY = "khayubdi_remember_login";
 const APP_VERSION = "1.0.0 RC";
-const APP_BUILD = "59";
+const APP_BUILD = "70";
 const APP_ENVIRONMENT = "Closed Beta";
 const APP_RELEASE_CHANNEL = "Release Candidate";
 const APP_DEVELOPER = "Sirasit Vichitpap";
-const APP_CACHE_VERSION = "khayubdi-exercise-v60";
+const APP_CACHE_VERSION = "khayubdi-exercise-v70";
 const BETA_WELCOME_KEY = "khayubdi_beta_welcome_dismissed";
 const FEEDBACK_QUEUE_KEY = "khayubdi_feedback_queue";
 const USE_BACKEND = location.protocol === "http:" || location.protocol === "https:";
@@ -113,6 +113,7 @@ let pendingProgressPhoto = null;
 let sessionStartedAt = null;
 let sessionTimer = null;
 let deferredInstallPrompt = null;
+let legacyModalPreviousFocus = null;
 let overloadStatsCache = { signature: "", data: null };
 let programSaveTimer = null;
 let programDirty = false;
@@ -142,6 +143,9 @@ const AIProvider = (() => {
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+function canonicalAuthEnabled() {
+  return Boolean(window.KHAYUBDI_OS_AUTH_CANONICAL || window.KhayubdiAuth?.isCanonical);
+}
 const fields = {
   splashShell: $("#splashShell"),
   authShell: $("#authShell"),
@@ -738,17 +742,21 @@ function init() {
   bindAiProgramGenerator();
   bindAiNutritionPlanner();
   bindBetaOperations();
+  bindAccessibleLegacyModals();
   bindInstall();
   renderQuickAdd();
   renderQuickFood();
+  window.KhayubdiComponents?.enhance();
   renderReleaseReadiness();
   renderOfflineStatus();
   setAuthMode("login");
-  syncAuthView();
-  if ("serviceWorker" in navigator) navigator.serviceWorker.register("/service-worker.js");
+  if (canonicalAuthEnabled()) retireLegacyAuthSurfaces();
+  else syncAuthView();
+  window.KhayubdiPWA?.register?.();
 }
 
 function bindAuth() {
+  if (canonicalAuthEnabled()) return;
   fields.authForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const password = fields.authPassword.value;
@@ -899,26 +907,28 @@ async function registerUser(registration, password) {
     }
   }
 
-  const users = loadUsers();
-  if (users[username] || Object.values(users).some((user) => normalizeUserId(user.email) === email)) {
-    showAuthMessage("This account already exists. Log in instead.", "error");
+  if (window.KhayubdiAuth?.register) {
+    const result = await window.KhayubdiAuth.register({
+      name: registration.displayName || username,
+      email,
+      password,
+      confirm: registration.confirmPassword,
+      terms: true,
+      remember: true,
+    });
+    if (!result?.ok) {
+      showAuthMessage(result?.message || "Registration failed.", "error");
+      return;
+    }
+    currentUserId = email;
+    profile = profileFromRegistration({ ...registration, username, email }, true);
+    localStorage.setItem(PROFILE_KEY(), JSON.stringify(profile));
+    showAuthMessage("Account created.", "success");
+    await syncAuthView();
     return;
   }
 
-  users[username] = {
-    username,
-    email,
-    password,
-    displayName: registration.displayName || username,
-    createdAt: new Date().toISOString(),
-  };
-  saveUsers(users);
-  currentUserId = username;
-  profile = profileFromRegistration({ ...registration, username, password }, true);
-  localStorage.setItem(PROFILE_KEY(), JSON.stringify(profile));
-  rememberSession(true);
-  showAuthMessage("Account created.", "success");
-  await syncAuthView();
+  showAuthMessage("Local account registration requires the canonical auth system. Please reload the app.", "error");
 }
 
 async function loginUser(id, password, remember) {
@@ -940,16 +950,21 @@ async function loginUser(id, password, remember) {
     }
   }
 
-  const users = loadUsers();
-  const userId = resolveLocalUserId(id, users);
-  if (!userId || users[userId].password !== password) {
-    showAuthMessage("Account not found or password is wrong. Tap Create account first.", "error");
+  if (window.KhayubdiAuth?.login) {
+    const users = loadUsers();
+    const userId = resolveLocalUserId(id, users);
+    const email = normalizeUserId(users[userId]?.email || id);
+    const result = await window.KhayubdiAuth.login({ email, password, remember });
+    if (!result?.ok) {
+      showAuthMessage(result?.message || "Login failed.", "error");
+      return;
+    }
+    currentUserId = email;
+    await syncAuthView();
     return;
   }
 
-  currentUserId = userId;
-  rememberSession(remember);
-  await syncAuthView();
+  showAuthMessage("Local account login requires the canonical auth system. Please reload the app.", "error");
 }
 
 async function syncAuthView() {
@@ -1033,6 +1048,7 @@ function showApp() {
 }
 
 function showLanding() {
+  if (canonicalAuthEnabled()) return;
   fields.splashShell.classList.remove("hidden");
   fields.authShell.classList.add("hidden");
   fields.onboardingShell.classList.add("hidden");
@@ -1040,6 +1056,7 @@ function showLanding() {
 }
 
 function showLogin() {
+  if (canonicalAuthEnabled()) return;
   fields.splashShell.classList.add("hidden");
   fields.authShell.classList.remove("hidden");
   fields.onboardingShell.classList.add("hidden");
@@ -1047,6 +1064,7 @@ function showLogin() {
 }
 
 function showOnboarding() {
+  if (canonicalAuthEnabled()) return;
   hydrateOnboardingForm();
   fields.splashShell.classList.add("hidden");
   fields.authShell.classList.add("hidden");
@@ -1057,6 +1075,15 @@ function showOnboarding() {
 function showAuthMessage(message, type) {
   fields.authMessage.textContent = message;
   fields.authMessage.className = `auth-note ${type}`;
+}
+
+function retireLegacyAuthSurfaces() {
+  fields.splashShell?.classList.add("hidden");
+  fields.authShell?.classList.add("hidden");
+  fields.onboardingShell?.classList.add("hidden");
+  fields.splashShell?.setAttribute("aria-hidden", "true");
+  fields.authShell?.setAttribute("aria-hidden", "true");
+  fields.onboardingShell?.setAttribute("aria-hidden", "true");
 }
 
 function bindTabs() {
@@ -1116,6 +1143,12 @@ function bindTabs() {
     fields.estimateFoodButton?.click();
   });
   fields.zeroBarcode?.addEventListener("click", () => showToast("Barcode capture is not enabled in this beta."));
+  $$("[data-outdoor-start]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const exercise = quickExercises.find((item) => item.name === button.dataset.outdoorStart);
+      if (exercise) addEntry(exercise);
+    });
+  });
   fields.uxDismissCheckin?.addEventListener("click", () => {
     uxCheckinSheetDismissed = true;
     renderUxCheckinSheet();
@@ -1157,11 +1190,59 @@ function bindBetaOperations() {
   fields.betaWelcomeContinue?.addEventListener("click", dismissBetaWelcome);
   fields.appErrorRetry?.addEventListener("click", () => window.location.reload());
   fields.appErrorBack?.addEventListener("click", () => {
-    fields.appErrorModal?.classList.add("hidden");
+    closeAccessibleLegacyModal(fields.appErrorModal);
     switchTab("dashboard");
   });
   window.addEventListener("online", () => { renderOfflineStatus(); renderDiagnostics(); });
   window.addEventListener("offline", () => { renderOfflineStatus(); renderDiagnostics(); });
+}
+
+function bindAccessibleLegacyModals() {
+  [fields.comingSoonModal, fields.betaWelcomeModal, fields.appErrorModal].filter(Boolean).forEach((modal) => {
+    if (modal.dataset.accessibleModalBound) return;
+    modal.dataset.accessibleModalBound = "true";
+    modal.setAttribute("aria-hidden", modal.classList.contains("hidden") ? "true" : "false");
+    modal.addEventListener("keydown", (event) => trapLegacyModalKeydown(event, modal));
+  });
+}
+
+function openAccessibleLegacyModal(modal) {
+  if (!modal) return;
+  legacyModalPreviousFocus = document.activeElement;
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+  modal.querySelector("button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href]")?.focus();
+}
+
+function closeAccessibleLegacyModal(modal) {
+  if (!modal) return;
+  modal.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+  legacyModalPreviousFocus?.focus?.();
+  legacyModalPreviousFocus = null;
+}
+
+function trapLegacyModalKeydown(event, modal) {
+  if (modal.classList.contains("hidden")) return;
+  if (event.key === "Escape") {
+    event.preventDefault();
+    if (modal === fields.appErrorModal) return;
+    if (modal === fields.betaWelcomeModal) return dismissBetaWelcome();
+    closeAccessibleLegacyModal(modal);
+    return;
+  }
+  if (event.key !== "Tab") return;
+  const focusable = Array.from(modal.querySelectorAll("button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex='-1'])"));
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
 }
 
 function bindGlobalErrorHandling() {
@@ -1180,7 +1261,7 @@ function showAppError(title = "Something went wrong", message = "Please reload o
   const textNode = $("#appErrorText");
   if (titleNode) titleNode.textContent = title;
   if (textNode) textNode.textContent = `${message} Your data on this device was not changed by this screen.`;
-  fields.appErrorModal.classList.remove("hidden");
+  openAccessibleLegacyModal(fields.appErrorModal);
 }
 
 async function saveFeedbackLocally() {
@@ -1218,10 +1299,11 @@ function bindCoachChat() {
   }
   if (fields.clearCoachChat) {
     fields.clearCoachChat.addEventListener("click", () => {
-      if (!window.confirm("ล้างบทสนทนากับโค้ช? ข้อมูลสุขภาพและ workout จะไม่ถูกลบ")) return;
-      chatMessages = [];
-      saveCoachChat();
-      renderCoachChat();
+      destructiveUserAction("Clear coach chat?", "Health data and workout history will not be deleted.", "Clear chat", () => {
+        chatMessages = [];
+        saveCoachChat();
+        renderCoachChat();
+      });
     });
   }
   fields.personaChips.forEach((button) => {
@@ -1345,8 +1427,9 @@ function bindAiNutritionPlanner() {
   fields.nutritionDraftMeals.addEventListener("input", updateNutritionDraftFromEditor);
   fields.acceptNutritionDraft.addEventListener("click", acceptNutritionDraft);
   fields.discardNutritionDraft.addEventListener("click", () => {
-    if (!window.confirm("ทิ้ง Nutrition Draft นี้? Food logs และแผนเดิมจะไม่เปลี่ยนแปลง")) return;
-    nutritionPlanDraft = null; saveNutritionPlanDraft(); renderNutritionPlanDraft(); renderDashboardNutritionDraft(); showToast("ทิ้ง Nutrition Draft แล้ว");
+    destructiveUserAction("Discard Nutrition Draft?", "Food logs and the existing plan will not change.", "Discard Draft", () => {
+      nutritionPlanDraft = null; saveNutritionPlanDraft(); renderNutritionPlanDraft(); renderDashboardNutritionDraft(); showToast("Nutrition Draft discarded.");
+    });
   });
   fields.openNutritionDraft.addEventListener("click", () => { switchTab("nutrition"); fields.nutritionPlanDraft.scrollIntoView({ behavior: "smooth", block: "start" }); });
 }
@@ -1497,10 +1580,18 @@ function updateNutritionDraftFromEditor(event) {
 }
 
 function acceptNutritionDraft() {
-  if (!nutritionPlanDraft || !window.confirm("ยืนยันบันทึก Nutrition Draft เป็นแผนใหม่? Food logs และแผนเดิมจะไม่ถูกแก้ไข")) return;
-  const approvedAt = new Date().toISOString();
-  nutritionPlans.unshift({ ...nutritionPlanDraft, id: `nutrition-plan-${crypto.randomUUID()}`, status: NUTRITION_PLAN_STATUSES.APPROVED, generation: { draftId: nutritionPlanDraft.draftId || nutritionPlanDraft.id, createdAt: nutritionPlanDraft.createdAt, generator: nutritionPlanDraft.generator || "Khayubdi AI Nutrition Planner", status: NUTRITION_PLAN_STATUSES.APPROVED, approvedAt, availableStatuses: [NUTRITION_PLAN_STATUSES.APPROVED, NUTRITION_PLAN_STATUSES.ARCHIVED] }, approvedAt }); saveNutritionPlans();
-  nutritionPlanDraft = null; saveNutritionPlanDraft(); renderNutritionPlanDraft(); renderDashboardNutritionDraft(); showToast("บันทึก Nutrition Plan ใหม่แล้ว");
+  if (!nutritionPlanDraft) return;
+  confirmUserAction({
+    title: "Save Nutrition Draft?",
+    description: "The draft will be saved as a new plan. Food logs and the existing plan will not be changed.",
+    actionLabel: "Save new plan",
+    tone: "primary",
+    onConfirm: () => {
+      const approvedAt = new Date().toISOString();
+      nutritionPlans.unshift({ ...nutritionPlanDraft, id: `nutrition-plan-${crypto.randomUUID()}`, status: NUTRITION_PLAN_STATUSES.APPROVED, generation: { draftId: nutritionPlanDraft.draftId || nutritionPlanDraft.id, createdAt: nutritionPlanDraft.createdAt, generator: nutritionPlanDraft.generator || "Khayubdi AI Nutrition Planner", status: NUTRITION_PLAN_STATUSES.APPROVED, approvedAt, availableStatuses: [NUTRITION_PLAN_STATUSES.APPROVED, NUTRITION_PLAN_STATUSES.ARCHIVED] }, approvedAt }); saveNutritionPlans();
+      nutritionPlanDraft = null; saveNutritionPlanDraft(); renderNutritionPlanDraft(); renderDashboardNutritionDraft(); showToast("Nutrition Plan saved.");
+    },
+  });
 }
 
 function nutritionRequestFromChat(message) {
@@ -1543,8 +1634,9 @@ function bindAiProgramGenerator() {
   fields.aiProgramRequestForm.addEventListener("submit", (event) => { event.preventDefault(); generateAiProgramDraft(); });
   fields.regenerateAiDraft.addEventListener("click", generateAiProgramDraft);
   fields.discardAiDraft.addEventListener("click", () => {
-    if (!window.confirm("ทิ้ง draft นี้? โปรแกรมปัจจุบันจะไม่เปลี่ยนแปลง")) return;
-    aiProgramDraft = null; saveAiProgramDraft(); renderAiProgramDraft(); renderDashboardDraftProgram(); showToast("ทิ้ง draft แล้ว");
+    destructiveUserAction("Discard Program Draft?", "The current program will not change.", "Discard Draft", () => {
+      aiProgramDraft = null; saveAiProgramDraft(); renderAiProgramDraft(); renderDashboardDraftProgram(); showToast("Draft discarded.");
+    });
   });
   fields.editAiDraft.addEventListener("click", () => {
     fields.aiDraftDays.querySelectorAll("input").forEach((input) => { input.disabled = false; });
@@ -1563,6 +1655,11 @@ function switchTab(tabName) {
   $$(".screen").forEach((screen) => screen.classList.remove("active"));
   tabs.forEach((tab) => tab.classList.add("active"));
   target.classList.add("active");
+  $$(".screen").forEach((screen) => screen.setAttribute("aria-hidden", screen.classList.contains("active") ? "false" : "true"));
+  window.KhayubdiComponents?.syncBottomNavigationState();
+  window.KhayubdiComponents?.enhanceLandmarks?.();
+  const routeAnnouncer = $("#osRouteAnnouncer");
+  if (routeAnnouncer) routeAnnouncer.textContent = `${target.querySelector("h1, h2")?.textContent?.trim() || tabName} opened`;
   if (tabName === "diagnostics") renderDiagnostics();
   if (tabName === "about" || tabName === "releaseChecklist") renderReleaseReadiness();
   if (tabName === "offline") renderOfflineStatus();
@@ -1580,6 +1677,27 @@ function switchWorkoutPanel(panelId) {
   fields.workoutSubtabs.forEach((tab) => tab.classList.toggle("active", tab.dataset.workoutPanel === panelId));
 }
 
+
+function confirmUserAction(options = {}) {
+  const confirmAction = window.KhayubdiRelease?.confirmAction;
+  if (typeof confirmAction !== "function") {
+    showToast(options.unavailableMessage || "Confirmation is temporarily unavailable.");
+    return false;
+  }
+  return confirmAction({
+    title: options.title || "Confirm action",
+    description: options.description || "Please confirm before continuing.",
+    actionLabel: options.actionLabel || "Confirm",
+    cancelLabel: options.cancelLabel || "Cancel",
+    tone: options.tone || "primary",
+    onConfirm: options.onConfirm || (() => {}),
+  });
+}
+
+function destructiveUserAction(title, description, actionLabel, onConfirm) {
+  return confirmUserAction({ title, description, actionLabel, tone: "danger", onConfirm });
+}
+
 function showToast(message) {
   if (!fields.appToast) return;
   fields.appToast.textContent = message;
@@ -1595,12 +1713,12 @@ function showToast(message) {
 
 function showBetaWelcomeIfNeeded() {
   if (!fields.betaWelcomeModal || localStorage.getItem(BETA_WELCOME_KEY) === "true") return;
-  fields.betaWelcomeModal.classList.remove("hidden");
+  openAccessibleLegacyModal(fields.betaWelcomeModal);
 }
 
 function dismissBetaWelcome() {
   localStorage.setItem(BETA_WELCOME_KEY, "true");
-  fields.betaWelcomeModal?.classList.add("hidden");
+  closeAccessibleLegacyModal(fields.betaWelcomeModal);
 }
 
 async function diagnosticsSnapshot() {
@@ -1776,11 +1894,11 @@ function formatBytes(bytes) {
 function showComingSoon(title) {
   fields.comingSoonTitle.textContent = title || "Not available in this beta";
   fields.comingSoonText.textContent = "This area is intentionally disabled for the Closed Beta readiness build.";
-  fields.comingSoonModal.classList.remove("hidden");
+  openAccessibleLegacyModal(fields.comingSoonModal);
 }
 
 function hideComingSoon() {
-  fields.comingSoonModal.classList.add("hidden");
+  closeAccessibleLegacyModal(fields.comingSoonModal);
 }
 
 function bindSession() {
@@ -1876,10 +1994,11 @@ function bindForms() {
       return;
     }
     if (deleteButton) {
-      if (!window.confirm("ลบข้อมูลน้ำวันนี้?")) return;
-      setWaterForDate(deleteButton.dataset.deleteWater, 0);
-      resetWaterEditForm();
-      render();
+      destructiveUserAction("Delete water entry?", "This water entry will be removed from this device.", "Delete entry", () => {
+        setWaterForDate(deleteButton.dataset.deleteWater, 0);
+        resetWaterEditForm();
+        render();
+      });
     }
   });
 
@@ -1928,8 +2047,9 @@ function bindForms() {
       return;
     }
     if (deleteButton) {
-      if (!window.confirm("ลบข้อมูลการนอนนี้?")) return;
-      await deleteSleepRecord(deleteButton.dataset.deleteSleep);
+      destructiveUserAction("Delete sleep entry?", "This sleep entry will be removed from this device.", "Delete entry", async () => {
+        await deleteSleepRecord(deleteButton.dataset.deleteSleep);
+      });
     }
   });
 
@@ -2016,8 +2136,9 @@ function bindForms() {
       return;
     }
     if (deleteButton) {
-      if (!window.confirm("ลบข้อมูลน้ำหนักนี้?")) return;
-      await deleteWeightRecord(deleteButton.dataset.deleteWeight);
+      destructiveUserAction("Delete weight entry?", "This weight entry will be removed from this device.", "Delete entry", async () => {
+        await deleteWeightRecord(deleteButton.dataset.deleteWeight);
+      });
     }
   });
 
@@ -2250,8 +2371,9 @@ function bindForms() {
   fields.foodHistoryList.addEventListener("click", async (event) => {
     const button = event.target.closest("[data-delete-food]");
     if (!button) return;
-    if (!window.confirm("ลบรายการอาหารนี้?")) return;
-    await deleteFood(button.dataset.deleteFood);
+    destructiveUserAction("Delete food entry?", "This food entry will be removed from your log.", "Delete entry", async () => {
+      await deleteFood(button.dataset.deleteFood);
+    });
   });
 
   $("#exportData").addEventListener("click", () => {
@@ -2339,9 +2461,7 @@ function bindForms() {
   });
 
   fields.deleteAccount.addEventListener("click", async () => {
-    const confirmed = confirm("Delete this account and all workout data on this device/server?");
-    if (!confirmed) return;
-
+    return destructiveUserAction("Delete local account?", "This removes local account data on this device/server. This cannot be undone.", "Delete account", async () => {
     if (USE_BACKEND && !LOCAL_TRACKING_ONLY) {
       try { await apiRequest("/api/app/account", { method: "DELETE" }); } catch (error) { showAuthMessage(error.message, "error"); return; }
       authToken = "";
@@ -2378,6 +2498,7 @@ function bindForms() {
     profile = defaultProfile();
     client = defaultClient();
     showLogin();
+    });
   });
 }
 
@@ -2704,6 +2825,7 @@ function render() {
   renderAiProgramDraft();
   renderNutritionPlanDraft();
   renderTrainerPortal();
+  window.KhayubdiComponents?.enhance();
 }
 
 function renderUxRewrite() {
@@ -3922,13 +4044,15 @@ function toggleArchiveProgram(id) {
 
 function deleteProgram(id) {
   const program = workoutPrograms.find((item) => item.id === id);
-  if (!program || !window.confirm("ลบโปรแกรมนี้? Workout history จะไม่ถูกลบ")) return;
-  workoutPrograms = workoutPrograms.filter((item) => item.id !== id);
-  if (!workoutPrograms.length) workoutPrograms = [blankProgram({ name: "My Program", goal: "general_fitness" })];
-  activeProgramId = sortedPrograms(false)[0]?.id || workoutPrograms[0].id;
-  workoutProgram = workoutPrograms.find((item) => item.id === activeProgramId) || workoutPrograms[0];
-  saveWorkoutProgram();
-  render();
+  if (!program) return;
+  destructiveUserAction("Delete program?", "Workout history will not be deleted.", "Delete program", () => {
+    workoutPrograms = workoutPrograms.filter((item) => item.id !== id);
+    if (!workoutPrograms.length) workoutPrograms = [blankProgram({ name: "My Program", goal: "general_fitness" })];
+    activeProgramId = sortedPrograms(false)[0]?.id || workoutPrograms[0].id;
+    workoutProgram = workoutPrograms.find((item) => item.id === activeProgramId) || workoutPrograms[0];
+    saveWorkoutProgram();
+    render();
+  });
 }
 
 function assignWorkoutToSchedule() {
@@ -7634,11 +7758,19 @@ function updateAiDraftFromEditor(event) {
 }
 
 function acceptAiProgramDraft() {
-  if (!aiProgramDraft || !window.confirm("ยืนยันบันทึก draft เป็นโปรแกรมใหม่? โปรแกรมเดิมจะยังอยู่")) return;
-  const approvedAt = new Date().toISOString();
-  const accepted = normalizeProgram({ ...aiProgramDraft, id: `program-${crypto.randomUUID()}`, status: undefined, generation: { draftId: aiProgramDraft.draftId || aiProgramDraft.id, createdAt: aiProgramDraft.createdAt, generator: aiProgramDraft.generator || "Khayubdi AI Program Generator", status: "Approved", approvedAt }, name: aiProgramDraft.name, createdAt: approvedAt, updatedAt: approvedAt, version: 1, schedule: null }, workoutPrograms.length);
-  workoutPrograms.unshift(accepted); activeProgramId = accepted.id; workoutProgram = accepted; saveWorkoutProgram();
-  aiProgramDraft = null; saveAiProgramDraft(); render(); switchWorkoutPanel("myProgramPanel"); showToast("บันทึกเป็นโปรแกรมใหม่แล้ว");
+  if (!aiProgramDraft) return;
+  confirmUserAction({
+    title: "Save Program Draft?",
+    description: "The draft will be saved as a new program. The existing program will remain.",
+    actionLabel: "Save new program",
+    tone: "primary",
+    onConfirm: () => {
+      const approvedAt = new Date().toISOString();
+      const accepted = normalizeProgram({ ...aiProgramDraft, id: `program-${crypto.randomUUID()}`, status: undefined, generation: { draftId: aiProgramDraft.draftId || aiProgramDraft.id, createdAt: aiProgramDraft.createdAt, generator: aiProgramDraft.generator || "Khayubdi AI Program Generator", status: "Approved", approvedAt }, name: aiProgramDraft.name, createdAt: approvedAt, updatedAt: approvedAt, version: 1, schedule: null }, workoutPrograms.length);
+      workoutPrograms.unshift(accepted); activeProgramId = accepted.id; workoutProgram = accepted; saveWorkoutProgram();
+      aiProgramDraft = null; saveAiProgramDraft(); render(); switchWorkoutPanel("myProgramPanel"); showToast("Program saved.");
+    },
+  });
 }
 
 function programRequestFromChat(message) {
@@ -8065,12 +8197,23 @@ async function persistProfile() {
 }
 
 function loadUsers() {
-  try { return JSON.parse(localStorage.getItem(USERS_KEY) || "{}"); }
+  try { return sanitizeLegacyUsers(JSON.parse(localStorage.getItem(USERS_KEY) || "{}")); }
   catch { return {}; }
 }
 
 function saveUsers(users) {
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  localStorage.setItem(USERS_KEY, JSON.stringify(sanitizeLegacyUsers(users)));
+}
+
+function sanitizeLegacyUsers(users) {
+  if (!users || typeof users !== "object" || Array.isArray(users)) return {};
+  return Object.fromEntries(Object.entries(users).map(([id, user]) => {
+    const safeUser = user && typeof user === "object" && !Array.isArray(user) ? { ...user } : {};
+    delete safeUser.password;
+    delete safeUser.plaintextPassword;
+    delete safeUser.confirmPassword;
+    return [id, safeUser];
+  }));
 }
 
 function resolveLocalUserId(login, users) {
@@ -8133,7 +8276,6 @@ function userStorageKey(baseKey) {
 function defaultProfile() {
   return {
     username: "",
-    password: "",
     displayName: "",
     gender: "",
     age: 0,
@@ -8157,7 +8299,6 @@ function profileFromRegistration(registration, onboardingComplete) {
   return {
     ...defaultProfile(),
     username: normalizeUserId(registration.username),
-    password: String(registration.password || ""),
     displayName: String(registration.displayName || registration.username || "").trim(),
     gender: registration.gender || "",
     age: Number(registration.age || 0),
@@ -8317,6 +8458,3 @@ function downloadJson(data, filename) {
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[char]);
 }
-
-
-

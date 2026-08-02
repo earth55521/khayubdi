@@ -1,0 +1,79 @@
+/* KHAYUBDI OS 2.0 — hidden RC diagnostics tools */
+
+.rc-tools {
+  position: fixed;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: calc(168px + env(safe-area-inset-bottom));
+  z-index: 320;
+  display: grid;
+  gap: 8px;
+  max-width: min(380px, calc(100vw - 24px));
+  color: var(--os-text, #f5f5f5);
+}
+
+.rc-tools[hidden] {
+  display: none;
+}
+
+.rc-tools__toggle,
+.rc-tools button {
+  min-height: 44px;
+  border: 1px solid var(--os-border, rgba(255,255,255,.12));
+  border-radius: 999px;
+  background: var(--os-accent, #39ff88);
+  color: #041008;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.rc-tools__panel {
+  display: none;
+  gap: 10px;
+  max-height: 72vh;
+  overflow: auto;
+  padding: 14px;
+  border: 1px solid var(--os-border, rgba(255,255,255,.12));
+  border-radius: 18px;
+  background: rgba(15, 15, 15, .98);
+  box-shadow: var(--os-shadow, 0 18px 55px rgba(0,0,0,.35));
+}
+
+.rc-tools.is-open .rc-tools__panel {
+  display: grid;
+}
+
+.rc-tools__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.rc-tools__pre {
+  max-height: 260px;
+  overflow: auto;
+  padding: 10px;
+  border-radius: 12px;
+  background: #050505;
+  color: #d4d4d4;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.rc-feedback {
+  display: grid;
+  gap: 10px;
+}
+
+.rc-feedback textarea,
+.rc-feedback input,
+.rc-feedback select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--os-border, rgba(255,255,255,.12));
+  border-radius: 12px;
+  background: #111;
+  color: var(--os-text, #f5f5f5);
+  padding: 10px;
+  font: inherit;
+}

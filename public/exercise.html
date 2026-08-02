@@ -14,7 +14,11 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icon.svg" />
-  <link rel="stylesheet" href="/exercise.css?v=60" />
+  <link rel="stylesheet" href="/exercise.css?v=70" />
+  <link rel="stylesheet" href="/components.css?v=70" />
+  <link rel="stylesheet" href="/os-screens.css?v=70" />
+  <link rel="stylesheet" href="/os-release.css?v=70" />
+  <link rel="stylesheet" href="/os-rc-tools.css?v=70" />
   </head>
   <body>
     <section class="splash-shell" id="splashShell">
@@ -1421,6 +1425,25 @@
         </section>
       </section>
 
+      <section class="screen" id="outdoor">
+        <section class="dashboard-hero outdoor-hero c-card c-card--outdoor">
+          <p class="eyebrow">Outdoor</p>
+          <h2>Outdoor Training</h2>
+          <p>Start a walk or run using the existing workout log.</p>
+        </section>
+        <section class="chart-card outdoor-start-card c-card c-card--outdoor">
+          <div class="section-title"><h2>Quick Start</h2><span>One tap</span></div>
+          <div class="quick-action-grid">
+            <button type="button" data-outdoor-start="Walking">Start Walk</button>
+            <button type="button" data-outdoor-start="Running">Start Run</button>
+          </div>
+        </section>
+        <section class="empty c-empty">
+          <strong>No outdoor session yet</strong>
+          <p>Your walking and running sessions will appear in Records after logging.</p>
+        </section>
+      </section>
+
       <section class="screen" id="trainingAnalytics">
         <section class="dashboard-hero analytics-hero">
           <p class="eyebrow">Training Intelligence</p>
@@ -1689,7 +1712,7 @@
         <section class="chart-card beta-settings-card">
           <div class="section-title">
             <h2>Closed Beta</h2>
-            <span>Version 1.0.0 RC ? Build 59</span>
+            <span>Version 1.0.0 RC ? Build 70</span>
           </div>
           <div class="beta-status-pill">Closed Beta ? Release Candidate</div>
           <div class="quick-action-grid">
@@ -1720,7 +1743,7 @@
             <article><strong>Sirasit Vichitpap</strong><span>Developer</span></article>
             <article><strong>khayubdi.pages.dev</strong><span>Website</span></article>
             <article><strong>Closed Beta Evaluation</strong><span>License</span></article>
-            <article><strong>khayubdi-exercise-v60</strong><span>Service Worker Version</span></article>
+            <article><strong>khayubdi-exercise-v70</strong><span>Service Worker Version</span></article>
           </div>
           <p class="trend-line">Copyright ? 2026 Sirasit Vichitpap. Closed Beta software for fitness guidance and testing.</p>
           <div class="quick-action-grid">
@@ -1729,7 +1752,7 @@
           </div>
         </section>
         <section class="chart-card changelog-card">
-          <div class="section-title"><h2>Version History</h2><span>Current Build 59</span></div>
+          <div class="section-title"><h2>Version History</h2><span>Current Build 70</span></div>
           <div class="changelog-list" id="changelogList"></div>
         </section>
       </section>
@@ -1797,7 +1820,7 @@
         <section class="dashboard-hero">
           <p class="eyebrow">Release Checklist</p>
           <h2>Closed Beta readiness</h2>
-          <p>Final production-readiness checklist for build 59.</p>
+          <p>Final production-readiness checklist for build 70.</p>
         </section>
         <section class="chart-card release-checklist-card">
           <div class="section-title"><h2>Launch Checks</h2><span>RC-01</span></div>
@@ -1826,9 +1849,9 @@
       </section>
       <nav class="bottom-nav" aria-label="Primary">
         <button class="tab active" data-tab="dashboard" type="button"><span>⌂</span><small>Home</small></button>
-        <button class="tab" data-tab="track" type="button"><span>🏋️</span><small>Workout</small></button>
-        <button class="tab nav-plus" data-tab="track" type="button"><span>+</span><small>เริ่ม</small></button>
-        <button class="tab" data-tab="coachChat" type="button"><span>🤖</span><small>AI</small></button>
+        <button class="tab" data-tab="track" type="button"><span>🏋️</span><small>Gym</small></button>
+        <button class="tab" data-tab="outdoor" type="button"><span>↟</span><small>Outdoor</small></button>
+        <button class="tab" data-tab="progress" type="button"><span>◆</span><small>Records</small></button>
         <button class="tab" data-tab="profile" type="button"><span>👤</span><small>Profile</small></button>
       </nav>
     </main>
@@ -1862,7 +1885,7 @@
     </div>
     <div class="toast hidden" id="appToast" role="status" aria-live="polite"></div>
 
-    <div class="modal-backdrop hidden" id="comingSoonModal" role="dialog" aria-modal="true" aria-labelledby="comingSoonTitle">
+    <div class="modal-backdrop hidden" id="comingSoonModal" role="dialog" aria-modal="true" aria-labelledby="comingSoonTitle" aria-describedby="comingSoonText">
       <div class="modal-card">
         <p class="eyebrow">Closed Beta</p>
         <h2 id="comingSoonTitle">Not available in this beta</h2>
@@ -1871,16 +1894,16 @@
       </div>
     </div>
 
-    <div class="modal-backdrop hidden" id="betaWelcomeModal" role="dialog" aria-modal="true" aria-labelledby="betaWelcomeTitle">
+    <div class="modal-backdrop hidden" id="betaWelcomeModal" role="dialog" aria-modal="true" aria-labelledby="betaWelcomeTitle" aria-describedby="betaWelcomeText">
       <div class="modal-card beta-welcome-card">
         <p class="eyebrow">Closed Beta</p>
         <h2 id="betaWelcomeTitle">Welcome to Closed Beta</h2>
-        <p>Thank you for testing Khayubdi. Please report bugs and suggestions from the Feedback Center so we can make the release stronger.</p>
+        <p id="betaWelcomeText">Thank you for testing Khayubdi. Please report bugs and suggestions from the Feedback Center so we can make the release stronger.</p>
         <button id="betaWelcomeContinue" type="button">Continue</button>
       </div>
     </div>
 
-    <div class="modal-backdrop hidden" id="appErrorModal" role="dialog" aria-modal="true" aria-labelledby="appErrorTitle">
+    <div class="modal-backdrop hidden" id="appErrorModal" role="dialog" aria-modal="true" aria-labelledby="appErrorTitle" aria-describedby="appErrorText">
       <div class="modal-card app-error-card">
         <p class="eyebrow">Something went wrong</p>
         <h2 id="appErrorTitle">We hit a temporary issue</h2>
@@ -1893,7 +1916,15 @@
       </div>
     </div>
 
-  <script src="/exercise.js?v=60"></script>
+  <script src="/components.js?v=70"></script>
+  <script src="/os-data.js?v=70"></script>
+  <script src="/os-auth.js?v=70"></script>
+  <script src="/os-pwa.js?v=70"></script>
+  <script src="/exercise.js?v=70"></script>
+  <script src="/os-app.js?v=70"></script>
+  <script src="/os-training.js?v=70"></script>
+  <script src="/os-release.js?v=70"></script>
+  <script src="/os-rc-tools.js?v=70"></script>
   </body>
 </html>
 

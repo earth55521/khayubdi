@@ -1,0 +1,25 @@
+{
+  "app": "KHAYUBDI OS 2.0",
+  "release": "Closed Beta RC2",
+  "version": "1.0.0-rc2",
+  "build": 70,
+  "cache": "khayubdi-exercise-v70",
+  "schema": 3,
+  "channel": "Closed Beta",
+  "environment": "production",
+  "generatedAt": "2026-08-01T00:00:00.000Z",
+  "storageKey": "khayubdi_os2_state_v1",
+  "diagnostics": {
+    "localCrashLog": true,
+    "devPerformanceLogger": true,
+    "devStorageInspector": true,
+    "devStateInspector": true,
+    "devEventLogViewer": true,
+    "diagnosticsExport": true
+  },
+  "privacy": {
+    "externalTelemetry": false,
+    "localOnlyDiagnostics": true,
+    "exportsMayContainFitnessData": true
+  }
+}

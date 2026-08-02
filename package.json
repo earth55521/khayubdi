@@ -5,7 +5,7 @@
   "description": "Khayubdi exercise tracking app with LINE OA backend connector",
   "scripts": {
     "dev": "node server.js",
-    "build": "node --check server.js && node --check public/exercise.js",
+    "build": "node --check server.js && node --check public/components.js && node --check public/os-data.js && node --check public/exercise.js && node --check public/os-app.js && node --check public/os-training.js && node --check public/os-release.js && node --check public/os-rc-tools.js",
     "start": "node server.js"
   },
   "engines": {
